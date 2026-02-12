@@ -15,10 +15,11 @@ export class RemittanceRouter {
         
         if (amount === 0) return "I could not figure out how much to send.";
 
+        // Default to Real if not Europe
         const targetCurrency = text.toLowerCase().includes("euro") ? 'cEUR' : 'cREAL';
         
         const convertedAmount = await this.mento.swapTokens(amount, 'cUSD', targetCurrency);
         
-        return `Done. I swapped ${amount} cUSD into ${convertedAmount} ${targetCurrency} and sent it.`;
+        return `Done. Swapped ${amount} cUSD to ${convertedAmount} ${targetCurrency} and sent.`;
     }
 }
