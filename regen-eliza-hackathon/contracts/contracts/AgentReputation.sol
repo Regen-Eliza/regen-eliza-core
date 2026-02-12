@@ -27,7 +27,6 @@ contract AgentReputation {
     }
 
     // 2. Agent calls this after finishing a job (Self-reporting for MVP)
-    // In production, this would be called by an Oracle or the user verifying the job.
     function recordSuccess() external {
         require(agents[msg.sender].isVerified, "Not a verified agent");
         
