@@ -1,0 +1,19 @@
+# Security (Block all keys)
+.env
+.env.local
+.env.test
+keys/
+secrets/
+
+# System Junk
+node_modules/
+dist/
+out/
+build/
+.DS_Store
+*.log
+
+# Editor Temp Files (Nano/Vim buffers)
+*~
+*.swp
+*.swo
