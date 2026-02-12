@@ -8,7 +8,7 @@ export class MarketWatcher {
     }
 
     async checkPrice(): Promise<boolean> {
-        // TODO: Integrate Pyth Oracle here
+        // Mocking price check for Hackathon MVP
         console.log(`📈 Checking price for ${this.targetAsset}...`);
         return true; 
     }
