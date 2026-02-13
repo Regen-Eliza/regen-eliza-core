@@ -1,17 +1,8 @@
 export class DiceGame {
-    /**
-     * Simulates a fair dice roll game.
-     * In a real deployment, this would use Chainlink VRF as per the milestone.
-     * For the Demo/Hackathon MVP, we simulate the logic to show the "Game Host" agent capability.
-     */
     async play(userAddress: string, betAmount: string) {
         console.log(`🎲 ${userAddress} is betting ${betAmount} cUSD...`);
-        
-        // 1. Roll the Dice (1-6)
         const roll = Math.floor(Math.random() * 6) + 1;
-        
-        // 2. Determine Winner (House vs Player)
-        const won = roll > 3; // Win on 4, 5, 6
+        const won = roll > 3; 
         
         if (won) {
             return `🎲 Rolled a ${roll}! YOU WIN! I am sending ${Number(betAmount) * 2} cUSD to your wallet.`;

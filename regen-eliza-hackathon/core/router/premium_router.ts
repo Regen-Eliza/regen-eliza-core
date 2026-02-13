@@ -1,6 +1,6 @@
 import { PaymentGate } from "../../skills/payment-gate";
 import { RemittanceRouter } from "../../skills/remittance-router";
-import { DiceGame } from "../../skills/games/dice_game"; // Import Game
+import { DiceGame } from "../../skills/games/dice_game"; 
 
 export class PremiumAgentRouter {
     private gate: PaymentGate;
@@ -16,12 +16,12 @@ export class PremiumAgentRouter {
     async handleRequest(userText: string, userAddress: string) {
         const lower = userText.toLowerCase();
 
-        // --- GAME LOGIC (Milestone 2) ---
+        // GAME LOGIC
         if (lower.includes("bet") || lower.includes("game") || lower.includes("roll")) {
-            return this.game.play(userAddress, "5"); // Default bet 5 for demo
+            return this.game.play(userAddress, "5");
         }
 
-        // --- PREMIUM REMITTANCE ---
+        // PREMIUM REMITTANCE
         if (lower.includes("send") || lower.includes("remit")) {
             const isPaid = await this.gate.verifyPayment(userAddress);
             if (!isPaid) {
