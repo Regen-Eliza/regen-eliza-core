@@ -1,14 +1,13 @@
 import express from "express";
 import cors from "cors";
 import { PremiumAgentRouter } from "./core/router/premium_router";
-import { FinancialRouter } from "./core/router/financial_router"; // Import the new skill
+import { FinancialRouter } from "./core/router/financial_router"; 
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Initialize both brains
 const premiumAgent = new PremiumAgentRouter();
 const financialAgent = new FinancialRouter();
 
@@ -24,12 +23,9 @@ app.post("/api/chat", async (req, res) => {
         let response;
         const lowerMsg = message.toLowerCase();
 
-        // ROUTING LOGIC: Decide which agent handles the request
         if (lowerMsg.includes("send") || lowerMsg.includes("pay") || lowerMsg.includes("transfer")) {
-            // Route to Financial Brain (Voice Wallet)
             response = await financialAgent.handle(message);
         } else {
-            // Route to Standard/Premium Brain (Chat & Remittance)
             response = await premiumAgent.handleRequest(message, userAddress || "0x000");
         }
         

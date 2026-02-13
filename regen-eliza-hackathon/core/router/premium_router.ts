@@ -1,31 +1,36 @@
 import { PaymentGate } from "../../skills/payment-gate";
 import { RemittanceRouter } from "../../skills/remittance-router";
+import { DiceGame } from "../../skills/games/dice_game"; // Import Game
 
 export class PremiumAgentRouter {
     private gate: PaymentGate;
     private remittance: RemittanceRouter;
+    private game: DiceGame;
 
     constructor() {
         this.gate = new PaymentGate();
         this.remittance = new RemittanceRouter();
+        this.game = new DiceGame();
     }
 
     async handleRequest(userText: string, userAddress: string) {
-        // 1. Check if they want to use the Premium Remittance feature
-        if (userText.includes("send") || userText.includes("remit")) {
-            
-            // 2. Gate the feature!
+        const lower = userText.toLowerCase();
+
+        // --- GAME LOGIC (Milestone 2) ---
+        if (lower.includes("bet") || lower.includes("game") || lower.includes("roll")) {
+            return this.game.play(userAddress, "5"); // Default bet 5 for demo
+        }
+
+        // --- PREMIUM REMITTANCE ---
+        if (lower.includes("send") || lower.includes("remit")) {
             const isPaid = await this.gate.verifyPayment(userAddress);
-            
             if (!isPaid) {
                 const link = await this.gate.createPaymentLink("Cross-Border Remittance", "0.5");
                 return `⚠️ This is a Premium Feature. Please pay 0.5 CELO to proceed: ${link}`;
             }
-
-            // 3. If paid, execute the logic
             return this.remittance.processTransfer(userText);
         }
 
-        return "I can only help with Premium Remittances right now.";
+        return "I can help with Remittances, Payments, and Games (Try saying 'Let's bet').";
     }
 }
