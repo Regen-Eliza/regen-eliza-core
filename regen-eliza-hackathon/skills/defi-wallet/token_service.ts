@@ -2,8 +2,6 @@ import { createThirdwebClient, getContract, sendAndConfirmTransaction, prepareCo
 import { transfer } from "thirdweb/extensions/erc20";
 import { celoSepolia } from "thirdweb/chains";
 import { privateKeyToAccount } from "thirdweb/wallets";
-import { dotenv } from "dotenv";
-
 require('dotenv').config();
 
 const TOKENS = {
@@ -16,36 +14,15 @@ export class TokenService {
     private account;
 
     constructor() {
-        this.client = createThirdwebClient({ 
-            secretKey: process.env.THIRDWEB_SECRET_KEY as string 
-        });
-        
-        this.account = privateKeyToAccount({
-            client: this.client,
-            privateKey: process.env.PRIVATE_KEY as string,
-        });
+        this.client = createThirdwebClient({ secretKey: process.env.THIRDWEB_SECRET_KEY as string });
+        this.account = privateKeyToAccount({ client: this.client, privateKey: process.env.PRIVATE_KEY as string });
     }
 
     async sendStablecoin(toAddress: string, amount: string) {
         console.log(`💸 Initiating Transfer: ${amount} cUSD -> ${toAddress}`);
-
-        const contract = getContract({
-            client: this.client,
-            chain: celoSepolia,
-            address: TOKENS.cUSD,
-        });
-
-        const transaction = transfer({
-            contract,
-            to: toAddress,
-            amount: amount,
-        });
-
-        const receipt = await sendAndConfirmTransaction({
-            transaction,
-            account: this.account,
-        });
-
+        const contract = getContract({ client: this.client, chain: celoSepolia, address: TOKENS.cUSD });
+        const transaction = transfer({ contract, to: toAddress, amount: amount });
+        const receipt = await sendAndConfirmTransaction({ transaction, account: this.account });
         console.log(`✅ Transfer Successful! Tx Hash: ${receipt.transactionHash}`);
         return receipt.transactionHash;
     }
