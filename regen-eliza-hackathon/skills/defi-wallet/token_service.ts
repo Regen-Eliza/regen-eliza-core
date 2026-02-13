@@ -1,4 +1,4 @@
-import { createThirdwebClient, getContract, sendAndConfirmTransaction, prepareContractCall } from "thirdweb";
+import { createThirdwebClient, getContract, sendAndConfirmTransaction } from "thirdweb";
 import { transfer } from "thirdweb/extensions/erc20";
 import { celoSepolia } from "thirdweb/chains";
 import { privateKeyToAccount } from "thirdweb/wallets";
