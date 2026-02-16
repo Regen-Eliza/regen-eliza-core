@@ -14,7 +14,7 @@ export class ReputationService {
     constructor() {
         this.client = createThirdwebClient({ secretKey: process.env.THIRDWEB_SECRET_KEY as string });
         this.account = privateKeyToAccount({ client: this.client, privateKey: process.env.PRIVATE_KEY as string });
-        
+
         this.contract = getContract({
             client: this.client,
             chain: celoSepolia,

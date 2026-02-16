@@ -22,7 +22,7 @@ app.post("/api/chat", async (req, res) => {
     try {
         const { message, userAddress } = req.body;
         console.log(`📩 Received: "${message}"`);
-        
+
         let response;
         const lowerMsg = message.toLowerCase();
 
@@ -34,7 +34,7 @@ app.post("/api/chat", async (req, res) => {
             response = await premiumAgent.handleRequest(message, userAddress || "0x000");
              reputation.mineReputation("general_interaction");
         }
-        
+
         res.json({ reply: response });
     } catch (error) {
         console.error(error);

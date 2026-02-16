@@ -1,6 +1,6 @@
 import { PaymentGate } from "../../skills/payment-gate";
 import { RemittanceRouter } from "../../skills/remittance-router";
-import { DiceGame } from "../../skills/games/dice_game"; 
+import { DiceGame } from "../../skills/games/dice_game";
 
 export class PremiumAgentRouter {
     private gate: PaymentGate;

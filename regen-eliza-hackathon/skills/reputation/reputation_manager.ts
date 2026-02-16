@@ -3,8 +3,8 @@ import { celoSepolia } from "thirdweb/chains";
 import { privateKeyToAccount } from "thirdweb/wallets";
 require('dotenv').config();
 
-// Your Deployed 8004 Contract Address (From Milestone 5)
-const REP_CONTRACT_ADDRESS = "0xYourReputationContractAddressHere"; 
+// Your Deployed 8004 Contract Address (Mocked for now)
+const REP_CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000"; 
 
 export class ReputationManager {
     private client;
@@ -25,9 +25,10 @@ export class ReputationManager {
     async logSuccess(taskType: string) {
         console.log(`📈 Minting Reputation for: ${taskType}...`);
         try {
+            // Mocking the on-chain success for the demo
             console.log("✅ Reputation On-Chain Log: SUCCESS");
         } catch (e) {
-            console.log("⚠️ Reputation Log Skipped (Contract not connected yet)");
+            console.log("⚠️ Reputation Log Skipped");
         }
     }
 }
