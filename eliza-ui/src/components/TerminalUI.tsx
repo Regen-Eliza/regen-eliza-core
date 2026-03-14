@@ -82,8 +82,12 @@ const AvatarPlane: React.FC<AsciiAvatarProps> = ({ avatarUrl, isSpeaking }) => {
           void main() {
             vec4 texColor = texture2D(uTexture, vUv);
             
-            // We return the raw texture color. 
-            // AsciiRenderer intercepts this and converts brightness to characters.
+            // Contrast enhancement mapping
+            // Using a pow() function to push darker areas to 'space' characters
+            // and keep lighter regions saturated so AsciiRenderer has less dense blocks.
+            texColor.rgb = pow(texColor.rgb, vec3(3.5));
+            texColor.rgb = smoothstep(0.05, 0.7, texColor.rgb);
+            
             gl_FragColor = texColor;
           }
         `}
@@ -101,9 +105,9 @@ export default function TerminalUI() {
   const elizaImageUrl = "/regen_eliza.jpg";
 
   const presetPrompts = [
-    "Favorite project?",
-    "What are you studying?",
-    "What's your passion?"
+    "Send USDm to Alice (voice command)",
+    "Donate to 5 good DeSci Projects",
+    "Deposit in a Vault and find profitsY"
   ];
 
   const handlePromptClick = (prompt: string) => {
@@ -190,7 +194,7 @@ export default function TerminalUI() {
             <input
               type="text"
               className="flex-1 bg-transparent outline-none placeholder-white/30 text-[#B0FBCD] text-sm"
-              placeholder="Ask about Eliza"
+              placeholder="Ask about Regen Eliza or use a voice command..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
             />
