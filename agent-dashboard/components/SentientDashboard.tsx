@@ -7,6 +7,7 @@ import SystemLogs from "./SystemLogs";
 import { DonationService } from "../../eliza-ui/src/services/donationService";
 import { voiceService } from "../../eliza-ui/src/services/voiceService";
 import { generateFundingReport } from "../../eliza-ui/src/utils/reporter";
+import Avatar from "./Avatar";
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 const privateKey = process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY || defaultKey;
@@ -117,18 +118,10 @@ export default function SentientDashboard() {
         </button>
       </div>
 
-      {/* 👤 Character Video */}
-      <div className="relative z-0 -mb-16 w-64 h-64 mx-auto overflow-hidden rounded-t-full mask-image-gradient">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover opacity-90 scale-110"
-        >
-          <source src="/videos/Reliza_Jacket_vid.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-transparent" />
+      {/* 👤 Character Avatar */}
+      <div className="relative z-0 -mb-16 w-64 h-64 mx-auto overflow-hidden rounded-t-full mask-image-gradient bg-zinc-900/50">
+        <Avatar />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* 🪪 The Card */}
