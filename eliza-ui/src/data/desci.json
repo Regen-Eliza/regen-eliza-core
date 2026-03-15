@@ -1,1 +1,92 @@
-[]
+[
+    {
+        "name": "Opensci",
+        "project_url": "https://desci.world/projects/opensci",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/b4436f7db3444dd982a81174852b92c1/photo/ahvhLoWB",
+        "description": "N/A",
+        "website": "https://OpenSCI.io",
+        "creator_page_url": "N/A",
+        "wallet_address": "0xd120e0616E8ee092d6473ed98757748C579B0C84"
+    },
+    {
+        "name": "Biotexturas",
+        "project_url": "https://desci.world/projects/biotexturas",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/94f003bf4cf44a24b57f0014888fb9e4/photo/nHqi8EHd",
+        "description": "N/A",
+        "website": "https://biotexturas.org/www/",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x38B85B7Cb0D4CB817F310409d537ec866EAab04A"
+    },
+    {
+        "name": "Psydao",
+        "project_url": "https://desci.world/projects/psydao",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/4730f80ff12146ac90adf2a8f5b5f0ff/photo/gKHZYZ0c",
+        "description": "N/A",
+        "website": "https://www.psydao.io/",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x5A5F94A8E4549f86f27e71bf8f893566506f75Ce"
+    },
+    {
+        "name": "Desai Xyz",
+        "project_url": "https://desci.world/projects/desai-xyz",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/a13c26e7b4e1437093aba6bfae88e381/photo/F2EGjKsL",
+        "description": "N/A",
+        "website": "https://x.com/DeSAI_xyz",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x4ADd4D2c14E0d25ED469b866E05FC5Fc2A45413e"
+    },
+    {
+        "name": "Moleculayer",
+        "project_url": "https://desci.world/projects/moleculayer",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/06e5d971816a4a90baa95d65bc8897f2/photo/8etDW55r",
+        "description": "N/A",
+        "website": "https://moleculayer.xyz/",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x7413D4342488C4436ba227dea351C9355711599c"
+    },
+    {
+        "name": "Descipherfund",
+        "project_url": "https://desci.world/projects/descipherfund",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/661e4a7beb1248029ae9dd3a88ea0cef/photo/wia4ENEq",
+        "description": "N/A",
+        "website": "https://descipher.fund/",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x3Df81e6dC3cDd45e1D2e473dBE7078EE055f23eF"
+    },
+    {
+        "name": "Desci Dao",
+        "project_url": "https://desci.world/projects/desci-dao",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/baf0fcc5e9df437abd638e479c52e199/photo/IqdPQKTU",
+        "description": "N/A",
+        "website": "https://www.descidao.pro/#contactForm",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x0aB50CD43463500889102d4d159E1615d0BD628D"
+    },
+    {
+        "name": "Episteme",
+        "project_url": "https://desci.world/projects/episteme",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/e73bb611f1ca4ffcac3357efddca70ed/photo/TFb6a8Wk",
+        "description": "N/A",
+        "website": "https://linktr.ee/episteme_sci",
+        "creator_page_url": "N/A",
+        "wallet_address": "0xd348deEc368a588794Ca21Daf9D441eD7C7642E6"
+    },
+    {
+        "name": "Astrocodex",
+        "project_url": "https://desci.world/projects/astrocodex",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/2410b96455754804989a17ced1fa300d/photo/sEe8pdao",
+        "description": "N/A",
+        "website": "https://www.astrocodex.io/",
+        "creator_page_url": "N/A",
+        "wallet_address": "0x590979A95dbBAb5A7F5D8CB298Ba0318d24FD81A"
+    },
+    {
+        "name": "Bonfiresai",
+        "project_url": "https://desci.world/projects/bonfiresai",
+        "image_url": "https://amtlwechzhlnhifiobhw.supabase.co/storage/v1/object/public/images/project/0748c1e9518e44dca4a5d604c0545c99/photo/z3xXcU05",
+        "description": "N/A",
+        "website": "https://calendar.google.com/calendar/r/eventedit?text=Bonfires.ai+Genesis+Mint&dates=20250819T213955%2F20251021T213955&details=Participate+in+the+Bonfires.ai+Genesis+Mint+to+get+exclusive+early+access+to+%24KNOW%3B+the+token+of+the+onchain+knowledge+economy.+Genesis+Mint+holders+also+have+exclusive+early+access+to+launching+their+own+Bonfire.",
+        "creator_page_url": "N/A",
+        "wallet_address": "0xa14560C9Ac8F6bEeD594F7F454Dc490706f21656"
+    }
+]
