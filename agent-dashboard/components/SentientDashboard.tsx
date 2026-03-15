@@ -132,20 +132,7 @@ export default function SentientDashboard() {
 
         {/* ⚡ Features */}
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center gap-3 transition-all hover:scale-[1.02] group">
-            <div className="p-2 bg-blue-500/20 rounded-lg text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors"><Activity size={18} /></div>
-            <div className="text-left">
-              <div className="text-sm font-bold">Start Game</div>
-              <div className="text-xs text-zinc-500">Dice Roll Protocol</div>
-            </div>
-          </button>
-          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center gap-3 transition-all hover:scale-[1.02] group">
-            <div className="p-2 bg-purple-500/20 rounded-lg text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors"><Zap size={18} /></div>
-            <div className="text-left">
-              <div className="text-sm font-bold">Send Funds</div>
-              <div className="text-xs text-zinc-500">Cross-Border (Celo)</div>
-            </div>
-          </button>
+          {/* Legacy buttons removed */}
         </div>
 
         <div className="mt-6 pt-6 border-t border-white/5 flex justify-between text-xs text-zinc-600">
