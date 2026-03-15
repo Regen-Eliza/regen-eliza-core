@@ -4,13 +4,41 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Mic, ShieldCheck, Zap, Activity, Globe, Power } from "lucide-react";
 import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
 import SystemLogs from "./SystemLogs";
+import { DonationService } from "../../eliza-ui/src/services/donationService";
+import { voiceService } from "../../eliza-ui/src/services/voiceService";
+import { generateFundingReport } from "../../eliza-ui/src/utils/reporter";
+
+const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+const privateKey = process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY || defaultKey;
+const donationService = new DonationService(privateKey);
 
 export default function SentientDashboard() {
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
   const [reputation, setReputation] = useState(850);
   const [network, setNetwork] = useState("TESTNET");
   const [volume, setVolume] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
   const requestRef = useRef<number>();
+
+  const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+    try {
+      const amount = 100;
+      const projects = await donationService.distributeFunds(category, amount);
+      if (projects) {
+        const report = generateFundingReport(projects);
+        await voiceService.speak(report);
+      } else {
+        await voiceService.speak("I encountered an issue trying to route funds.");
+      }
+    } catch (e) {
+      console.error(e);
+      await voiceService.speak("An error occurred during communication.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   // Animation Loop for Audio Visualization
   const animate = () => {
@@ -132,16 +160,32 @@ export default function SentientDashboard() {
 
         {/* ⚡ Features */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+          <button 
+            disabled={isProcessing}
+            onClick={() => handleFund("desci")}
+            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
+          >
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Fund DeSci Projects</div>
           </button>
-          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+          <button 
+            disabled={isProcessing}
+            onClick={() => handleFund("eco")}
+            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
+          >
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Fund Eco Projects</div>
           </button>
-          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+          <button 
+            disabled={isProcessing}
+            onClick={() => handleFund("builders")}
+            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
+          >
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Builders</div>
           </button>
-          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+          <button 
+            disabled={isProcessing}
+            onClick={() => handleFund("agents")}
+            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
+          >
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Agents</div>
           </button>
         </div>
