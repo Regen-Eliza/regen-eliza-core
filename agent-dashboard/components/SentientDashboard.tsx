@@ -231,6 +231,24 @@ export default function SentientDashboard() {
           </button>
         </div>
 
+        {/* 🔥 Additional Services */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <button 
+            disabled={isProcessing}
+            onClick={() => console.log("Cross-Chain Swaps (Squid Router) clicked")}
+            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
+          >
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Cross-Chain Swaps (Squid Router)</div>
+          </button>
+          <button 
+            disabled={isProcessing}
+            onClick={() => console.log("x402 Direct Payments clicked")}
+            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
+          >
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">x402 Direct Payments</div>
+          </button>
+        </div>
+
         {/* Terminal Logs Box */}
         <AnimatePresence mode="wait">
           {reportText && (
