@@ -19,6 +19,7 @@ export default function SentientDashboard() {
   const [volume, setVolume] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [reportText, setReportText] = useState("");
+  const [hasInitialized, setHasInitialized] = useState(false);
   const requestRef = useRef<number>();
 
   const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
@@ -71,6 +72,27 @@ export default function SentientDashboard() {
       {/* 🌌 Ambience */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-900/10 via-black to-black z-0" />
       <SystemLogs active={true} />
+
+      {/* Initialization Modal */}
+      <AnimatePresence>
+        {!hasInitialized && (
+          <motion.div 
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
+          >
+            <div className="text-center">
+              <h2 className="text-2xl font-bold mb-6 text-green-400">System Initialization Required</h2>
+              <button 
+                onClick={() => setHasInitialized(true)}
+                className="px-6 py-3 bg-green-500/10 border border-green-500/50 hover:bg-green-500/20 text-green-400 font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(74,222,128,0.2)]"
+              >
+                Initialize Audio & Microphone Permissions
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* 🎛️ Top Controls */}
       <div className="absolute top-6 right-6 flex gap-3 z-20">
