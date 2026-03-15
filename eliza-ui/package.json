@@ -12,6 +12,7 @@
   "dependencies": {
     "@petersenmatthew/talkinghead": "github:petersenmatthew/TalkingHead",
     "@types/three": "^0.183.1",
+    "elevenlabs": "^1.59.0",
     "ethers": "^6.16.0",
     "framer-motion": "^12.36.0",
     "lucide-react": "^0.577.0",
