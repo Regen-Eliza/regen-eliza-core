@@ -43,7 +43,25 @@ export class VoiceService {
         throw new Error(`ElevenLabs API error: ${response.status} ${response.statusText}`);
       }
 
-      const audioBlob = await response.blob();
+      const arrayBuffer = await response.arrayBuffer();
+
+      // Check if TalkingHead exists and is initialized
+      const talkingHead = (window as any).talkingHead;
+      
+      if (talkingHead) {
+        try {
+          // Decode audio buffer and let TalkingHead handle playback + visemes
+          const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+          const decodedAudio = await audioContext.decodeAudioData(arrayBuffer);
+          await talkingHead.speakAudio(decodedAudio);
+          return;
+        } catch (err) {
+          console.error("TalkingHead speakAudio failed, falling back to native Audio:", err);
+        }
+      }
+
+      // Fallback: Normal playback
+      const audioBlob = new Blob([arrayBuffer], { type: 'audio/mpeg' });
       const audioUrl = URL.createObjectURL(audioBlob);
       const audio = new Audio(audioUrl);
       
@@ -63,5 +81,21 @@ export class VoiceService {
   }
 }
 
-// Export a singleton instance initialized with the Vite environment variable
-export const voiceService = new VoiceService(import.meta.env.VITE_ELEVENLABS_API_KEY);
+// Export a singleton instance initialized with the environment variable
+// Support both Vite (import.meta.env) and Next.js (process.env)
+const getApiKey = () => {
+  if (typeof process !== "undefined" && process.env && process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY) {
+    return process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY;
+  }
+  try {
+    // @ts-ignore
+    if (import.meta && import.meta.env && import.meta.env.VITE_ELEVENLABS_API_KEY) {
+      // @ts-ignore
+      return import.meta.env.VITE_ELEVENLABS_API_KEY;
+    }
+  } catch (e) {
+    // ignore
+  }
+  return "";
+};
+export const voiceService = new VoiceService(getApiKey());
