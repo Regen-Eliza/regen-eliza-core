@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { Mic, CornerDownLeft } from 'lucide-react';
+import { DonationService } from '../services/donationService';
+import { voiceService } from '../services/voiceService';
+import { generateFundingReport } from '../utils/reporter';
+
+// Initialize with dummy key if empty, to prevent immediate crash.
+// User will paste the real key in their .env
+const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+const donationService = new DonationService(import.meta.env.VITE_REGEN_ELIZA_PRIVATE_KEY || defaultKey);
 
 export default function TerminalUI() {
   const [inputText, setInputText] = useState('');
@@ -19,23 +27,56 @@ export default function TerminalUI() {
 
   const handlePromptClick = (prompt: string) => {
     setInputText(prompt);
-    simulateAgentResponse();
+    // Needed to pass prompt directly since state update is async
+    processInput(prompt);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
-    simulateAgentResponse();
+    processInput(inputText);
   };
 
-  const simulateAgentResponse = () => {
+  const processInput = async (text: string) => {
     setIsSpeaking(true);
     setInputText("");
     
-    // Simulate conversation happening for a variable duration
-    setTimeout(() => {
+    const submittedText = text.toLowerCase();
+    try {
+      if (
+        submittedText.includes("donate") || 
+        submittedText.includes("send") ||
+        submittedText.includes("desci") ||
+        submittedText.includes("eco") ||
+        submittedText.includes("agent") ||
+        submittedText.includes("builder")
+      ) {
+        // Determine category
+        let category: "desci" | "eco" | "builders" | "agents" = "desci"; // fallback
+        if (submittedText.includes("eco")) category = "eco";
+        if (submittedText.includes("builder")) category = "builders";
+        if (submittedText.includes("agent")) category = "agents";
+
+        // trigger donation with dummy amount
+        const amount = 100; 
+        const projects = await donationService.distributeFunds(category, amount);
+        
+        if (projects) {
+          const report = generateFundingReport(projects);
+          await voiceService.speak(report);
+        } else {
+          await voiceService.speak("I encountered an issue trying to route funds.");
+        }
+      } else {
+        // Fallback for random chats
+        await voiceService.speak("I am Regen Eliza. You can ask me to donate to DeSci, eco, builders, or agents.");
+      }
+    } catch (e) {
+      console.error(e);
+      await voiceService.speak("An error occurred during communication.");
+    } finally {
       setIsSpeaking(false);
-    }, 2500 + Math.random() * 2000);
+    }
   };
 
   return (

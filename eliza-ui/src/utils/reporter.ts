@@ -1,4 +1,4 @@
-import { FundedProject } from "../services/donationService";
+import type { FundedProject } from "../services/donationService";
 
 /**
  * Utility to generate a conversational report based on the funded projects.
