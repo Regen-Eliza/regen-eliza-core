@@ -131,8 +131,19 @@ export default function SentientDashboard() {
         </div>
 
         {/* ⚡ Features */}
-        <div className="grid grid-cols-2 gap-4 mt-6">
-          {/* Legacy buttons removed */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Fund DeSci Projects</div>
+          </button>
+          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Fund Eco Projects</div>
+          </button>
+          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Builders</div>
+          </button>
+          <button className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group">
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Agents</div>
+          </button>
         </div>
 
         <div className="mt-6 pt-6 border-t border-white/5 flex justify-between text-xs text-zinc-600">
