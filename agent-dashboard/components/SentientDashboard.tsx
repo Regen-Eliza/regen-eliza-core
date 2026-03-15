@@ -66,6 +66,16 @@ export default function SentientDashboard() {
   const toggleMic = () => isListening ? stopListening() : startListening();
   const toggleNetwork = () => setNetwork(prev => prev === "TESTNET" ? "MAINNET" : "TESTNET");
 
+  const handleInitialize = async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (e) {
+      console.error("Microphone access denied or not available", e);
+    } finally {
+      setHasInitialized(true);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#050505] text-white font-mono flex flex-col items-center justify-center relative overflow-hidden">
 
@@ -84,7 +94,7 @@ export default function SentientDashboard() {
             <div className="text-center">
               <h2 className="text-2xl font-bold mb-6 text-green-400">System Initialization Required</h2>
               <button 
-                onClick={() => setHasInitialized(true)}
+                onClick={handleInitialize}
                 className="px-6 py-3 bg-green-500/10 border border-green-500/50 hover:bg-green-500/20 text-green-400 font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(74,222,128,0.2)]"
               >
                 Initialize Audio & Microphone Permissions
