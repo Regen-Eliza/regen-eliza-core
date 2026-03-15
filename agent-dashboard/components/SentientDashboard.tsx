@@ -18,6 +18,7 @@ export default function SentientDashboard() {
   const [network, setNetwork] = useState("TESTNET");
   const [volume, setVolume] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [reportText, setReportText] = useState("");
   const requestRef = useRef<number>();
 
   const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
@@ -28,9 +29,14 @@ export default function SentientDashboard() {
       const projects = await donationService.distributeFunds(category, amount);
       if (projects) {
         const report = generateFundingReport(projects);
+        setReportText(""); // clear previous
+        setTimeout(() => setReportText(report), 50); // Small delay to retrigger animation
         await voiceService.speak(report);
       } else {
-        await voiceService.speak("I encountered an issue trying to route funds.");
+        const errorMsg = "I encountered an issue trying to route funds.";
+        setReportText("");
+        setTimeout(() => setReportText(errorMsg), 50);
+        await voiceService.speak(errorMsg);
       }
     } catch (e) {
       console.error(e);
@@ -189,6 +195,42 @@ export default function SentientDashboard() {
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Agents</div>
           </button>
         </div>
+
+        {/* Terminal Logs Box */}
+        <AnimatePresence mode="wait">
+          {reportText && (
+            <motion.div 
+              key={reportText}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mt-6 p-4 bg-black/60 border border-green-500/30 rounded-xl font-mono text-xs text-green-400 relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-green-500/5 pointer-events-none" />
+              <div className="mb-2 text-[10px] text-green-500/50 uppercase tracking-widest flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                Transaction Router Output
+              </div>
+              <p className="leading-relaxed">
+                {reportText.split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.03 }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+                <motion.span 
+                  className="inline-block w-1.5 h-3 bg-green-500 ml-1 align-baseline"
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                />
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="mt-6 pt-6 border-t border-white/5 flex justify-between text-xs text-zinc-600">
           <span className="flex items-center gap-1"><Globe size={10} /> 8004SCAN.IO LINKED</span>
