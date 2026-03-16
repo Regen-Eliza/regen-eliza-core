@@ -21,26 +21,7 @@ Regen Eliza is explicitly engineered to bridge identity, public goods, and agent
 * **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets and maps voice intents to execute x402 micro-payments.
 
 ---<div align="center">
-  <h1>🌿 Regen Eliza: The Omni-Agent for Agentic Public Goods</h1>
-  <p><b>An autonomous, voice-activated ERC-8004 agent designed to route capital, execute Agentic DeFi, and fund the Regenerative Economy on Celo.</b></p>
-  
-  <img src="https://img.shields.io/badge/Status-Live_on_Testnet-green?style=for-the-badge" alt="Status" />
-  <img src="https://img.shields.io/badge/Network-Celo-yellow?style=for-the-badge" alt="Network" />
-  <img src="https://img.shields.io/badge/Framework-Next.js_14-black?style=for-the-badge" alt="Framework" />
-</div>
 
-<br/>
-
-> **Regen Eliza** is not just a script; she is an entity. Registered on the 8004scan registry with a verifiable on-chain identity, she operates across multiple protocols to evaluate and fund impact projects. She listens to human voice commands to bridge liquidity and deploy capital to public goods autonomously.
-
-## 🏆 Hackathon Bounties Targeted
-
-Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
-
-* **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC).
-* **🦄 Uniswap (Agentic Finance):** Integration of the Uniswap API to allow Eliza to autonomously swap and bridge value on-chain via natural voice commands.
-* **🔵 ENS (Cross-chain Identity):** Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions.
-* **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets and maps voice intents to execute x402 micro-payments.
 
 ---
 
