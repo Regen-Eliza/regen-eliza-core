@@ -26,3 +26,6 @@ Run: git add README.md && git commit -m "docs: initialize core README structure 
 Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
 
 
+* **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC).
+
+* 
