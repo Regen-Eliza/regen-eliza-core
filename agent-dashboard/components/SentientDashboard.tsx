@@ -5,11 +5,11 @@ import { Mic, ShieldCheck, Zap, Activity, Globe, Power } from "lucide-react";
 import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
 import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
 import SystemLogs from "./SystemLogs";
-import { DonationService } from "../../eliza-ui/src/services/donationService";
-import { voiceService } from "../../eliza-ui/src/services/voiceService";
-import { generateFundingReport, generateTransferReport } from "../../eliza-ui/src/utils/reporter";
-import { swapService } from "../../eliza-ui/src/services/swapService";
-import { parseIntentAndExecuteTransfer } from "../../eliza-ui/src/utils/intentParser";
+import { DonationService } from "../services/donationService";
+import { voiceService } from "../services/voiceService";
+import { generateFundingReport, generateTransferReport } from "../utils/reporter";
+import { swapService } from "../services/swapService";
+import { parseIntentAndExecuteTransfer } from "../utils/intentParser";
 import Avatar from "./Avatar";
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
