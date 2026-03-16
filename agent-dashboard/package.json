@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@0xsquid/sdk": "^2.13.0",
     "@met4citizen/talkinghead": "^1.7.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
