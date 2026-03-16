@@ -36,3 +36,6 @@ Regen Eliza is explicitly engineered to bridge identity, public goods, and agent
 * **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets and maps voice intents to execute x402 micro-payments.
 
 * 
+## 🚀 Core Capabilities
+### 🎙️ 1. Voice-to-Action Core (WebSpeech API)
+No more clicking buttons. Users speak directly to Eliza. Her LLM intent parser routes the command...
