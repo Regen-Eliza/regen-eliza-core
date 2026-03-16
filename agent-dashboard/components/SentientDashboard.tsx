@@ -143,12 +143,11 @@ export default function SentientDashboard() {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
-      // Step 5 formatting placeholder: print user input
-      setReportText(`> User: ${command}`);
+      const userLog = `> User: ${command}\n\n`;
+      setReportText(userLog + "> System: Processing...");
       
       const result = await parseIntentAndExecuteTransfer(command);
       
-      // Assume result now holds standard fields since we'll refactor intentParser next
       if (result) {
         let report = "";
         if (result.type === "transfer") {
@@ -158,17 +157,19 @@ export default function SentientDashboard() {
         } else if (result.type === "swap") {
           report = "Cross-chain swap complete. I successfully bridged liquidity from Base into the Celo ecosystem.";
         } else {
-           // Fallback for current parseIntentAndExecuteTransfer
           report = generateTransferReport(result.amount, result.symbol, result.contact);
         }
         
-        setTimeout(() => setReportText(report), 1500); // Give user a moment to read their input
+        const newLog = `${userLog}> System: ${report}`;
+        setTimeout(() => setReportText(newLog), 1500); 
         await voiceService.speak(report);
       }
     } catch (e: any) {
       console.error(e);
       const errorMsg = e.message || "I could not understand that command.";
-      setTimeout(() => setReportText(errorMsg), 1500);
+      const userLog = `> User: ${command}\n\n`;
+      const newLog = `${userLog}> System: ${errorMsg}`;
+      setTimeout(() => setReportText(newLog), 1500);
       await voiceService.speak(errorMsg);
     } finally {
       setIsProcessing(false);
