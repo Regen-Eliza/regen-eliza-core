@@ -18,3 +18,6 @@ Run: git add README.md && git commit -m "docs: initialize core README structure 
 > **Regen Eliza** is not just a script; she is an entity. Registered on the 8004scan registry with a verifiable on-chain identity.
 >
 > 
+
+> She listens to human voice commands to bridge liquidity and fund public goods autonomously.
+
