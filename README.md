@@ -14,3 +14,7 @@ Run: git add README.md && git commit -m "docs: initialize core README structure 
   <img src="https://img.shields.io/badge/Framework-Next.js_14-black?style=for-the-badge" alt="Framework" />
 <br/>
 
+
+> **Regen Eliza** is not just a script; she is an entity. Registered on the 8004scan registry with a verifiable on-chain identity.
+>
+> 
