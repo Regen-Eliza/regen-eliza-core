@@ -20,7 +20,7 @@ export default function Avatar() {
         headRef.current = head;
         
         // The human needs to place their .glb avatar file in public/models/avatar.glb
-        const avatarUrl = "/models/avatar.glb";
+        const avatarUrl = "https://models.readyplayer.me/64bfa15f0e72c63d7c3934a6.glb";
         
         await head.showAvatar({
           url: avatarUrl,
