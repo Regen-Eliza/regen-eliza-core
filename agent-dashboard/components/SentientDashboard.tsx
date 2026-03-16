@@ -8,6 +8,7 @@ import { DonationService } from "../../eliza-ui/src/services/donationService";
 import { voiceService } from "../../eliza-ui/src/services/voiceService";
 import { generateFundingReport } from "../../eliza-ui/src/utils/reporter";
 import { swapService } from "../../eliza-ui/src/services/swapService";
+import { parseIntentAndExecuteTransfer } from "../../eliza-ui/src/utils/intentParser";
 import Avatar from "./Avatar";
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
@@ -71,6 +72,36 @@ export default function SentientDashboard() {
     } catch (e) {
       console.error(e);
       const errorMsg = "An error occurred during the cross-chain swap.";
+      setReportText("");
+      setTimeout(() => setReportText(errorMsg), 50);
+      await voiceService.speak(errorMsg);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleDirectPayment = async () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+    try {
+      const initMsg = "Listening and parsing transfer command...";
+      setReportText("");
+      setTimeout(() => setReportText(initMsg), 50);
+      
+      // Simulating voice command input for the demo
+      const voiceCommand = "Send 10 USDC to Alice";
+      const result = await parseIntentAndExecuteTransfer(voiceCommand);
+      
+      if (result) {
+        // We will offload this text generation to the reporter utility shortly
+        const report = `Transfer complete. I successfully sent ${result.amount} ${result.symbol} to ${result.contact}.`;
+        setReportText("");
+        setTimeout(() => setReportText(report), 50);
+        await voiceService.speak(report);
+      }
+    } catch (e: any) {
+      console.error(e);
+      const errorMsg = e.message || "An error occurred during the transfer.";
       setReportText("");
       setTimeout(() => setReportText(errorMsg), 50);
       await voiceService.speak(errorMsg);
@@ -266,7 +297,7 @@ export default function SentientDashboard() {
           </button>
           <button 
             disabled={isProcessing}
-            onClick={() => console.log("x402 Direct Payments clicked")}
+            onClick={handleDirectPayment}
             className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
           >
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">x402 Direct Payments</div>
