@@ -43,3 +43,7 @@ No more clicking buttons. Users speak directly to Eliza. Her LLM intent parser r
 ...executes the on-chain transaction, and verbally reports the success receipt back using **ElevenLabs TTS** and a dynamic 3D lip-syncing avatar.
 
 
+### 💸 2. Agentic Finance (Uniswap Router)
+By simply saying *"Swap tokens"*, she leverages the Uniswap protocol to mathematically resolve the optimal route and execute token swaps autonomously.
+
+
