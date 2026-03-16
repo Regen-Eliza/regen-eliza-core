@@ -20,8 +20,6 @@ Regen Eliza is explicitly engineered to bridge identity, public goods, and agent
 * **🔵 ENS (Cross-chain Identity):** Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions.
 * **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets and maps voice intents to execute x402 micro-payments.
 
----<div align="center">
-
 
 ---
 
