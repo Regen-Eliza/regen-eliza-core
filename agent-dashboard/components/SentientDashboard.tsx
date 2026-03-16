@@ -192,7 +192,7 @@ export default function SentientDashboard() {
     } finally {
       setHasInitialized(true);
       setTimeout(() => {
-        voiceService.speak("Hi, I am Regen Eliza. I am an autonomous ERC-8004 agent on Celo. I provide three core services: First, I can route donations to verified public goods projects. Second, I can swap stablecoins from Base and Arbitrum into Celo to fund these projects. And third, I can execute x402 direct payments to your saved contacts. How can I help you today?");
+        voiceService.speak("Hi, I am Regen Eliza. I am an autonomous ERC-8004 agent on Celo. I provide three core services: First, I can route donations to verified public goods projects. Second, I can swap stablecoins on Celo using the Uniswap protocol. And third, I can execute x402 direct payments to your saved ENS contacts. How can I help you today?");
       }, 500);
     }
   };
