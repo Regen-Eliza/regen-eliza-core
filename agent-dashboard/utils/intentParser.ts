@@ -1,6 +1,7 @@
 import { transferService } from '../services/transferService';
 import { swapService } from '../services/swapService';
 import { DonationService } from '../services/donationService';
+import contacts from '../data/contacts.json';
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 const privateKey = (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY) || defaultKey;
@@ -48,15 +49,25 @@ export async function parseIntentAndExecuteTransfer(voiceCommand: string): Promi
     }
 
     // 3. Fallback to DIRECT PAYMENTS / TRANSFER
-    const match = transcript.match(/send ([\d\.]+) (usdc|usdt|cusd) to (\w+)/i);
+    const match = transcript.match(/send ([\d\.]+) (usdc|usdt|cusd) to (.+)/i);
     if (!match) {
       throw new Error("Could not parse intent. Expected format: 'Send 10 USDC to Alice'");
     }
 
     const amount = match[1];
     const tokenSymbol = match[2].toUpperCase();
-    const contactName = match[3];
+    const spokenContact = match[3].trim().toLowerCase();
 
+    const contact = contacts.find(c => 
+      c.name.toLowerCase() === spokenContact || 
+      (c as any).spokenName?.toLowerCase() === spokenContact
+    );
+
+    if (!contact) {
+      throw new Error(`Could not find contact for '${match[3].trim()}'`);
+    }
+
+    const contactName = contact.name;
     const tokenAddress = TOKEN_ADDRESSES[tokenSymbol];
     
     if (!tokenAddress) {
