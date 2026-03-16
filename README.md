@@ -47,3 +47,6 @@ No more clicking buttons. Users speak directly to Eliza. Her LLM intent parser r
 By simply saying *"Swap tokens"*, she leverages the Uniswap protocol to mathematically resolve the optimal route and execute token swaps autonomously.
 
 
+### 🌍 3. Public Goods Engine (x402 Protocol)
+Implementing the `thirdweb/x402` payment gate, she distributes stablecoins to verified regenerative projects.
+
