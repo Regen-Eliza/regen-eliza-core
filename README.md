@@ -29,3 +29,4 @@ Regen Eliza is explicitly engineered to bridge identity, public goods, and agent
 * **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC).
 
 * 
+* **🦄 Uniswap (Agentic Finance):** Integration of the Uniswap API to allow Eliza to autonomously swap and bridge value on-chain via natural voice commands.
