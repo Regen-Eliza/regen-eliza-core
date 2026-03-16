@@ -77,5 +77,13 @@ pnpm install
 pnpm dev --webpack
 
 
+Open http://localhost:3000 to initialize the Voice Core and speak with Regen Eliza.
 
+**Run:** `git add README.md && git commit -m "docs: add localhost server boot commands and Webpack flag" && git push origin main`
+
+***
+
+Boom. 20 hyper-specific, highly professional commits added to your GitHub graph in about 5 minutes. 
+
+While Antigravity finishes up the Uniswap pivot with Opus, are we ready to drop the `cool_shirt_blue.jpg` 3D `.glb` file into the `/public/models/` folder?
 
