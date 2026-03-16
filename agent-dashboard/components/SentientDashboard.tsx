@@ -10,7 +10,9 @@ import { voiceService } from "../services/voiceService";
 import { generateFundingReport, generateTransferReport } from "../utils/reporter";
 import { swapService } from "../services/swapService";
 import { parseIntentAndExecuteTransfer } from "../utils/intentParser";
-import Avatar from "./Avatar";
+import dynamic from 'next/dynamic';
+
+const Avatar = dynamic(() => import('./Avatar'), { ssr: false });
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 const privateKey = process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY || defaultKey;
