@@ -7,6 +7,7 @@ import SystemLogs from "./SystemLogs";
 import { DonationService } from "../../eliza-ui/src/services/donationService";
 import { voiceService } from "../../eliza-ui/src/services/voiceService";
 import { generateFundingReport } from "../../eliza-ui/src/utils/reporter";
+import { swapService } from "../../eliza-ui/src/services/swapService";
 import Avatar from "./Avatar";
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
@@ -43,6 +44,36 @@ export default function SentientDashboard() {
     } catch (e) {
       console.error(e);
       await voiceService.speak("An error occurred during communication.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleSwap = async () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+    try {
+      const initMsg = "Initiating cross-chain swap from Base to Celo...";
+      setReportText("");
+      setTimeout(() => setReportText(initMsg), 50);
+      
+      const amount = "1"; // 1 USDC
+      const fromChain = "8453"; // Base
+      
+      const receipt = await swapService.executeCrossChainSwap(amount, fromChain);
+      
+      if (receipt) {
+        const report = "Cross-chain swap complete. I successfully bridged liquidity from Base into the Celo ecosystem.";
+        setReportText(""); // clear previous
+        setTimeout(() => setReportText(report), 50); // Small delay to retrigger animation
+        await voiceService.speak(report);
+      }
+    } catch (e) {
+      console.error(e);
+      const errorMsg = "An error occurred during the cross-chain swap.";
+      setReportText("");
+      setTimeout(() => setReportText(errorMsg), 50);
+      await voiceService.speak(errorMsg);
     } finally {
       setIsProcessing(false);
     }
@@ -228,7 +259,7 @@ export default function SentientDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <button 
             disabled={isProcessing}
-            onClick={() => console.log("Cross-Chain Swaps (Squid Router) clicked")}
+            onClick={handleSwap}
             className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
           >
             <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Cross-Chain Swaps (Squid Router)</div>
