@@ -57,18 +57,15 @@ git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.c
 cd regen-eliza-core/agent-dashboard
 pnpm install
 
-### 2. Environment Variables
-```bash
-Create a .env file in the agent-dashboard directory:
 
-Code snippet
+Environment Variables
+Create a .env file in the agent-dashboard directory:
 NEXT_PUBLIC_THIRDWEB_CLIENT_ID=your_thirdweb_key
 AGENT_PRIVATE_KEY=your_celo_wallet_private_key
 
-
-### 3. Boot the Agent Terminal
-```bash
 pnpm dev --webpack
+
+
 Open http://localhost:3000 to initialize the Voice Core and speak with Regen Eliza.
 
 
