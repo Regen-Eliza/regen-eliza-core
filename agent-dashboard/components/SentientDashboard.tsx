@@ -58,24 +58,23 @@ export default function SentientDashboard() {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
-      const initMsg = "Initiating cross-chain swap from Base to Celo...";
+      const initMsg = "Initiating token swap on Celo via Uniswap...";
       setReportText("");
       setTimeout(() => setReportText(initMsg), 50);
       
-      const amount = "1"; // 1 USDC
-      const fromChain = "8453"; // Base
+      const amount = "1"; // 1 USDC demo swap
       
-      const receipt = await swapService.executeCrossChainSwap(amount, fromChain);
+      const receipt = await swapService.executeSwap(amount);
       
       if (receipt) {
-        const report = "Cross-chain swap complete. I successfully bridged liquidity from Base into the Celo ecosystem.";
+        const report = "Swap complete. I successfully executed the trade via the Uniswap protocol.";
         setReportText(""); // clear previous
         setTimeout(() => setReportText(report), 50); // Small delay to retrigger animation
         await voiceService.speak(report);
       }
     } catch (e) {
       console.error(e);
-      const errorMsg = "An error occurred during the cross-chain swap.";
+      const errorMsg = "An error occurred during the Uniswap token swap.";
       setReportText("");
       setTimeout(() => setReportText(errorMsg), 50);
       await voiceService.speak(errorMsg);
@@ -157,7 +156,7 @@ export default function SentientDashboard() {
         } else if (result.type === "donate") {
           report = generateFundingReport(result.projects);
         } else if (result.type === "swap") {
-          report = "Cross-chain swap complete. I successfully bridged liquidity from Base into the Celo ecosystem.";
+          report = "Swap complete. I successfully executed the trade via the Uniswap protocol.";
         } else {
           report = generateTransferReport(result.amount, result.symbol, result.contact);
         }
@@ -349,7 +348,7 @@ export default function SentientDashboard() {
             onClick={handleSwap}
             className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
           >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Cross-Chain Swaps (Squid Router)</div>
+            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Token Swaps (Uniswap API)</div>
           </button>
           <button 
             disabled={isProcessing}
