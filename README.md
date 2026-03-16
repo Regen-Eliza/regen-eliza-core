@@ -50,3 +50,6 @@ By simply saying *"Swap tokens"*, she leverages the Uniswap protocol to mathemat
 ### 🌍 3. Public Goods Engine (x402 Protocol)
 Implementing the `thirdweb/x402` payment gate, she distributes stablecoins to verified regenerative projects.
 
+### 📇 4. ENS-Powered Autonomous Payroll
+Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the alias, map it to the Celo network, and execute the transfer.
+
