@@ -27,7 +27,7 @@ export default function SentientDashboard() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [reportText, setReportText] = useState("");
   const [hasInitialized, setHasInitialized] = useState(false);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | undefined>(undefined);
 
   const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
     if (isProcessing) return;
