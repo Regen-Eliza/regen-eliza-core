@@ -21,3 +21,8 @@ Run: git add README.md && git commit -m "docs: initialize core README structure 
 
 > She listens to human voice commands to bridge liquidity and fund public goods autonomously.
 
+
+## 🏆 Hackathon Bounties Targeted
+Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
+
+
