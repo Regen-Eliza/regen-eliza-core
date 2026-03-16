@@ -1,61 +1,63 @@
-# 🌿 Regen Eliza: The Sovereign AI Agent
+ozkite@pop-os:~/regen-eliza-core/agent-dashboard$ 
+^[[200~pnpm dev --webpack^[[201~
+pnpm dev --webpack
 
-**An autonomous, voice-activated ERC-8004 agent designed to route capital, execute Agentic DeFi, and fund the Regenerative Economy on the Celo network.**
+> regen-eliza-antigravity@0.1.0 dev /home/ozkite/regen-eliza-core/agent-dashboard
+> next dev --webpack
 
-![Regen Eliza UI](https://img.shields.io/badge/Status-Live_on_Testnet-green) ![Network](https://img.shields.io/badge/Network-Celo-yellow) ![Framework](https://img.shields.io/badge/Framework-Next.js_14-black)
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/ozkite/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /home/ozkite/regen-eliza-core/agent-dashboard/pnpm-lock.yaml
 
-## 🏆 Hackathon Bounties Targeted
+▲ Next.js 16.1.6 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.126:3000
 
-Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
+✓ Starting...
+✓ Ready in 1243ms
+○ Compiling / ...
+⨯ ./services/swapService.ts:1:1
+Module not found: Can't resolve '@0xsquid/sdk'
+> 1 | import { Squid } from '@0xsquid/sdk';
+    | ^
+  2 | import { ethers } from 'ethers';
+  3 |
+  4 | export class SwapService {
 
-* **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC/cUSD) for low-fee, high-speed public goods distribution.
-* **🦄 Uniswap (Agentic Finance):** Native integration of the Uniswap API/SDK to allow Regen Eliza to autonomously swap and bridge value on-chain via natural voice commands.
-* **🔵 ENS:** Cross-chain identity resolution. Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions via her voice-activated Address Book.
-* **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets (DeSci, Eco, Builders) and maps voice intents to execute x402 micro-payments to verified impact projects.
+https://nextjs.org/docs/messages/module-not-found
 
----
+Import trace for requested module:
+./components/SentientDashboard.tsx
+./app/page.tsx
+⨯ ./services/swapService.ts:1:1
+Module not found: Can't resolve '@0xsquid/sdk'
+> 1 | import { Squid } from '@0xsquid/sdk';
+    | ^
+  2 | import { ethers } from 'ethers';
+  3 |
+  4 | export class SwapService {
 
-## 🚀 Core Capabilities
+https://nextjs.org/docs/messages/module-not-found
 
-### 1. 🎙️ Voice-to-Action Core (Full Autonomous UI)
-No more clicking buttons. Users speak directly to Eliza using native **WebSpeech API** recognition. Her LLM intent parser routes the command, executes the on-chain transaction, and verbally reports the success receipt back using **ElevenLabs TTS** and a dynamic 3D lip-syncing avatar.
+Import trace for requested module:
+./components/SentientDashboard.tsx
+./app/page.tsx
+⨯ ./services/swapService.ts:1:1
+Module not found: Can't resolve '@0xsquid/sdk'
+> 1 | import { Squid } from '@0xsquid/sdk';
+    | ^
+  2 | import { ethers } from 'ethers';
+  3 |
+  4 | export class SwapService {
 
-### 2. 💸 Agentic Finance (Uniswap Router)
-Eliza can manage her own treasury. By simply saying *"Swap tokens"*, she leverages the Uniswap protocol to mathematically resolve the optimal route and execute token swaps autonomously, acting as a liquidity magnet for the ecosystem.
+https://nextjs.org/docs/messages/module-not-found
 
-### 3. 🌍 Public Goods Donation Engine (x402)
-Eliza serves as a public goods routing service. Implementing the `thirdweb/x402` payment gate, she can distribute stablecoins to verified regenerative projects, providing instant audio-visual terminal receipts of the exact project funded.
+Import trace for requested module:
+./components/SentientDashboard.tsx
+./app/page.tsx
+ GET / 500 in 13.0s (compile: 13.0s, render: 65ms)
 
-### 4. 📇 ENS-Powered Address Book
-Eliza acts as an autonomous payroll and remittance agent. Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the alias, map it to the Celo network, and execute the transfer.
 
-### 5. 🤖 Sovereign Identity (ERC-8004)
-Eliza is not a script; she is an entity. She is registered on the 8004scan registry with a verifiable on-chain identity and reputation score, allowing other agents (A2A) to discover and utilize her routing services.
-
----
-
-## 🛠️ Tech Stack
-
-* **Blockchain:** Celo (EVM)
-* **Frontend:** Next.js (App Router), Tailwind CSS, Framer Motion
-* **Agent Identity:** ERC-8004 / 8004scan.io
-* **DeFi Engine:** Uniswap SDK / API
-* **Payments & Auth:** Thirdweb SDK, x402 Protocol
-* **Voice Engine:** Native WebSpeech API (STT) + ElevenLabs (TTS)
-* **Avatar:** `met4citizen/TalkingHead` (3D Lip-sync)
-
----
-
-## ⚡ Quick Start Guide
-
-### Prerequisites
-* Node.js v18+
-* `pnpm` package manager
-* A funded Celo Wallet Private Key (for the Agent)
-
-### 1. Installation
-
-```bash
-git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.com/Regen-Eliza/regen-eliza-core.git)
-cd regen-eliza-core/agent-dashboard
-pnpm install
