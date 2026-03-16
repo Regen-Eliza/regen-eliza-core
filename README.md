@@ -1,90 +1,61 @@
-# 🌱 Regen Eliza: The Sovereign AI Agent on Celo
+# 🌿 Regen Eliza: The Sovereign AI Agent
 
-> **Winner of the Celo Agent Hackathon (Submission)**
-> An autonomous AI agent with a verifiable on-chain identity, capable of managing funds, hosting games, and building reputation via ERC-8004.
+**An autonomous, voice-activated ERC-8004 agent designed to route capital, execute Agentic DeFi, and fund the Regenerative Economy on the Celo network.**
+
+![Regen Eliza UI](https://img.shields.io/badge/Status-Live_on_Testnet-green) ![Network](https://img.shields.io/badge/Network-Celo-yellow) ![Framework](https://img.shields.io/badge/Framework-Next.js_14-black)
+
+## 🏆 Hackathon Bounties Targeted
+
+Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
+
+* **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC/cUSD) for low-fee, high-speed public goods distribution.
+* **🦄 Uniswap (Agentic Finance):** Native integration of the Uniswap API/SDK to allow Regen Eliza to autonomously swap and bridge value on-chain via natural voice commands.
+* **🔵 ENS:** Cross-chain identity resolution. Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions via her voice-activated Address Book.
+* **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets (DeSci, Eco, Builders) and maps voice intents to execute x402 micro-payments to verified impact projects.
 
 ---
 
-## 🚀 Key Features (Milestones Completed)
+## 🚀 Core Capabilities
 
-### 1. 🗣️ Social Layer (Voice & Payments)
-- **Voice-to-Action:** Integrated voice parsing logic to interpret commands like *"Send 5 cUSD to Mom"* or *"Split the bill"*.
-- **MiniPay Integration:** Generates deep links for seamless mobile payments within the MiniPay wallet.
+### 1. 🎙️ Voice-to-Action Core (Full Autonomous UI)
+No more clicking buttons. Users speak directly to Eliza using native **WebSpeech API** recognition. Her LLM intent parser routes the command, executes the on-chain transaction, and verbally reports the success receipt back using **ElevenLabs TTS** and a dynamic 3D lip-syncing avatar.
 
-### 2. 💸 DeFi Core (Remittance & Wallet)
-- **Autonomous Wallet:** Eliza has her own embedded wallet (powered by **Thirdweb SDK**).
-- **Stablecoin Remittance:** Supports **cUSD** transfers on Celo Sepolia with near-zero gas fees.
-- **Financial Router:** Smart routing logic to differentiate between general chat and financial commands.
+### 2. 💸 Agentic Finance (Uniswap Router)
+Eliza can manage her own treasury. By simply saying *"Swap tokens"*, she leverages the Uniswap protocol to mathematically resolve the optimal route and execute token swaps autonomously, acting as a liquidity magnet for the ecosystem.
 
-### 3. 🛡️ Infrastructure (Identity & Reputation)
-- **ERC-8004 Compliance:** Implements the **Agent Identity Standard** to register on the blockchain.
-- **Reputation Mining:** Automatically logs successful tasks (transactions, games) to the **8004 Registry** to build an on-chain credit score.
-- **SelfClaw Verification:** Verified "Proof of Humanity" via the SelfClaw protocol.
+### 3. 🌍 Public Goods Donation Engine (x402)
+Eliza serves as a public goods routing service. Implementing the `thirdweb/x402` payment gate, she can distribute stablecoins to verified regenerative projects, providing instant audio-visual terminal receipts of the exact project funded.
 
-### 4. 🎲 Community Engagement (Game Host)
-- **Dice Game Skill:** Eliza can host provably fair games (e.g., Dice Roll) and automatically pay out winners from her treasury.
-- **Business Model (x402):** Implements a "Payment Gate" mock to lock premium features behind a crypto paywall.
+### 4. 📇 ENS-Powered Address Book
+Eliza acts as an autonomous payroll and remittance agent. Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the alias, map it to the Celo network, and execute the transfer.
+
+### 5. 🤖 Sovereign Identity (ERC-8004)
+Eliza is not a script; she is an entity. She is registered on the 8004scan registry with a verifiable on-chain identity and reputation score, allowing other agents (A2A) to discover and utilize her routing services.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Blockchain:** Celo Sepolia Testnet
-- **Agent Framework:** TypeScript (Node.js)
-- **Wallet & Contracts:** Thirdweb SDK
-- **Identity:** ERC-8004 / 8004scan.io
-- **Frontend:** Next.js (App Router) + Tailwind CSS
-- **Backend:** Express.js API
+* **Blockchain:** Celo (EVM)
+* **Frontend:** Next.js (App Router), Tailwind CSS, Framer Motion
+* **Agent Identity:** ERC-8004 / 8004scan.io
+* **DeFi Engine:** Uniswap SDK / API
+* **Payments & Auth:** Thirdweb SDK, x402 Protocol
+* **Voice Engine:** Native WebSpeech API (STT) + ElevenLabs (TTS)
+* **Avatar:** `met4citizen/TalkingHead` (3D Lip-sync)
 
 ---
 
 ## ⚡ Quick Start Guide
 
 ### Prerequisites
-- Node.js v18+
-- A Celo Sepolia Wallet Private Key
-- Thirdweb API Key
+* Node.js v18+
+* `pnpm` package manager
+* A funded Celo Wallet Private Key (for the Agent)
 
 ### 1. Installation
+
 ```bash
-git clone https://github.com/Regen-Eliza/regen-eliza-core.git
-cd regen-eliza-core/regen-eliza-hackathon
-npm install
-```
-
-### 2. Environment Setup
-Create a `.env` file in the root directory:
-```env
-PRIVATE_KEY=your_wallet_private_key
-THIRDWEB_SECRET_KEY=your_thirdweb_key
-PORT=3005
-```
-
-### 3. Run the Agent (Backend)
-```bash
-# Starts the Agent Server on Port 3005
-PORT=3005 npx ts-node server.ts
-```
-
-### 4. Run the Dashboard (Frontend)
-Open a new terminal:
-```bash
-cd web
-npm install
-npm run dev
-# Visit http://localhost:3000
-```
-
----
-
-## 🎥 Demo Capabilities
-
-You can test the following commands in the Dashboard:
-
-1.  **"Send 1.0 cUSD to 0x..."** -> Triggers the Financial Router & Blockchain Transaction.
-2.  **"Let's bet on a dice game"** -> Triggers the Game Skill.
-3.  **"Who are you?"** -> Triggers the Identity & Reputation check.
-
----
-
-*Built with ❤️ for the Celo "Build with AI" Hackathon.*
+git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.com/Regen-Eliza/regen-eliza-core.git)
+cd regen-eliza-core/agent-dashboard
+pnpm install
