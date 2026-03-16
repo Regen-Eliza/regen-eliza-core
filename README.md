@@ -58,4 +58,9 @@ Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the
 * **Frontend:** Next.js (App Router), Tailwind CSS
 * **Agent Identity:** ERC-8004 / 8004scan.io
 
-* 
+
+* **DeFi Engine:** Uniswap SDK / API
+* **Payments & Auth:** Thirdweb SDK, x402 Protocol
+* **Voice Engine:** WebSpeech API + ElevenLabs (TTS)
+
+  
