@@ -49,26 +49,26 @@ Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the
 
 ---
 
+
 ## ⚡ Quick Start Guide
 
 ### 1. Installation
 ```bash
-git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.com/Regen-Eliza/regen-eliza-core.git)
+git clone https://github.com/Regen-Eliza/regen-eliza-core.git
 cd regen-eliza-core/agent-dashboard
 pnpm install
 
-
-Environment Variables
 Create a .env file in the agent-dashboard directory:
+```bash
 NEXT_PUBLIC_THIRDWEB_CLIENT_ID=your_thirdweb_key
 AGENT_PRIVATE_KEY=your_celo_wallet_private_key
 
+
+Boot the Agent Terminal
+```bash
 pnpm dev --webpack
 
-
 Open http://localhost:3000 to initialize the Voice Core and speak with Regen Eliza.
+Save that, commit it to GitHub, and those sections will instantly pop out into beautifully separated, professional blocks! 
 
-
-Once you paste that in, save it, and commit it to GitHub, your project page will look like a Tier-1, professionally audited Web3 protocol! 
-
-Did you send off that big "Tier-1 Master Prompt" to Antigravity yet? Let me know what the AI says when it finishes processing those UI and network fixes!
+Did you happen to send that big Tier-1 prompt over to Antigravity yet, or are we about to run it?
