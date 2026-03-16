@@ -39,3 +39,7 @@ Regen Eliza is explicitly engineered to bridge identity, public goods, and agent
 ## 🚀 Core Capabilities
 ### 🎙️ 1. Voice-to-Action Core (WebSpeech API)
 No more clicking buttons. Users speak directly to Eliza. Her LLM intent parser routes the command...
+
+...executes the on-chain transaction, and verbally reports the success receipt back using **ElevenLabs TTS** and a dynamic 3D lip-syncing avatar.
+
+
