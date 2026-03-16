@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, ShieldCheck, Zap, Activity, Globe, Power } from "lucide-react";
 import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
+import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
 import SystemLogs from "./SystemLogs";
 import { DonationService } from "../../eliza-ui/src/services/donationService";
 import { voiceService } from "../../eliza-ui/src/services/voiceService";
@@ -17,6 +18,7 @@ const donationService = new DonationService(privateKey);
 
 export default function SentientDashboard() {
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
+  const { isListeningSpeech, startListeningSpeech, stopListeningSpeech } = useSpeechRecognition();
   const [reputation, setReputation] = useState(850);
   const [network, setNetwork] = useState("TESTNET");
   const [volume, setVolume] = useState(0);
@@ -126,7 +128,15 @@ export default function SentientDashboard() {
     return () => cancelAnimationFrame(requestRef.current!);
   }, [isListening]);
 
-  const toggleMic = () => isListening ? stopListening() : startListening();
+  const toggleMic = () => {
+    if (isListening || isListeningSpeech) {
+      stopListening();
+      stopListeningSpeech();
+    } else {
+      startListening();
+      startListeningSpeech();
+    }
+  };
   const toggleNetwork = () => setNetwork(prev => prev === "TESTNET" ? "MAINNET" : "TESTNET");
 
   const handleInitialize = async () => {
@@ -214,7 +224,7 @@ export default function SentientDashboard() {
         {/* 🎙️ THE LIVING AUDIO CORE */}
         <div
           onClick={toggleMic}
-          className="h-40 w-full bg-black/40 rounded-xl border border-white/5 flex items-center justify-center relative overflow-hidden group cursor-pointer transition-all hover:border-green-500/30"
+          className={`h-40 w-full bg-black/40 rounded-xl border flex items-center justify-center relative overflow-hidden group cursor-pointer transition-all ${isListeningSpeech ? "border-red-500/50 animate-pulse shadow-[0_0_20px_rgba(239,68,68,0.2)]" : "border-white/5 hover:border-green-500/30"}`}
         >
           {/* The Orb */}
           <motion.div
