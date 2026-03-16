@@ -32,3 +32,7 @@ Regen Eliza is explicitly engineered to bridge identity, public goods, and agent
 * **🦄 Uniswap (Agentic Finance):** Integration of the Uniswap API to allow Eliza to autonomously swap and bridge value on-chain via natural voice commands.
 
 * **🔵 ENS (Cross-chain Identity):** Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions.
+
+* **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets and maps voice intents to execute x402 micro-payments.
+
+* 
