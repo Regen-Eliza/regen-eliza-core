@@ -53,3 +53,9 @@ Implementing the `thirdweb/x402` payment gate, she distributes stablecoins to ve
 ### 📇 4. ENS-Powered Autonomous Payroll
 Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the alias, map it to the Celo network, and execute the transfer.
 
+## 🛠️ Tech Stack
+* **Blockchain:** Celo (EVM)
+* **Frontend:** Next.js (App Router), Tailwind CSS
+* **Agent Identity:** ERC-8004 / 8004scan.io
+
+* 
