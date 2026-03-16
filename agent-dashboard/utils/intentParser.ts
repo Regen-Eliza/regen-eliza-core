@@ -23,18 +23,19 @@ export async function parseIntentAndExecuteTransfer(voiceCommand: string): Promi
   const transcript = voiceCommand.toLowerCase();
 
   try {
-    // 1. Check for SWAP
-    if (transcript.includes("swap") || transcript.includes("bridge")) {
-      const match = transcript.match(/(?:swap|bridge) ([\d\.]+) (usdc|usdt|cusd) from (base|arbitrum)/i);
+    // 1. Check for SWAP (Uniswap on Celo)
+    if (transcript.includes("swap") || transcript.includes("trade") || transcript.includes("exchange")) {
+      const match = transcript.match(/(?:swap|trade|exchange) ([\d\.]+) (usdc|usdt|cusd) (?:to|for|into) (usdc|usdt|cusd)/i);
       if (match) {
         const amount = match[1];
-        const fromChain = match[3].toLowerCase() === "base" ? "8453" : "42161"; // arbitrum is 42161
-        const receipt = await swapService.executeCrossChainSwap(amount, fromChain);
-        return { type: "swap", receipt, amount, fromChain };
+        const fromToken = match[2].toUpperCase();
+        const toToken = match[3].toUpperCase();
+        const receipt = await swapService.executeSwap(amount, fromToken, toToken);
+        return { type: "swap", receipt, amount, fromToken, toToken };
       }
-      // Demo fallback if pattern match misses
-      const receipt = await swapService.executeCrossChainSwap("1", "8453");
-      return { type: "swap", receipt, amount: "1", fromChain: "8453" };
+      // Demo fallback: swap 1 USDC to USDT on Celo via Uniswap
+      const receipt = await swapService.executeSwap("1", "USDC", "USDT");
+      return { type: "swap", receipt, amount: "1", fromToken: "USDC", toToken: "USDT" };
     }
 
     // 2. Check for DONATIONS
@@ -60,6 +61,7 @@ export async function parseIntentAndExecuteTransfer(voiceCommand: string): Promi
 
     const contact = contacts.find(c => 
       c.name.toLowerCase() === spokenContact || 
+      c.name.replace('.eth', '').toLowerCase() === spokenContact ||
       (c as any).spokenName?.toLowerCase() === spokenContact
     );
 
