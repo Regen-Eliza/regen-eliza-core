@@ -3,5 +3,7 @@
 </div>
 
 
+Run: git add README.md && git commit -m "docs: initialize core README structure and omni-agent heading" && git push origin main
+
 
 
