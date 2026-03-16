@@ -18,7 +18,7 @@ const donationService = new DonationService(privateKey);
 
 export default function SentientDashboard() {
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
-  const { isListeningSpeech, startListeningSpeech, stopListeningSpeech } = useSpeechRecognition();
+  const { isListeningSpeech, startListeningSpeech, stopListeningSpeech, transcript, setTranscript } = useSpeechRecognition();
   const [reputation, setReputation] = useState(850);
   const [network, setNetwork] = useState("TESTNET");
   const [volume, setVolume] = useState(0);
@@ -138,6 +138,49 @@ export default function SentientDashboard() {
     }
   };
   const toggleNetwork = () => setNetwork(prev => prev === "TESTNET" ? "MAINNET" : "TESTNET");
+
+  const handleVoiceCommand = async (command: string) => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+    try {
+      // Step 5 formatting placeholder: print user input
+      setReportText(`> User: ${command}`);
+      
+      const result = await parseIntentAndExecuteTransfer(command);
+      
+      // Assume result now holds standard fields since we'll refactor intentParser next
+      if (result) {
+        let report = "";
+        if (result.type === "transfer") {
+          report = generateTransferReport(result.amount, result.symbol, result.contact);
+        } else if (result.type === "donate") {
+          report = generateFundingReport(result.projects);
+        } else if (result.type === "swap") {
+          report = "Cross-chain swap complete. I successfully bridged liquidity from Base into the Celo ecosystem.";
+        } else {
+           // Fallback for current parseIntentAndExecuteTransfer
+          report = generateTransferReport(result.amount, result.symbol, result.contact);
+        }
+        
+        setTimeout(() => setReportText(report), 1500); // Give user a moment to read their input
+        await voiceService.speak(report);
+      }
+    } catch (e: any) {
+      console.error(e);
+      const errorMsg = e.message || "I could not understand that command.";
+      setTimeout(() => setReportText(errorMsg), 1500);
+      await voiceService.speak(errorMsg);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!isListeningSpeech && transcript) {
+      handleVoiceCommand(transcript);
+      setTranscript("");
+    }
+  }, [isListeningSpeech, transcript, setTranscript]);
 
   const handleInitialize = async () => {
     try {
