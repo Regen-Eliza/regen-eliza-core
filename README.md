@@ -72,3 +72,10 @@ cd regen-eliza-core/agent-dashboard
 pnpm install
 
 
+**3. Boot the Agent Terminal**
+```bash
+pnpm dev --webpack
+
+
+
+
