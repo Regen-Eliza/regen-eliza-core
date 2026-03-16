@@ -63,4 +63,12 @@ Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the
 * **Payments & Auth:** Thirdweb SDK, x402 Protocol
 * **Voice Engine:** WebSpeech API + ElevenLabs (TTS)
 
-  
+
+  ## ⚡ Quick Start Guide
+**1. Installation**
+```bash
+git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.com/Regen-Eliza/regen-eliza-core.git)
+cd regen-eliza-core/agent-dashboard
+pnpm install
+
+
