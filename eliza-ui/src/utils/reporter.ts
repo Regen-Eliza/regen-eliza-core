@@ -26,3 +26,10 @@ export function generateFundingReport(projects: FundedProject[]): string {
 
   return report.trim();
 }
+
+/**
+ * Utility to generate a conversational report for direct wallet transfers.
+ */
+export function generateTransferReport(amount: string, token: string, contactName: string): string {
+  return `Transfer complete. I successfully sent ${amount} ${token} to ${contactName}.`;
+}

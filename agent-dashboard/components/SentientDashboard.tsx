@@ -6,7 +6,7 @@ import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
 import SystemLogs from "./SystemLogs";
 import { DonationService } from "../../eliza-ui/src/services/donationService";
 import { voiceService } from "../../eliza-ui/src/services/voiceService";
-import { generateFundingReport } from "../../eliza-ui/src/utils/reporter";
+import { generateFundingReport, generateTransferReport } from "../../eliza-ui/src/utils/reporter";
 import { swapService } from "../../eliza-ui/src/services/swapService";
 import { parseIntentAndExecuteTransfer } from "../../eliza-ui/src/utils/intentParser";
 import Avatar from "./Avatar";
@@ -93,8 +93,8 @@ export default function SentientDashboard() {
       const result = await parseIntentAndExecuteTransfer(voiceCommand);
       
       if (result) {
-        // We will offload this text generation to the reporter utility shortly
-        const report = `Transfer complete. I successfully sent ${result.amount} ${result.symbol} to ${result.contact}.`;
+        // We will offload this text generation to the reporter utility
+        const report = generateTransferReport(result.amount, result.symbol, result.contact);
         setReportText("");
         setTimeout(() => setReportText(report), 50);
         await voiceService.speak(report);
