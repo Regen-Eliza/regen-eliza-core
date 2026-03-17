@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🌿 Regen Eliza: The Omni-Agent for Agentic Public Goods</h1>
+  <h1>🌿 The Omni-Agent for Agentic Public Goods</h1>
   <p><b>An autonomous, voice-activated ERC-8004 agent designed to route capital, execute Agentic DeFi, and fund the Regenerative Economy on Celo.</b></p>
   
   <img src="https://img.shields.io/badge/Status-Live_on_Testnet-green?style=for-the-badge" alt="Status" />
