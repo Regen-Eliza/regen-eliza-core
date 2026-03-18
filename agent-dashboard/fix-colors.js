@@ -7,9 +7,9 @@ const oldTitleRegex = /\/\* ─── ASCII TITLE ─── \*\/[\s\S]*?(?=\/\* 
 const newTitle = `/* ─── ASCII TITLE ─── */
 const ASCII_TITLE = \`
    ██████  ███████ ██████  ███████ ███    ██     ███████ ██      ██ ███████ ███████ 
-██   ██ ██      ██      ██      ████   ██     ██      ██      ██    ███  ██   ██ 
-██████  █████   ██  ███ █████   ██ ██  ██     █████   ██      ██   ███   ███████ 
-██   ██ ██      ██   ██ ██      ██  ██ ██     ██      ██      ██  ███    ██   ██ 
+   ██   ██ ██      ██      ██      ████   ██     ██      ██      ██    ███  ██   ██ 
+   ██████  █████   ██  ███ █████   ██ ██  ██     █████   ██      ██   ███   ███████ 
+   ██   ██ ██      ██   ██ ██      ██  ██ ██     ██      ██      ██  ███    ██   ██ 
    ██   ██ ███████  ██████ ███████ ██   ████     ███████ ███████ ██ ███████ ██   ██ 
 \`;
 
@@ -24,7 +24,7 @@ content = content.replace(/bg-\[#050505\]/g, 'bg-[#021002]');
 fs.writeFileSync('components/SentientDashboard.tsx', content);
 
 try {
-  let avatar = fs.readFileSync('components/Avatar.tsx', 'utf8');
-  avatar = avatar.replace(/#34e234/g, '#064006');
-  fs.writeFileSync('components/Avatar.tsx', avatar);
-} catch(e){}
+   let avatar = fs.readFileSync('components/Avatar.tsx', 'utf8');
+   avatar = avatar.replace(/#34e234/g, '#064006');
+   fs.writeFileSync('components/Avatar.tsx', avatar);
+} catch (e) { }

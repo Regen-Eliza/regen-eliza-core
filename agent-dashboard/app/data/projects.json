@@ -1,0 +1,123 @@
+[
+  {
+    "id": "eco-001",
+    "name": "Celo Public Goods",
+    "category": "ecology",
+    "description": "Funding climate and biodiversity regeneration projects on the Celo network through transparent on-chain governance.",
+    "wallet": "0xA8dD5eBa7b028a73C840cF9f342e5AcB004AE999",
+    "socials": {
+      "twitter": "https://twitter.com/CeloOrg",
+      "website": "https://celo.org/public-goods"
+    }
+  },
+  {
+    "id": "eco-002",
+    "name": "Regen Network",
+    "category": "ecology",
+    "description": "Ecological credits and regenerative finance infrastructure for verified environmental impact.",
+    "wallet": "0xB3C9f210F9b4A9dD8Ed71a9F428b2C3E7A10dE22",
+    "socials": {
+      "twitter": "https://twitter.com/regennetwork",
+      "website": "https://regen.network"
+    }
+  },
+  {
+    "id": "eco-003",
+    "name": "GreenPill Network",
+    "category": "ecology",
+    "description": "A global community funding local regenerative projects through crypto-enabled public goods mechanisms.",
+    "wallet": "0xC4D0e321F0c5BeEE9e82Bb0A10C43D4F8B21fF33",
+    "socials": {
+      "twitter": "https://twitter.com/greenpillntwk",
+      "website": "https://greenpill.network"
+    }
+  },
+  {
+    "id": "build-001",
+    "name": "Octant Public Goods",
+    "category": "builders",
+    "description": "Golem Foundation's experiment in participatory public goods funding, rewarding active ecosystem contributors.",
+    "wallet": "0xD5E1f432B1d6CfFF0f93Cc1B21A5E4G9C32g044",
+    "socials": {
+      "twitter": "https://twitter.com/OctantApp",
+      "website": "https://octant.app"
+    }
+  },
+  {
+    "id": "build-002",
+    "name": "Gitcoin Grants",
+    "category": "builders",
+    "description": "The leading quadratic funding platform accelerating open source infrastructure development across web3.",
+    "wallet": "0xE6F2g543C2e7DgFF1g04Dd2C32B6F5H0D43h155",
+    "socials": {
+      "twitter": "https://twitter.com/gitcoin",
+      "website": "https://grants.gitcoin.co"
+    }
+  },
+  {
+    "id": "build-003",
+    "name": "ENS DAO Ecosystem",
+    "category": "builders",
+    "description": "Supporting builders and developers in the ENS ecosystem through community-governed grants.",
+    "wallet": "0xF7G3h654D3f8EhGG2h15Ee3D43C7G6I1E54i266",
+    "socials": {
+      "twitter": "https://twitter.com/ensdomains",
+      "website": "https://ens.domains"
+    }
+  },
+  {
+    "id": "desci-001",
+    "name": "DeSci Foundation",
+    "category": "desci",
+    "description": "Decentralized science infrastructure funding open, reproducible research with on-chain NFT IP primitives.",
+    "wallet": "0xG8H4i765E4g9FiHH3i26Ff4E54D8H7J2F65j377",
+    "socials": {
+      "twitter": "https://twitter.com/DeSciWorld",
+      "website": "https://desci.foundation"
+    }
+  },
+  {
+    "id": "desci-002",
+    "name": "VitaDAO",
+    "category": "desci",
+    "description": "Collective funding and IP-NFT governance for longevity research and life-extension biotech.",
+    "wallet": "0xH9I5j876F5h0GjII4j37Gg5F65E9I8K3G76k488",
+    "socials": {
+      "twitter": "https://twitter.com/vita_dao",
+      "website": "https://vitadao.com"
+    }
+  },
+  {
+    "id": "desci-003",
+    "name": "Molecule Protocol",
+    "category": "desci",
+    "description": "Tokenizing biotech IP to unlock community-funded pharmaceutical research and drug development.",
+    "wallet": "0xI0J6k987G6i1HkJJ5k48Hh6G76F0J9L4H87l599",
+    "socials": {
+      "twitter": "https://twitter.com/molecule_dao",
+      "website": "https://molecule.to"
+    }
+  },
+  {
+    "id": "agent-001",
+    "name": "Regen Eliza (ERC-8004)",
+    "category": "agents",
+    "description": "Autonomous ERC-8004 agent operating on Celo and Base, routing public goods donations via on-chain intent parsing.",
+    "wallet": "0x7a300060b39350A8dD5eBa7b028a73C8004AE004",
+    "socials": {
+      "twitter": "https://twitter.com/RegenEliza",
+      "website": "https://regen-eliza.vercel.app"
+    }
+  },
+  {
+    "id": "agent-002",
+    "name": "AI Agent Alliance",
+    "category": "agents",
+    "description": "Funding the next generation of autonomous ERC-8004 agents empowering decentralized coordination at scale.",
+    "wallet": "0xJ1K7l098H7j2IlKK6l59Ii7H87G1K0M5I98m600",
+    "socials": {
+      "twitter": "https://twitter.com/AIAgentAlliance",
+      "website": "https://aiagentalliance.xyz"
+    }
+  }
+]

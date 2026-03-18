@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, ShieldCheck, Globe, Power, Wallet, X } from "lucide-react";
+import { Mic, ShieldCheck, Globe, Power, Wallet, X, Zap } from "lucide-react";
 import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
 import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
 import { DonationService } from "../services/donationService";
@@ -631,6 +631,61 @@ export default function SentientDashboard() {
                   <span className="text-[#888]/40">0x0000...000{i}</span>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* A2A Commerce Panel */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-5">
+            <div className={`${panelLabel} flex items-center gap-2`}>
+              <Zap size={14} className="text-[#6ba368]" /> A2A COMMERCE
+            </div>
+            <div className="text-[#888888] font-mono text-xs tracking-widest uppercase mb-3">Agent Hiring</div>
+
+            {/* Operating Budget */}
+            <div className="flex flex-col space-y-2 mb-4">
+              <div className="text-[#888888] font-mono text-xs tracking-widest mb-1">OPERATING BUDGET</div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                  <span className="text-[#e5e5e5] font-mono text-xs">Base (ETH/USDC)</span>
+                </div>
+                <span className="text-[#6ba368] font-mono text-xs">Active</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
+                  <span className="text-[#e5e5e5] font-mono text-xs">Celo (cUSD)</span>
+                </div>
+                <span className="text-[#6ba368] font-mono text-xs">Active</span>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col space-y-2">
+              <button
+                disabled={isProcessing}
+                onClick={async () => {
+                  if (isProcessing) return;
+                  setIsProcessing(true);
+                  pushLog('A2A HIRE — initiating micro-payment to data agent...');
+                  await new Promise(r => setTimeout(r, 800));
+                  pushLog('A2A HIRE — sent 0.5 USDC → 0xAgent...d4ta');
+                  pushLog('A2A HIRE — receipt confirmed. Task delegated.');
+                  setReportText('');
+                  setTimeout(() => setReportText('> A2A micro-payment of 0.5 USDC sent to Data Agent (0xAgent...d4ta) on Base.\n> Task: Fetch on-chain public goods metrics.\n> Status: CONFIRMED'), 50);
+                  setIsProcessing(false);
+                }}
+                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors font-mono text-xs tracking-widest disabled:opacity-40"
+              >
+                [ HIRE DATA AGENT (0.5 USDC) ]
+              </button>
+              <button
+                disabled={isProcessing}
+                onClick={() => handleSwapRequest('1', 'USDC', 'USDT')}
+                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors font-mono text-xs tracking-widest disabled:opacity-40"
+              >
+                [ SWAP &amp; BRIDGE YIELD ]
+              </button>
             </div>
           </div>
 
