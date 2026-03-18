@@ -11,6 +11,9 @@ importers:
       '@0xsquid/sdk':
         specifier: ^2.13.0
         version: 2.13.0(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@6.0.6)
+      '@0xsquid/squid-types':
+        specifier: ^0.1.217
+        version: 0.1.217(typescript@5.9.3)
       '@met4citizen/talkinghead':
         specifier: ^1.7.0
         version: 1.7.0
@@ -100,6 +103,11 @@ packages:
 
   '@0xsquid/sdk@2.13.0':
     resolution: {integrity: sha512-YrI4VxuLQHPWXno+SwwEo+eiC1A8jBE0u+g+rr8qAFKPupIqxN+doQYzqPvl6mkSDctUEfqdSYbocb4Knv4fsw==}
+
+  '@0xsquid/squid-types@0.1.217':
+    resolution: {integrity: sha512-Qrik3ty5nQxiyDQiDUNWXV4W1jbm7Bq+hvP7ZUEavlVLe5V8TKdx7v5W8jCAt09a4S1+zavXe8iUtForpHYiyQ==}
+    peerDependencies:
+      typescript: ^5.3.3
 
   '@adraffy/ens-normalize@1.10.0':
     resolution: {integrity: sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==}
@@ -4786,6 +4794,11 @@ snapshots:
       - encoding
       - typescript
       - utf-8-validate
+
+  '@0xsquid/squid-types@0.1.217(typescript@5.9.3)':
+    dependencies:
+      long: 5.3.2
+      typescript: 5.9.3
 
   '@adraffy/ens-normalize@1.10.0': {}
 

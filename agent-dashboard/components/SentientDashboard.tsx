@@ -1,15 +1,16 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, ShieldCheck, Zap, Activity, Globe, Power } from "lucide-react";
+import { Mic, ShieldCheck, Globe, Power, Wallet, X } from "lucide-react";
 import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
 import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
-import SystemLogs from "./SystemLogs";
 import { DonationService } from "../services/donationService";
 import { voiceService } from "../services/voiceService";
 import { generateFundingReport, generateTransferReport } from "../utils/reporter";
 import { swapService } from "../services/swapService";
 import { parseIntentAndExecuteTransfer } from "../utils/intentParser";
+import contacts from "../data/contacts.json";
+import { executeDonation } from "../app/actions/transaction";
 import dynamic from 'next/dynamic';
 
 const Avatar = dynamic(() => import('./Avatar'), { ssr: false });
@@ -18,66 +19,139 @@ const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789ab
 const privateKey = process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY || defaultKey;
 const donationService = new DonationService(privateKey);
 
+/* ─── ASCII TITLE ─── */
+const ASCII_TITLE = `
+   ██████  ███████ ██████  ███████ ███    ██     ███████ ██      ██ ███████ ███████ 
+   ██   ██ ██      ██      ██      ████   ██     ██      ██      ██    ███  ██   ██ 
+   ██████  █████   ██  ███ █████   ██ ██  ██     █████   ██      ██   ███   ███████ 
+   ██   ██ ██      ██   ██ ██      ██  ██ ██     ██      ██      ██  ███    ██   ██ 
+   ██   ██ ███████  ██████ ███████ ██   ████     ███████ ███████ ██ ███████ ██   ██ 
+`;
+
+/* ─── Color Palette ─── */
+const C = {
+  green: "#064006",   // neon — headers, borders, indicators only
+  muted: "#d0d0d0",   // off-white — body text, buttons, logs
+  dim: "#888888",   // dimmed — secondary info
+  dimGreen: "#064006",   // kept for reference in borders/dots
+};
+
 export default function SentientDashboard() {
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
   const { isListeningSpeech, startListeningSpeech, stopListeningSpeech, transcript, setTranscript } = useSpeechRecognition();
-  const [reputation, setReputation] = useState(850);
+  const [reputation, setReputation] = useState(76.98);
   const [network, setNetwork] = useState("TESTNET");
+  const [activeChain, setActiveChain] = useState('CELO');
   const [volume, setVolume] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [reportText, setReportText] = useState("");
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [logs, setLogs] = useState<string[]>([]);
   const requestRef = useRef<number | undefined>(undefined);
+
+  /* ─── Swap Confirmation Modal State ─── */
+  const [swapModal, setSwapModal] = useState<{
+    open: boolean;
+    amount: string;
+    fromToken: string;
+    toToken: string;
+  }>({ open: false, amount: "1", fromToken: "USDC", toToken: "USDT" });
+
+  /* ─── Logging helper ─── */
+  const pushLog = (msg: string) => setLogs(prev => [`> ${msg}`, ...prev].slice(0, 50));
 
   const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
+      pushLog(`FUND ${category.toUpperCase()} — routing 100 USDT...`);
       const amount = 100;
       const projects = await donationService.distributeFunds(category, amount);
       if (projects) {
         const report = generateFundingReport(projects);
-        setReportText(""); // clear previous
-        setTimeout(() => setReportText(report), 50); // Small delay to retrigger animation
+        setReportText("");
+        setTimeout(() => setReportText(report), 50);
+        pushLog(`SUCCESS — funded ${projects.length} project(s)`);
         await voiceService.speak(report);
       } else {
         const errorMsg = "I encountered an issue trying to route funds.";
         setReportText("");
         setTimeout(() => setReportText(errorMsg), 50);
+        pushLog("ERROR — could not route funds");
         await voiceService.speak(errorMsg);
       }
     } catch (e) {
       console.error(e);
+      pushLog("ERROR — communication failure");
       await voiceService.speak("An error occurred during communication.");
     } finally {
       setIsProcessing(false);
     }
   };
 
-  const handleSwap = async () => {
+  /* ─── On-Chain Micro-Donation via Server Action ─── */
+  const handleOnChainDonation = async (target: "ecology" | "builders") => {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
-      const initMsg = "Initiating token swap on Celo via Uniswap...";
+      pushLog(`BASE TX — sending 0.0001 ETH micro-donation to ${target.toUpperCase()}...`);
+      setReportText("");
+      setTimeout(() => setReportText(`Executing on-chain micro-donation to ${target} on Base Mainnet...`), 50);
+
+      const result = await executeDonation(target);
+
+      if (result.success && result.txHash) {
+        pushLog(`TX SUCCESS: ${result.txHash.slice(0, 22)}...`);
+        const report = `On-chain donation confirmed on ${result.network}.\nTarget: ${result.target}\nAmount: ${result.amount} ETH\nTX: ${result.txHash}`;
+        setReportText("");
+        setTimeout(() => setReportText(report), 50);
+        await voiceService.speak(`Micro-donation to ${target} confirmed on Base. Transaction hash: ${result.txHash.slice(0, 18)}`);
+      } else {
+        pushLog(`TX FAILED — ${result.error}`);
+        const errorMsg = `On-chain donation failed: ${result.error}`;
+        setReportText("");
+        setTimeout(() => setReportText(errorMsg), 50);
+        await voiceService.speak(`The on-chain donation to ${target} could not be completed. ${result.error}`);
+      }
+    } catch (e: any) {
+      console.error(e);
+      pushLog(`ERROR — ${e.message || "on-chain donation failed"}`);
+      await voiceService.speak("An error occurred during the on-chain transaction.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  /* ─── Opens the confirmation modal instead of executing immediately ─── */
+  const handleSwapRequest = (amount = "1", fromToken = "USDC", toToken = "USDT") => {
+    setSwapModal({ open: true, amount, fromToken, toToken });
+    pushLog(`SWAP — preview: ${amount} ${fromToken} → ${toToken}`);
+  };
+
+  /* ─── Executes the real swap after user confirms ─── */
+  const handleSwapConfirm = async () => {
+    const { amount, fromToken, toToken } = swapModal;
+    setSwapModal(prev => ({ ...prev, open: false }));
+    if (isProcessing) return;
+    setIsProcessing(true);
+    try {
+      pushLog(`SWAP — executing ${amount} ${fromToken} → ${toToken} on-chain...`);
+      const initMsg = `Executing swap: ${amount} ${fromToken} → ${toToken} via Uniswap on Celo...`;
       setReportText("");
       setTimeout(() => setReportText(initMsg), 50);
-      
-      const amount = "1"; // 1 USDC demo swap
-      
-      const receipt = await swapService.executeSwap(amount);
-      
-      if (receipt) {
-        const report = "Swap complete. I successfully executed the trade via the Uniswap protocol.";
-        setReportText(""); // clear previous
-        setTimeout(() => setReportText(report), 50); // Small delay to retrigger animation
-        await voiceService.speak(report);
-      }
-    } catch (e) {
-      console.error(e);
-      const errorMsg = "An error occurred during the Uniswap token swap.";
+      const receipt = await swapService.executeSwap(amount, fromToken, toToken);
+      const report = `Swap confirmed on Celo. TX: ${receipt.transactionHash}`;
       setReportText("");
-      setTimeout(() => setReportText(errorMsg), 50);
-      await voiceService.speak(errorMsg);
+      setTimeout(() => setReportText(report), 50);
+      pushLog(`SWAP OK — tx: ${receipt.transactionHash?.slice(0, 18)}...`);
+      await voiceService.speak("Swap complete. The trade was successfully executed via the Uniswap protocol on Celo.");
+    } catch (e: any) {
+      console.error(e);
+      const errorMsg = e.message || "Swap execution failed.";
+      pushLog(`ERROR — ${errorMsg.slice(0, 60)}`);
+      setReportText("");
+      setTimeout(() => setReportText(`Swap failed: ${errorMsg}`), 50);
+      await voiceService.speak("The swap could not be completed. " + errorMsg.split('.')[0]);
     } finally {
       setIsProcessing(false);
     }
@@ -87,23 +161,22 @@ export default function SentientDashboard() {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
+      pushLog("x402 PAY — parsing transfer command...");
       const initMsg = "Listening and parsing transfer command...";
       setReportText("");
       setTimeout(() => setReportText(initMsg), 50);
-      
-      // Simulating voice command input for the demo
       const voiceCommand = "Send 10 USDC to Alice";
       const result = await parseIntentAndExecuteTransfer(voiceCommand);
-      
       if (result) {
-        // We will offload this text generation to the reporter utility
         const report = generateTransferReport(result.amount, result.symbol, result.contact);
         setReportText("");
         setTimeout(() => setReportText(report), 50);
+        pushLog(`TRANSFER OK — ${result.amount} ${result.symbol} → ${result.contact}`);
         await voiceService.speak(report);
       }
     } catch (e: any) {
       console.error(e);
+      pushLog(`ERROR — ${e.message || "transfer failed"}`);
       const errorMsg = e.message || "An error occurred during the transfer.";
       setReportText("");
       setTimeout(() => setReportText(errorMsg), 50);
@@ -113,11 +186,10 @@ export default function SentientDashboard() {
     }
   };
 
-  // Animation Loop for Audio Visualization
   const animate = () => {
     if (isListening) {
       const vol = getFrequency();
-      setVolume(vol); // Values typically 0-255
+      setVolume(vol);
     } else {
       setVolume(0);
     }
@@ -133,41 +205,54 @@ export default function SentientDashboard() {
     if (isListening || isListeningSpeech) {
       stopListening();
       stopListeningSpeech();
+      pushLog("MIC OFF");
     } else {
       startListening();
       startListeningSpeech();
+      pushLog("MIC ON — listening for voice commands...");
     }
   };
-  const toggleNetwork = () => setNetwork(prev => prev === "TESTNET" ? "MAINNET" : "TESTNET");
+  const toggleNetwork = () => {
+    setNetwork(prev => prev === "TESTNET" ? "MAINNET" : "TESTNET");
+    pushLog(`NETWORK — switched to ${network === "TESTNET" ? "MAINNET" : "TESTNET"}`);
+  };
 
   const handleVoiceCommand = async (command: string) => {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
+      pushLog(`VOICE CMD: "${command}"`);
       const userLog = `> User: ${command}\n\n`;
       setReportText(userLog + "> System: Processing...");
-      
       const result = await parseIntentAndExecuteTransfer(command);
-      
       if (result) {
+        // Swap intents go through the confirmation modal
+        if (result.type === "swap" && result.needsConfirmation) {
+          setIsProcessing(false);
+          handleSwapRequest(result.amount, result.fromToken, result.toToken);
+          setReportText("");
+          setTimeout(() => setReportText(`> Intent parsed. Swap ${result.amount} ${result.fromToken} → ${result.toToken}. Awaiting confirmation...`), 50);
+          return;
+        }
+
         let report = "";
         if (result.type === "transfer") {
-          report = generateTransferReport(result.amount, result.symbol, result.contact);
+          report = `> Intent parsed. Transfer to: ${result.resolvedAlias || result.contact}\n\n` +
+            generateTransferReport(result.amount, result.symbol, result.contact);
         } else if (result.type === "donate") {
           report = generateFundingReport(result.projects);
-        } else if (result.type === "swap") {
-          report = "Swap complete. I successfully executed the trade via the Uniswap protocol.";
         } else {
           report = generateTransferReport(result.amount, result.symbol, result.contact);
         }
-        
         const newLog = `${userLog}> System: ${report}`;
-        setTimeout(() => setReportText(newLog), 1500); 
+        setTimeout(() => setReportText(newLog), 1500);
+        pushLog(`RESULT: ${report.slice(0, 60)}...`);
         await voiceService.speak(report);
       }
     } catch (e: any) {
       console.error(e);
       const errorMsg = e.message || "I could not understand that command.";
+      pushLog(`ERROR — ${errorMsg}`);
       const userLog = `> User: ${command}\n\n`;
       const newLog = `${userLog}> System: ${errorMsg}`;
       setTimeout(() => setReportText(newLog), 1500);
@@ -191,216 +276,422 @@ export default function SentientDashboard() {
       console.error("Microphone access denied or not available", e);
     } finally {
       setHasInitialized(true);
+      pushLog("SYSTEM INITIALIZED");
+      pushLog("Connecting to Celo Mainnet [RPC: forno.celo.org]");
+      pushLog("ERC-8004 Identity Verified: 0x7a30...8004");
+      pushLog("ElevenLabs API: Connected");
+      pushLog("Listening for Intents...");
       setTimeout(() => {
         voiceService.speak("Hi, I am Regen Eliza. I am an autonomous ERC-8004 agent on Celo. I provide three core services: First, I can route donations to verified public goods projects. Second, I can swap stablecoins on Celo using the Uniswap protocol. And third, I can execute x402 direct payments to your saved ENS contacts. How can I help you today?");
       }, 500);
     }
   };
 
+  /* ─── Shared Styles ─── */
+  const dockBtn = `px-6 py-3 text-lg tracking-wider bg-black/40 hover:bg-[${C.green}]/10 border border-[${C.green}]/30 hover:border-[${C.green}]/60 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-40 shrink-0 text-[${C.muted}] font-mono tracking-wide`;
+
+  const panelLabel = `text-sm text-[${C.green}]/50 uppercase tracking-widest mb-3 font-mono tracking-wide`;
+
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-mono flex flex-col items-center justify-center relative overflow-hidden">
+    <div className="flex flex-col h-screen w-full bg-[#050505] text-[#e5e5e5] overflow-hidden scanlines">
 
-      {/* 🌌 Ambience */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-900/10 via-black to-black z-0" />
-      <SystemLogs active={true} />
+      {/* ═══════════════════════════════════
+          SWAP CONFIRMATION MODAL
+          ═══════════════════════════════════ */}
+      <AnimatePresence>
+        {swapModal.open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-[#0a0a0a] border-2 border-[#2a2a2a] rounded-2xl p-8 max-w-md w-full mx-4 "
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-mono tracking-wide text-[#6ba368] tracking-wider">CONFIRM TRADE</h3>
+                <button onClick={() => setSwapModal(prev => ({ ...prev, open: false }))} className="text-[#888] hover:text-white transition-colors">
+                  <X size={20} />
+                </button>
+              </div>
 
-      {/* Initialization Modal */}
+              <div className="space-y-4 mb-8">
+                <div className="flex justify-between items-center border-b border-white/10 pb-3">
+                  <span className="text-sm font-mono tracking-wide text-[#888]">Amount</span>
+                  <span className="text-lg font-mono tracking-wide text-[#e5e5e5]">{swapModal.amount}</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-white/10 pb-3">
+                  <span className="text-sm font-mono tracking-wide text-[#888]">From</span>
+                  <span className="text-lg font-mono tracking-wide text-[#e5e5e5]">{swapModal.fromToken}</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-white/10 pb-3">
+                  <span className="text-sm font-mono tracking-wide text-[#888]">To</span>
+                  <span className="text-lg font-mono tracking-wide text-[#e5e5e5]">{swapModal.toToken}</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-white/10 pb-3">
+                  <span className="text-sm font-mono tracking-wide text-[#888]">Router</span>
+                  <span className="text-xs font-mono tracking-wide text-[#888]">Uniswap V3 (Celo)</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-mono tracking-wide text-[#888]">Fee Tier</span>
+                  <span className="text-sm font-mono tracking-wide text-[#e5e5e5]">0.05%</span>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setSwapModal(prev => ({ ...prev, open: false }))}
+                  className="flex-1 px-4 py-3 text-sm font-mono tracking-wide tracking-wider border border-white/20 rounded-lg text-[#888] hover:text-white hover:border-white/40 transition-all"
+                >
+                  [ CANCEL ]
+                </button>
+                <button
+                  onClick={handleSwapConfirm}
+                  className="flex-1 px-4 py-3 text-sm font-mono tracking-wide tracking-wider bg-[#6ba368]/10 border-2 border-[#2a2a2a] rounded-lg text-[#6ba368] hover:bg-[#6ba368]/20 hover: transition-all"
+                >
+                  [ CONFIRM TRADE ]
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ═══════════════════════════════════
+          INITIALIZATION OVERLAY
+          ═══════════════════════════════════ */}
       <AnimatePresence>
         {!hasInitialized && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md"
           >
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-6 text-green-400">System Initialization Required</h2>
-              <button 
+              <pre className="text-[#6ba368] font-bold text-sm sm:text-base md:text-lg leading-tight text-center mb-8 font-mono tracking-wide">
+                {ASCII_TITLE}
+              </pre>
+              <h2 className="text-2xl mb-6 text-[#e5e5e5] font-mono tracking-widest">
+                {'>'} SYSTEM INITIALIZATION REQUIRED_
+              </h2>
+              <button
                 onClick={handleInitialize}
-                className="px-6 py-3 bg-green-500/10 border border-green-500/50 hover:bg-green-500/20 text-green-400 font-bold rounded-xl transition-all shadow-[0_0_15px_rgba(74,222,128,0.2)]"
+                className="px-8 py-4 bg-[#6ba368]/10 border-2 border-[#2a2a2a] hover:bg-[#6ba368]/20 text-[#6ba368] rounded-xl transition-all font-mono tracking-widest text-xl"
               >
-                Initialize Audio & Microphone Permissions
+                [ INITIALIZE ]
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* 🎛️ Top Controls */}
-      <div className="absolute top-6 right-6 flex gap-3 z-20">
-        <button
-          onClick={toggleNetwork}
-          className={`px-3 py-1 text-xs border rounded-full transition-all ${network === "MAINNET" ? "border-green-500 text-green-400 bg-green-500/10 shadow-[0_0_10px_rgba(74,222,128,0.4)]" : "border-yellow-500 text-yellow-500"}`}
-        >
-          ● {network}
-        </button>
+      {/* ═══════════════════════════════════
+          ASCII TITLE BAR
+          ═══════════════════════════════════ */}
+      <div className="w-full flex justify-center items-center pt-4 pb-2 shrink-0 z-10">
+        <pre className="text-[#6ba368] font-bold text-sm sm:text-base md:text-lg leading-tight text-center select-none font-mono tracking-wide">
+          {ASCII_TITLE}
+        </pre>
       </div>
 
-      {/* 👤 Character Avatar */}
-      <div className="relative z-0 -mb-16 w-64 h-64 mx-auto overflow-hidden rounded-t-full mask-image-gradient bg-zinc-900/50">
-        <Avatar />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-transparent to-transparent pointer-events-none" />
-      </div>
+      {/* ═══════════════════════════════════
+          3-COLUMN DASHBOARD GRID
+          ═══════════════════════════════════ */}
+      <div className="w-[95%] mx-auto grid grid-cols-[1fr_2fr_1fr] gap-6 items-start mt-2 flex-1 min-h-0 z-10 overflow-y-auto pb-12 pr-2 scrollbar-hide">
 
-      {/* 🪪 The Card */}
-      <motion.div className="z-10 w-full max-w-2xl bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative">
+        {/* ─── COLUMN 1: Agent Details Panel ─── */}
+        <div className="h-full flex flex-col gap-6 overflow-y-auto pb-24 scrollbar-hide">
+          {/* Identity Card */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
+            <div className={panelLabel}>Agent Identity</div>
+            <div className="text-2xl font-mono tracking-wide tracking-wider mb-2 text-[#6ba368]">REGEN ELIZA</div>
+            <div className="text-base font-mono tracking-wide text-[#e5e5e5]/80 flex items-center gap-2">
+              <ShieldCheck size={16} className="text-[#6ba368]" /> ERC-8004 Autonomous Agent
+            </div>
+            <div className="flex flex-col space-y-2 mt-4">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                <span className="text-[#888888] font-mono tracking-wide text-sm">BASE ID: 30121</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
+                <span className="text-[#888888] font-mono tracking-wide text-sm">CELO ID: 1851</span>
+              </div>
+            </div>
+          </div>
 
-        {/* Verification Badge */}
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-green-500/10 border border-green-500/50 text-green-400 px-4 py-1 rounded-full text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(74,222,128,0.2)]">
-          <ShieldCheck size={14} /> ERC-8004 VERIFIED
+          {/* Network Status */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
+            <div className="flex justify-between items-center w-full mb-3">
+              <span className="text-[#888888] font-mono uppercase tracking-widest text-sm">NETWORK</span>
+              <span className="text-[#6ba368] font-mono flex items-center">
+                <div className={`w-2 h-2 rounded-full mr-2 ${activeChain === 'CELO' ? 'bg-yellow-400' : 'bg-blue-500'}`}></div> {activeChain}
+              </span>
+            </div>
+            <button onClick={() => setActiveChain(prev => prev === 'CELO' ? 'BASE' : 'CELO')} className="w-full border border-[#2a2a2a] text-[#888888] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors py-2 rounded font-mono text-xs tracking-widest my-3">• TOGGLE CHAIN</button>
+            <div className="flex justify-between text-base font-mono tracking-wide text-[#888]">
+              <span>REP Score</span>
+              <span className="text-[#6ba368] text-2xl leading-none">{reputation}</span>
+            </div>
+          </div>
+
+          {/* 8004 Scan */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
+            <div className={panelLabel}>8004SCAN.IO</div>
+            <div className="flex items-center gap-2 text-base font-mono tracking-wide text-[#e5e5e5]/80">
+              <Globe size={16} className="text-[#6ba368]" />
+              <span>LINKED</span>
+            </div>
+            <div className="flex flex-col space-y-3 mt-3">
+              <div className="flex flex-col">
+                <div className="flex items-center space-x-2"><span className="w-2 h-2 rounded-full bg-blue-500"></span><span className="text-[#e5e5e5] font-mono text-sm">Chain: Base (8453)</span></div>
+                <div className="text-[#888888] font-mono text-xs pl-4 mt-1">RPC: mainnet.base.org</div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center space-x-2"><span className="w-2 h-2 rounded-full bg-yellow-400"></span><span className="text-[#e5e5e5] font-mono text-sm">Chain: Celo (42220)</span></div>
+                <div className="text-[#888888] font-mono text-xs pl-4 mt-1">RPC: forno.celo.org</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Agent Skills */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-4">
+            <div className={`${panelLabel} flex items-center gap-2`}>
+              <ShieldCheck size={14} className="text-[#6ba368]" /> Agent Skills
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+              <a
+                href="/skills/builder-funding.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-md font-mono tracking-widest text-xs hover:border-[#6ba368] hover:text-[#6ba368] transition-colors"
+              >
+                [ BUILDER_FUNDING.MD ]
+              </a>
+              <a
+                href="/skills/public-goods.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-md font-mono tracking-widest text-xs hover:border-[#6ba368] hover:text-[#6ba368] transition-colors"
+              >
+                [ PUBLIC_GOODS.MD ]
+              </a>
+              <a
+                href="/skills/octant-evaluation.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-md font-mono tracking-widest text-xs hover:border-[#6ba368] hover:text-[#6ba368] transition-colors"
+              >
+                [ OCTANT_EVALUATION.MD ]
+              </a>
+              <a
+                href="/skills/lido-yield-treasury.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-md font-mono tracking-widest text-xs hover:border-[#6ba368] hover:text-[#6ba368] transition-colors"
+              >
+                [ LIDO_TREASURY.MD ]
+              </a>
+              <a
+                href="/skills/uniswap-intent-router.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-md font-mono tracking-widest text-xs hover:border-[#6ba368] hover:text-[#6ba368] transition-colors"
+              >
+                [ UNISWAP_ROUTER.MD ]
+              </a>
+              <a
+                href="/skills/celo-real-world-impact.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-md font-mono tracking-widest text-xs hover:border-[#6ba368] hover:text-[#6ba368] transition-colors"
+              >
+                [ CELO_IMPACT.MD ]
+              </a>
+            </div>
+          </div>
+
+          {/* ASCII Art Block 1 (8004-ERC) */}
+          <pre className="text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
+            {`   ___   ___   ___  _  _         _____ ____   ____ 
+  ( _ ) / _ \\ / _ \\| || |       | ____|  _ \\ / ___|
+  / _ \\| | | | | | | || |_ _____|  _| | |_) | |    
+ | (_) | |_| | |_| |__   _|_____| |___|  _ <| |___ 
+  \\___/ \\___/ \\___/   |_|       |_____|_| \\_\\\\____|`}
+          </pre>
+
+          {/* ASCII Art Block 2 (x402) */}
+          <pre className="text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
+            {`     _  _    ___ ____  
+ __  _| || |  / _ \\___ \\ 
+ \\ \\/ / || |_| | | |__) |
+  >  <|__   _| |_| / __/ 
+ /_/\\_\\  |_|  \\___/_____|`}
+          </pre>
+
+          {/* Voice / Mic Toggle */}
+          <button
+            onClick={toggleMic}
+            className={`w-full flex items-center justify-center gap-3 px-4 py-4 text-lg tracking-wider rounded-lg border-2 transition-all font-mono tracking-wide ${isListeningSpeech
+              ? "border-red-500/60 bg-red-500/10 text-red-400 animate-pulse "
+              : "border-[#2a2a2a] bg-[#6ba368]/5 text-[#e5e5e5] hover:bg-[#6ba368]/10 hover:"
+              }`}
+          >
+            {isListening ? <><Mic size={18} className="text-red-500" /> LISTENING...</> : <><Power size={18} className="text-[#6ba368]" /> VOICE CORE</>}
+          </button>
         </div>
 
-        {/* Header */}
-        <div className="flex justify-between items-start mb-8 mt-2">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
-              REGEN ELIZA
-            </h1>
-            <p className="text-zinc-500 text-sm mt-1 flex items-center gap-2">
-              <span className={`w-2 h-2 rounded-full ${network === "MAINNET" ? "bg-green-500 animate-pulse" : "bg-yellow-500"}`} />
-              SYSTEM ONLINE • {network}
-            </p>
-          </div>
-          <div className="text-right">
-            <div className="text-xs text-zinc-500 uppercase tracking-widest">Reputation</div>
-            <div className="text-5xl font-bold text-green-400 tabular-nums">{reputation}</div>
-          </div>
+        {/* ─── COLUMN 2: Avatar (Center) ─── */}
+        <div className="w-full h-[65vh] filter grayscale sepia hue-rotate-[80deg] contrast-150 brightness-75 opacity-90 rounded-lg overflow-hidden border border-[#2a2a2a] ">
+          <Avatar />
         </div>
 
-        {/* 🎙️ THE LIVING AUDIO CORE */}
-        <div
-          onClick={toggleMic}
-          className={`h-40 w-full bg-black/40 rounded-xl border flex items-center justify-center relative overflow-hidden group cursor-pointer transition-all ${isListeningSpeech ? "border-red-500/50 animate-pulse shadow-[0_0_20px_rgba(239,68,68,0.2)]" : "border-white/5 hover:border-green-500/30"}`}
-        >
-          {/* The Orb */}
-          <motion.div
-            className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-blue-500 blur-md absolute z-10"
-            animate={{
-              scale: 1 + (volume / 50),
-              opacity: 0.5 + (volume / 300)
-            }}
-          />
-          <motion.div
-            className="w-12 h-12 rounded-full bg-white absolute z-20 mix-blend-overlay"
-            animate={{ scale: 1 + (volume / 60) }}
-          />
+        {/* ─── COLUMN 3: Transaction Log Panel ─── */}
+        <div className="h-full flex flex-col gap-6">
+          {/* Live Transaction Log */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6 h-48 flex flex-col">
+            <div className={`${panelLabel} flex items-center gap-2`}>
+              <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
+              Transaction Log
+            </div>
+            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide font-mono tracking-wide text-base space-y-2">
+              <AnimatePresence>
+                {logs.map((log, i) => (
+                  <motion.div
+                    key={`${log}-${i}`}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="text-[#e5e5e5]/70 leading-relaxed"
+                  >
+                    {log}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              {logs.length === 0 && (
+                <div className="text-[#888]/50 text-base italic">Awaiting transactions...</div>
+              )}
+            </div>
+          </div>
 
-          {/* Ripples */}
-          <AnimatePresence>
-            {isListening && (
-              <>
-                <motion.div
-                  initial={{ opacity: 0, scale: 1 }}
-                  animate={{ opacity: 0, scale: 3 }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="absolute w-16 h-16 border border-green-500/30 rounded-full"
-                />
-                <motion.div
-                  initial={{ opacity: 0, scale: 1 }}
-                  animate={{ opacity: 0, scale: 2 }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
-                  className="absolute w-16 h-16 border border-blue-500/30 rounded-full"
-                />
-              </>
+          {/* Active Transaction Output */}
+          <AnimatePresence mode="wait">
+            {reportText && (
+              <motion.div
+                key={reportText}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                className="border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-6 max-h-48 overflow-y-auto scrollbar-hide"
+              >
+                <div className={`${panelLabel} flex items-center gap-2`}>
+                  <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
+                  Active Output
+                </div>
+                <p className="font-mono tracking-wide text-base text-[#e5e5e5] leading-relaxed">
+                  {reportText.split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.02 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                  <motion.span
+                    className="inline-block w-2 h-5 bg-[#6ba368] ml-0.5 align-baseline"
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  />
+                </p>
+              </motion.div>
             )}
           </AnimatePresence>
 
-          <div className="absolute bottom-3 text-xs text-zinc-400 flex items-center gap-2 group-hover:text-green-400 transition-colors z-30 font-bold tracking-widest">
-            {isListening ? <><Mic size={12} className="text-red-500 animate-pulse" /> LISTENING ({Math.round(volume)})</> : <><Power size={12} /> ACTIVATE VOICE CORE</>}
+          {/* ENS Contacts */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
+            <div className={`${panelLabel} flex items-center gap-2`}>
+              <Wallet size={14} className="text-[#6ba368]" /> ENS Address Book
+            </div>
+            <div className="h-32 overflow-y-auto pr-2 space-y-3 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#6ba368]/30 [&::-webkit-scrollbar-thumb]:rounded-full">
+              {contacts.map((c) => (
+                <div key={c.name} className="flex items-center justify-between text-base font-mono tracking-wide">
+                  <span className="text-[#e5e5e5]/80">{c.name}</span>
+                  <span className="text-[#888]/60">{c.walletAddress.slice(0, 6)}...{c.walletAddress.slice(-4)}</span>
+                </div>
+              ))}
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={`placeholder-${i}`} className="flex items-center justify-between text-base font-mono tracking-wide">
+                  <span className="text-[#e5e5e5]/40">unknown{i + 1}.eth</span>
+                  <span className="text-[#888]/40">0x0000...000{i}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════
+          BOTTOM DOCK CONTROL BAR
+          ═══════════════════════════════════ */}
+      <div className="w-[95%] mx-auto grid grid-cols-[1fr_2fr_1fr] gap-6 items-center py-6 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 min-h-[22vh]">
+
+        {/* Left Section (Tracks) */}
+        <div className="flex items-center space-x-4 text-[#e5e5e5] justify-start font-mono tracking-wide">
+          <span className="text-[#6ba368] font-bold tracking-widest text-xl">TRACKS:</span>
+          <span className="font-bold text-lg">CELO | OCTANT | ENS | UNISWAP</span>
+        </div>
+
+        {/* Center Section (Services) */}
+        <div className="flex flex-col items-center space-y-4 font-mono tracking-wide font-bold">
+          <div className="text-[#6ba368] font-bold text-2xl tracking-widest text-center w-full mb-1">SERVICES</div>
+
+          {/* Row 1 */}
+          <div className="flex items-center space-x-3 w-full justify-center">
+            <span className="text-[#6ba368] w-40 text-right text-xl">Donate to:</span>
+            <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">DeSci</button>
+            <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">Ecology</button>
+            <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">Builders</button>
+            <button disabled={isProcessing} onClick={() => handleFund("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">Agents</button>
+          </div>
+
+          {/* Row 2 */}
+          <div className="flex items-center space-x-3 w-full justify-center">
+            <span className="text-[#6ba368] w-auto pl-4 whitespace-nowrap text-right text-xl">Send Crypto to:</span>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">My Contacts</button>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">a ENS address</button>
+          </div>
+
+          {/* Row 3 */}
+          <div className="flex items-center space-x-3 w-full justify-center">
+            <span className="text-[#6ba368] w-40 text-right text-xl">Swap:</span>
+            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">USDT_BASE to USDm</button>
+            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base">USDC_Base to USDT_CELO</button>
           </div>
         </div>
 
-        {/* ⚡ Features */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-          <button 
-            disabled={isProcessing}
-            onClick={() => handleFund("desci")}
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
-          >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Fund DeSci Projects</div>
-          </button>
-          <button 
-            disabled={isProcessing}
-            onClick={() => handleFund("eco")}
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
-          >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Fund Eco Projects</div>
-          </button>
-          <button 
-            disabled={isProcessing}
-            onClick={() => handleFund("builders")}
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
-          >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Builders</div>
-          </button>
-          <button 
-            disabled={isProcessing}
-            onClick={() => handleFund("agents")}
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
-          >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Support Agents</div>
-          </button>
-        </div>
-
-        {/* 🔥 Additional Services */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <button 
-            disabled={isProcessing}
-            onClick={handleSwap}
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
-          >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">Token Swaps (Uniswap API)</div>
-          </button>
-          <button 
-            disabled={isProcessing}
-            onClick={handleDirectPayment}
-            className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl flex items-center justify-center transition-all hover:scale-[1.02] group disabled:opacity-50"
-          >
-            <div className="text-center font-bold text-sm text-zinc-300 group-hover:text-white">x402 Direct Payments</div>
-          </button>
-        </div>
-
-        {/* Terminal Logs Box */}
-        <AnimatePresence mode="wait">
-          {reportText && (
-            <motion.div 
-              key={reportText}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="mt-6 p-4 bg-black/60 border border-green-500/30 rounded-xl font-mono text-xs text-green-400 relative overflow-hidden"
+        {/* Right Section (Contacts) */}
+        <div className="flex items-center space-x-4 justify-end font-mono tracking-wide">
+          <span className="text-[#6ba368] font-bold text-xl tracking-widest">ENS CONTACTS:</span>
+          {contacts.slice(0, 3).map((c) => (
+            <button
+              key={c.name}
+              disabled={isProcessing}
+              onClick={handleDirectPayment}
+              className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-4 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-sm sm:text-base"
+              title={c.walletAddress}
             >
-              <div className="absolute inset-0 bg-green-500/5 pointer-events-none" />
-              <div className="mb-2 text-[10px] text-green-500/50 uppercase tracking-widest flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                Transaction Router Output
-              </div>
-              <p className="leading-relaxed">
-                {reportText.split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.03 }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-                <motion.span 
-                  className="inline-block w-1.5 h-3 bg-green-500 ml-1 align-baseline"
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                />
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="mt-6 pt-6 border-t border-white/5 flex justify-between text-xs text-zinc-600">
-          <span className="flex items-center gap-1"><Globe size={10} /> 8004SCAN.IO LINKED</span>
-          <span>ID: 0x7a30...8004</span>
+              {c.spokenName}
+            </button>
+          ))}
         </div>
-
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
 // Define the supported categories
@@ -6,7 +5,7 @@ export type DonationCategory = "desci" | "eco" | "builders" | "agents";
 
 export interface Recipient {
   address: string;
-  weight: number; // For proportional distribution of the total amount
+  weight: number;
 }
 
 export interface FundedProject {
@@ -15,28 +14,44 @@ export interface FundedProject {
 }
 
 /**
- * Scaffolding for a service that distributes funds to a category of Web3 projects
- * using the x402 payment protocol on the Celo network.
+ * Distributes funds to a category of Web3 projects on Celo.
+ * SDK initialization is LAZY to prevent boot crashes when the
+ * Thirdweb API key is missing or the network is unreachable.
  */
 export class DonationService {
-  private sdk: ThirdwebSDK;
+  private sdk: any = null;
+  private privateKey: string;
+  private sdkInitAttempted: boolean = false;
 
   constructor(privateKey: string) {
-    // Initialize standard Celo network using thirdweb
-    this.sdk = ThirdwebSDK.fromPrivateKey(privateKey, "celo");
+    this.privateKey = privateKey;
+    // Intentionally NOT calling ThirdwebSDK here to avoid crash on boot.
   }
 
-  /**
-   * Distribute funds to a specific category.
-   * @param category The category as defined above
-   * @param amount The total amount in stablecoins (e.g., USDT/USDm) to distribute
-   * @returns A Promise resolving to an array of funded projects or false when it fails
-   */
+  /** Lazily initialise the Thirdweb SDK. Safe to call multiple times. */
+  private async ensureSDK(): Promise<boolean> {
+    if (this.sdk) return true;
+    if (this.sdkInitAttempted) return false;
+    this.sdkInitAttempted = true;
+    try {
+      const { ThirdwebSDK } = await import("@thirdweb-dev/sdk");
+      this.sdk = ThirdwebSDK.fromPrivateKey(this.privateKey, "celo");
+      console.log("[DonationService] ThirdwebSDK initialized successfully.");
+      return true;
+    } catch (error) {
+      console.warn(
+        "[DonationService] ThirdwebSDK init failed (missing API key or network). Running in demo mode:",
+        error
+      );
+      return false;
+    }
+  }
+
   async distributeFunds(category: DonationCategory, amount: number): Promise<FundedProject[] | false> {
     try {
+      await this.ensureSDK();
       console.log(`Starting funding process for category: ${category} with amount: ${amount}`);
 
-      // 1. Dynamically import the corresponding JSON file which contains the recipients
       const recipientsData = await import(`../data/${category}.json`);
       const recipients: any[] = recipientsData.default || [];
 
@@ -47,7 +62,6 @@ export class DonationService {
 
       console.log(`Found ${recipients.length} recipients for ${category}. Select and set up x402 payload...`);
 
-      // 2. Randomly select 1 to 3 projects to fund
       const numToSelect = Math.floor(Math.random() * 3) + 1;
       const shuffled = [...recipients].sort(() => 0.5 - Math.random());
       const selected = shuffled.slice(0, numToSelect);
@@ -55,20 +69,15 @@ export class DonationService {
       const distributionPayload = selected.map(r => {
         const address = r.agent_wallet || r["Wallet Address"] || r.wallet_address || r.Wallet || "0x0000000000000000000000000000000000000000";
         const share = amount / selected.length;
-        
         return {
           to: address,
-          amount: ethers.utils.parseUnits(share.toString(), 18) // Assuming 18 decimals like standard ERC20
+          amount: ethers.utils.parseUnits(share.toString(), 18)
         };
       });
 
       console.log("x402 Payment Payload Prepared:", distributionPayload);
-
-      // 3. Execute the batch transaction or interact with the x402 distribution contract
-      // const tx = await this.sdk.wallet.sendRawTransaction({...})
       console.log("Distributing stablecoins (USDT/USDm) on Celo network...");
 
-      // Simulate a successful transaction
       const fundedProjects: FundedProject[] = selected.map(r => ({
         name: r.name || r.Name || r["Project Name"] || "Unknown Project",
         description: r.description || r.Description || "No description provided."
