@@ -27,7 +27,7 @@ export default function SystemLogs({ active }: { active: boolean }) {
   }, [active]);
 
   return (
-    <div className="absolute bottom-4 left-4 font-mono text-[10px] text-green-500/60 w-64 h-32 overflow-hidden pointer-events-none">
+    <div className="absolute top-20 left-4 font-retro text-sm text-green-500/30 w-80 h-36 overflow-hidden pointer-events-none z-20">
       <AnimatePresence>
         {logs.map((log, i) => (
           <motion.div
