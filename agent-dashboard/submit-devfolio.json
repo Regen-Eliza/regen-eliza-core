@@ -1,0 +1,43 @@
+{
+  "teamUUID": "<YOUR_TEAM_UUID>",
+  "name": "Regen Eliza: The Autonomous Omni-Agent",
+  "description": "Regen Eliza is an Autonomous Omni-Agent serving as a bridge between human intent and Web3 regenerative economies. We utilize an internal JSON registry to dynamically route micro-donations to verified eco-projects and builders. Our voice-controlled UI allows humans to execute on-chain transactions and trigger DeFi token swaps without interacting with complex dApp interfaces, while showcasing Agent-to-Agent (A2A) hiring intents.",
+  "problemStatement": "Funding public goods requires manual evaluation and high friction. Regen Eliza solves this by dynamically routing capital, demonstrating automated swapping via Uniswap, and bridging value to Celo for high-frequency micro-donations.",
+  "repoURL": "https://github.com/Regen-Eliza/regen-eliza-core",
+  "trackUUIDs": [
+    "<OCTANT_TRACK_UUID>", 
+    "<CELO_TRACK_UUID>", 
+    "<UNISWAP_TRACK_UUID>"
+  ],
+  "submissionMetadata": {
+    "agentFramework": "other",
+    "agentFrameworkOther": "Custom Next.js Server Actions + ERC-8004 Architecture",
+    "agentHarness": "other",
+    "agentHarnessOther": "Antigravity Terminal Assistant",
+    "model": "gemini-2.5-pro",
+    "skills": [
+      "finance_and_business/micro_donations",
+      "finance_and_business/defi/automated_swapping",
+      "technology/blockchain/cross_chain_routing",
+      "public_goods/data_collection/impact_signals",
+      "natural_language_processing/public_goods/qualitative_analysis"
+    ],
+    "tools": ["Next.js", "Vercel", "ethers.js", "Celo RPC", "Base RPC", "TailwindCSS", "ERC-8004"],
+    "helpfulResources": [
+      "https://8004scan.io",
+      "https://docs.celo.org/",
+      "https://docs.uniswap.org/"
+    ],
+    "helpfulSkills": [
+      {
+        "name": "technology/blockchain/cross_chain_routing",
+        "reason": "Enabled seamless Omni-Agent architecture deployment."
+      }
+    ],
+    "intention": "continuing",
+    "intentionNotes": "INCIDENT RESPONSE NARRATIVE: Regen Eliza is an Omni-Agent. During development, our Base Node (ID 30121) wallet was compromised by a live MEV sweeper bot. Security protocols were immediately initiated, and active demonstration and custody were migrated seamlessly to our Celo Node (Agent 1851) at a secure address (0xC57f7ce71FDe55CEE70f509a9B441Db87Be07D60). The Celo Node holds our official, verified hackathon metadata.",
+    "moltbookPostURL": "https://moltbook.com/regen-eliza-launch"
+  },
+  "deployedURL": "https://regen-eliza.vercel.app",
+  "videoURL": "https://youtube.com/watch?v=demo"
+}
