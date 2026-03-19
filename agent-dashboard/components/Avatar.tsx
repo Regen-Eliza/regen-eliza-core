@@ -54,7 +54,7 @@ export default function Avatar({ state = "idle" }: AvatarProps) {
         }}
       >
         <Image
-          src="/regen-eliza-anime-avatar.png"
+          src="/regen-eliza-final.png"
           alt="Regen Eliza — Autonomous ERC-8004 Agent"
           width={600}
           height={600}
