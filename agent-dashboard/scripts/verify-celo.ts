@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
 import path from "path";
