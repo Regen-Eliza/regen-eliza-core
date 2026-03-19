@@ -1,90 +1,73 @@
-# 🌱 Regen Eliza: The Sovereign AI Agent on Celo
+<div align="center">
+  <h1>🌿 The Omni-Agent for Agentic Public Goods</h1>
+  <p><b>An autonomous, voice-activated ERC-8004 agent designed to route capital, execute Agentic DeFi, and fund the Regenerative Economy on Celo.</b></p>
+  
+  <img src="https://img.shields.io/badge/Status-Live_on_Testnet-green?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/Network-Celo-yellow?style=for-the-badge" alt="Network" />
+  <img src="https://img.shields.io/badge/Framework-Next.js_14-black?style=for-the-badge" alt="Framework" />
+</div>
 
-> **Winner of the Celo Agent Hackathon (Submission)**
-> An autonomous AI agent with a verifiable on-chain identity, capable of managing funds, hosting games, and building reputation via ERC-8004.
+<br/>
+
+> **Regen Eliza** is not just a script; she is an entity. Registered on the 8004scan registry with a verifiable on-chain identity, she operates across multiple protocols to evaluate and fund impact projects. She listens to human voice commands to bridge liquidity and deploy capital to public goods autonomously.
+
+## 🏆 Hackathon Bounties Targeted
+
+Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
+
+* **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC).
+* **🦄 Uniswap (Agentic Finance):** Integration of the Uniswap API to allow Eliza to autonomously swap and bridge value on-chain via natural voice commands.
+* **🔵 ENS (Cross-chain Identity):** Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions.
+* **🐙 Octant (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza autonomously parses vetted datasets and maps voice intents to execute x402 micro-payments.
+
 
 ---
 
-## 🚀 Key Features (Milestones Completed)
+## 🚀 Core Capabilities
 
-### 1. 🗣️ Social Layer (Voice & Payments)
-- **Voice-to-Action:** Integrated voice parsing logic to interpret commands like *"Send 5 cUSD to Mom"* or *"Split the bill"*.
-- **MiniPay Integration:** Generates deep links for seamless mobile payments within the MiniPay wallet.
+### 🎙️ 1. Voice-to-Action Core (WebSpeech API)
+No more clicking buttons. Users speak directly to Eliza. Her LLM intent parser routes the command, executes the on-chain transaction, and verbally reports the success receipt back using **ElevenLabs TTS** and a dynamic 3D lip-syncing avatar.
 
-### 2. 💸 DeFi Core (Remittance & Wallet)
-- **Autonomous Wallet:** Eliza has her own embedded wallet (powered by **Thirdweb SDK**).
-- **Stablecoin Remittance:** Supports **cUSD** transfers on Celo Sepolia with near-zero gas fees.
-- **Financial Router:** Smart routing logic to differentiate between general chat and financial commands.
+### 💸 2. Agentic Finance (Uniswap Router)
+By simply saying *"Swap tokens"*, she leverages the Uniswap protocol to mathematically resolve the optimal route and execute token swaps autonomously.
 
-### 3. 🛡️ Infrastructure (Identity & Reputation)
-- **ERC-8004 Compliance:** Implements the **Agent Identity Standard** to register on the blockchain.
-- **Reputation Mining:** Automatically logs successful tasks (transactions, games) to the **8004 Registry** to build an on-chain credit score.
-- **SelfClaw Verification:** Verified "Proof of Humanity" via the SelfClaw protocol.
+### 🌍 3. Public Goods Engine (x402 Protocol)
+Implementing the `thirdweb/x402` payment gate, she distributes stablecoins to verified regenerative projects.
 
-### 4. 🎲 Community Engagement (Game Host)
-- **Dice Game Skill:** Eliza can host provably fair games (e.g., Dice Roll) and automatically pay out winners from her treasury.
-- **Business Model (x402):** Implements a "Payment Gate" mock to lock premium features behind a crypto paywall.
+### 📇 4. ENS-Powered Autonomous Payroll
+Users can say, *"Send 10 USDT to ottox.eth"*, and she will instantly resolve the alias, map it to the Celo network, and execute the transfer.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Blockchain:** Celo Sepolia Testnet
-- **Agent Framework:** TypeScript (Node.js)
-- **Wallet & Contracts:** Thirdweb SDK
-- **Identity:** ERC-8004 / 8004scan.io
-- **Frontend:** Next.js (App Router) + Tailwind CSS
-- **Backend:** Express.js API
+* **Blockchain:** Celo (EVM)
+* **Frontend:** Next.js (App Router), Tailwind CSS
+* **Agent Identity:** ERC-8004 / 8004scan.io
+* **DeFi Engine:** Uniswap SDK / API
+* **Payments & Auth:** Thirdweb SDK, x402 Protocol
+* **Voice Engine:** WebSpeech API + ElevenLabs (TTS)
 
 ---
 
 ## ⚡ Quick Start Guide
 
-### Prerequisites
-- Node.js v18+
-- A Celo Sepolia Wallet Private Key
-- Thirdweb API Key
-
 ### 1. Installation
 ```bash
-git clone https://github.com/Regen-Eliza/regen-eliza-core.git
-cd regen-eliza-core/regen-eliza-hackathon
-npm install
+git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.com/Regen-Eliza/regen-eliza-core.git)
+cd regen-eliza-core/agent-dashboard
+pnpm install
 ```
 
-### 2. Environment Setup
-Create a `.env` file in the root directory:
+### 2. Environment Variables
+Create a `.env` file in the `agent-dashboard` directory:
 ```env
-PRIVATE_KEY=your_wallet_private_key
-THIRDWEB_SECRET_KEY=your_thirdweb_key
-PORT=3005
+NEXT_PUBLIC_THIRDWEB_CLIENT_ID=your_thirdweb_key
+AGENT_PRIVATE_KEY=your_celo_wallet_private_key
 ```
 
-### 3. Run the Agent (Backend)
+### 3. Boot the Agent Terminal
 ```bash
-# Starts the Agent Server on Port 3005
-PORT=3005 npx ts-node server.ts
+pnpm dev --webpack
 ```
-
-### 4. Run the Dashboard (Frontend)
-Open a new terminal:
-```bash
-cd web
-npm install
-npm run dev
-# Visit http://localhost:3000
-```
-
----
-
-## 🎥 Demo Capabilities
-
-You can test the following commands in the Dashboard:
-
-1.  **"Send 1.0 cUSD to 0x..."** -> Triggers the Financial Router & Blockchain Transaction.
-2.  **"Let's bet on a dice game"** -> Triggers the Game Skill.
-3.  **"Who are you?"** -> Triggers the Identity & Reputation check.
-
----
-
-*Built with ❤️ for the Celo "Build with AI" Hackathon.*
+Open `http://localhost:3000` to initialize the Voice Core and speak with Regen Eliza.
