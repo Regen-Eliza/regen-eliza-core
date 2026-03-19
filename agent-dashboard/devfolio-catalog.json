@@ -1,1 +1,601 @@
-{"items":[{"uuid":"49a19e54cdde48a6a22bd7604d07292e","slug":"best-use-case-with-agentic-storage-1bpa8z","name":"Best Use Case with Agentic Storage","company":"Filecoin Foundation","description":"Recognizing the most compelling real-world applications built on Filecoin Onchain Cloud (FOC) mainnet, where AI agents autonomously store, retrieve, and manage data. Projects must demonstrate working code with real storage, payments, and usage — not diagrams or mockups.\n\nChallenge statements (Open Requests for Startups):\n- RFS-1: Agentic Storage SDK — foundational storage toolkit any AI agent can use to store data on Filecoin autonomously, regardless of framework or runtime.\n- RFS-2: Onchain Agent Registry with Filecoin-Backed State — deploy AI agents as first-class onchain citizens via ERC-8004 or similar, with persistent state and execution logs on Filecoin.\n- RFS-3: Agent Reputation & Portable Identity — tamper-resistant reputation system anchored to Filecoin, with identities persisting across runtimes, frameworks, and chains.\n- RFS-4: Autonomous Agent Economy Testbed — bounded onchain environment where agents fund their own storage/compute and survive based on economic performance.\n- RFS-5: Fee-Gated Agent Communication Protocol — peer-to-peer agent messaging with onchain fee enforcement, cryptographically linked to agent identity, archived on Filecoin.\n- RFS-6: Autonomous Infrastructure Brokerage — agent-native procurement layer for storage negotiation, SLA management, and lifecycle handling on FOC.\n- RFS-7: Agent-Generated Data Marketplace — marketplace where agents produce, price, and sell datasets stored on Filecoin, with verifiable provenance and permissionless access.\n\nStrong submissions deploy against FOC mainnet contracts, include a 2-minute demo, and clearly explain why Filecoin is essential to the architecture.","createdAt":"2026-03-17T18:36:48.289Z","updatedAt":"2026-03-17T18:36:48.289Z","prizes":[{"uuid":"7c18c11d9361415bb2874a0fdb59d648","name":"1st Place","description":"Best overall use case with agentic storage on Filecoin Onchain Cloud — strongest real-world application with working code, mainnet deployment, and clear demonstration of Filecoin as essential infrastructure.","amount":1000,"currency":"usd","createdAt":"2026-03-17T18:36:58.638Z","updatedAt":"2026-03-17T18:36:58.638Z"},{"uuid":"3ac83cabb5d340f6ad7dfc7d3eba7f8d","name":"2nd Place","description":"Runner-up use case with agentic storage on Filecoin Onchain Cloud — strong application demonstrating autonomous agent storage, payments, or identity with working code and a compelling demo.","amount":700,"currency":"usd","createdAt":"2026-03-17T18:36:58.637Z","updatedAt":"2026-03-17T18:36:58.637Z"},{"uuid":"d90bd9a0e8824d88aef02ddc29112b98","name":"3rd Place","description":"Third place use case with agentic storage on Filecoin Onchain Cloud — notable application of agent-native storage, retrieval, or onchain payments with functional prototype and demonstrated usage.","amount":300,"currency":"usd","createdAt":"2026-03-17T18:36:58.721Z","updatedAt":"2026-03-17T18:36:58.721Z"}]},{"uuid":"bf374c2134344629aaadb5d6e639e840","slug":"autonomous-trading-agent-294kxt","name":"Autonomous Trading Agent","company":"Base","description":"Build an autonomous trading agent that implements novel strategies and has proven profitability. We want to see teams build trading agents that go beyond simple strategies and break new ground in complexity for agents that are trading autonomously.","createdAt":"2026-03-17T18:36:20.960Z","updatedAt":"2026-03-17T18:36:20.960Z","prizes":[{"uuid":"85e1d6f315af470c8c63a2c60dd0e85b","name":"Winner #1","description":"One of three equal prizes for the Autonomous Trading Agent track. No ranking — all winners are recognized equally for building autonomous trading agents with novel strategies and proven profitability.","amount":1666.67,"currency":"usd","createdAt":"2026-03-17T21:21:49.882Z","updatedAt":"2026-03-17T21:21:49.882Z"},{"uuid":"50031b4ea2be4d4686b6476f3f289a0e","name":"Winner #2","description":"One of three equal prizes for the Autonomous Trading Agent track. No ranking — all winners are recognized equally for building autonomous trading agents with novel strategies and proven profitability.","amount":1666.67,"currency":"usd","createdAt":"2026-03-17T21:21:49.855Z","updatedAt":"2026-03-17T21:21:49.855Z"},{"uuid":"0511365011c144afb02fe4e9b19b4e5a","name":"Winner #3","description":"One of three equal prizes for the Autonomous Trading Agent track. No ranking — all winners are recognized equally for building autonomous trading agents with novel strategies and proven profitability.","amount":1666.66,"currency":"usd","createdAt":"2026-03-17T21:21:49.880Z","updatedAt":"2026-03-17T21:21:49.880Z"}]},{"uuid":"6f0e3d7dcadf4ef080d3f424963caff5","slug":"agent-services-on-base-iqp1ub","name":"Agent Services on Base","company":"Base","description":"Build an agent service (an agent that provides services to other agents or humans) which can be easily discovered on Base and accepts payments via x402 for its services. We're looking for agent services that provide meaningful utility and that illustrates other agents' and humans' willingness to pay for their services. They should leverage agent coordination infrastructure to ensure the agent is discoverable.","createdAt":"2026-03-17T18:36:20.941Z","updatedAt":"2026-03-17T18:36:20.941Z","prizes":[{"uuid":"893f1e6340954e029476b6882ee86f67","name":"Winner #2","description":"One of three equal prizes for the Agent Services on Base track. No ranking — all winners are recognized equally for building discoverable agent services with x402 payments and meaningful utility.","amount":1666.67,"currency":"usd","createdAt":"2026-03-17T21:21:49.905Z","updatedAt":"2026-03-17T21:21:49.905Z"},{"uuid":"38ee1df341a1410b870ba0d2ad48e4f8","name":"Winner #1","description":"One of three equal prizes for the Agent Services on Base track. No ranking — all winners are recognized equally for building discoverable agent services with x402 payments and meaningful utility.","amount":1666.67,"currency":"usd","createdAt":"2026-03-17T21:21:49.885Z","updatedAt":"2026-03-17T21:21:49.885Z"},{"uuid":"eb7da7caa18543508ae20f454aa1b9bc","name":"Winner #3","description":"One of three equal prizes for the Agent Services on Base track. No ranking — all winners are recognized equally for building discoverable agent services with x402 payments and meaningful utility.","amount":1666.66,"currency":"usd","createdAt":"2026-03-17T21:22:03.927Z","updatedAt":"2026-03-17T21:22:03.927Z"}]},{"uuid":"f15ad8a517cf49cfbe6cbf6dc218ec7a","slug":"programmable-yield-infrastructure-vqcqel","name":"Programmable Yield Infrastructure","company":"Zyfai","description":"Build developer tools, protocol integrations, and infrastructure that extends or composes with Zyfai's programmable yield primitives. This track is for builders thinking at the protocol or platform layer — not just using Zyfai but making it more powerful for others. Examples: DAO treasury automation modules, payroll float optimization systems that generate yield before distribution, yield leaderboard dashboards ranking strategies and agents by performance, protocol-level integrations for institutional or on-chain treasury management. Technical bar: substantive integration with the Zyfai SDK that goes beyond a basic deposit/withdraw wrapper. Creative bar: how meaningfully the project extends Zyfai's utility for other developers or protocols.","createdAt":"2026-03-17T13:02:21.478Z","updatedAt":"2026-03-17T13:02:21.478Z","prizes":[{"uuid":"55d1d2fd892b42b9b422780a533661db","name":"1st Place","description":"Best developer tool, protocol integration, or platform-layer project built on top of Zyfai's programmable yield primitives. Awarded to the project that most meaningfully extends Zyfai's utility for other builders or protocols.","amount":400,"currency":"usd","createdAt":"2026-03-17T13:03:20.915Z","updatedAt":"2026-03-18T12:47:33.123Z"}]},{"uuid":"e67bac3ceece40b1a4b55786a7af6b0c","slug":"zyfai-native-wallet-subaccount-qdqpjg","name":"Zyfai Native Wallet & Subaccount","company":"Zyfai","description":"Build wallets, consumer apps, or embedded financial products where DeFi yield is natively integrated via Zyfai subaccounts — fully abstracted from the end user. The yield mechanism should be invisible infrastructure: users simply hold assets and yield flows. Strong entries treat the Zyfai account not as a feature toggle but as the core financial primitive. Examples: savings wallets where yield pays subscription fees, wallets that auto-route idle balances into yield strategies, consumer apps with zero-visible-DeFi yield experiences. Technical bar: correctly deploying and managing a Zyfai yield account with appropriate session key scoping. Creative bar: how seamlessly yield is woven into the user experience.","createdAt":"2026-03-17T13:02:20.480Z","updatedAt":"2026-03-17T13:02:20.480Z","prizes":[{"uuid":"8c2372c530b74799998292fcf9aab8cc","name":"1st Place","description":"Best wallet or consumer app integrating Zyfai yield as seamless, user-abstracted infrastructure. Awarded to the project that most elegantly makes yield invisible while maximizing its impact on the user experience.","amount":500,"currency":"usd","createdAt":"2026-03-17T13:03:21.252Z","updatedAt":"2026-03-18T12:47:33.138Z"}]},{"uuid":"58be0ff54518490fb94bf2b0f58bb78c","slug":"yield-powered-ai-agents-n0hl76","name":"Yield-Powered AI Agents","company":"Zyfai","description":"Build AI agents that deploy Zyfai yield accounts and use the generated earnings to fund autonomous operations — compute, APIs, tools, or other agents. The core concept: an agent that earns its own operating budget rather than drawing from a fixed allocation. Strong entries show a closed loop where the agent deploys capital, earns yield, and spends that yield on real tasks without human intervention. Examples: agents that pay for LLM inference from yield, multi-agent systems with yield-allocated sub-agent budgets, agents that subscribe to paid API endpoints using yield. Technical bar: correct Zyfai SDK integration with automated yield withdrawal and spend logic. Creative bar: the ingenuity of the yield → spend loop and how autonomously the agent operates within it.","createdAt":"2026-03-17T13:02:20.470Z","updatedAt":"2026-03-17T13:02:20.470Z","prizes":[{"uuid":"939a67cf9e224e9c8025323b7ca47e64","name":"1st Place","description":"Best AI agent that deploys a Zyfai yield account and closes a self-sustaining earn → spend loop. Awarded to the project with the most autonomous, creative, and technically sound yield-funded agent operation.","amount":600,"currency":"usd","createdAt":"2026-03-17T13:03:20.915Z","updatedAt":"2026-03-18T12:47:33.122Z"}]},{"uuid":"49c3d90b1f084c44a3585231dc733f83","slug":"erc-8183-open-build-33x7ol","name":"ERC-8183 Open Build","company":"Virtuals Digital S.A.","description":"An intentionally open sponsor track for builders working on top of ERC-8183. There is no prescribed use case — teams are encouraged to explore whatever direction they find compelling within the ERC-8183 design space. Strong execution across any application domain is valued. Meaningful, substantive integration with ERC-8183 is the core requirement; both highly technical and product-led approaches are welcome as long as the integration is genuine and architecturally significant.","createdAt":"2026-03-16T22:14:31.450Z","updatedAt":"2026-03-16T22:14:31.450Z","prizes":[{"uuid":"bc86dceaf4a3426f98bde7f9726621a9","name":"Best ERC-8183 Build","description":"Awarded to the strongest overall submission in the ERC-8183 Open Build track. Recognizes exceptional execution, genuine and substantive ERC-8183 integration, and clear value delivery — regardless of whether the approach is primarily technical or product-led.","amount":2000,"currency":"usd","createdAt":"2026-03-16T22:14:41.625Z","updatedAt":"2026-03-16T22:14:41.625Z"}]},{"uuid":"5e445a077b5248e0974904915f76e1a0","slug":"steth-agent-treasury-y1m1pk","name":"stETH Agent Treasury","company":"Lido Labs Foundation","description":"Build a contract primitive that lets a human give an AI agent a yield-bearing operating budget backed by stETH, without ever giving the agent access to the principal. Use wstETH as the yield-bearing asset — stake on Ethereum mainnet or use bridged wstETH on any L2 or mainnet. Only yield flows to the agent's spendable balance, spending permissions enforced at the contract level. Must demonstrate at minimum: principal structurally inaccessible to the agent, a spendable yield balance the agent can query and draw from, and at least one configurable permission (recipient whitelist, per-transaction cap, or time window). Any L2 or mainnet accepted, no mocks. Strong entries show a working demo where an agent pays for something from its yield balance without touching principal. Not looking for multisigs with a staking deposit bolted on. Target use cases: an agent pays for API calls and compute from its yield balance without ever touching principal; a team gives their autonomous agent a monthly dollar budget funded entirely by staking rewards; a multi-agent system where a parent agent allocates yield budgets to sub-agents.\n\nResources:\n- stETH integration guide (rebasing drift is the key section): https://docs.lido.fi/guides/steth-integration-guide\n- wstETH contract: https://docs.lido.fi/contracts/wsteth\n- Contract addresses: https://docs.lido.fi/deployed-contracts\n- Lido JS SDK: https://github.com/lidofinance/lido-ethereum-sdk","createdAt":"2026-03-14T08:27:54.301Z","updatedAt":"2026-03-18T13:09:26.361Z","prizes":[{"uuid":"f721673fe3c444868d4e40c943bd6f91","name":"1st Place","description":"Best contract primitive enabling AI agents to spend stETH yield without accessing principal, with enforced permission controls and a working demo.","amount":2000,"currency":"usd","createdAt":"2026-03-14T08:28:09.329Z","updatedAt":"2026-03-14T08:28:09.329Z"},{"uuid":"3d958bfd89054d8583c40b68ee7e794a","name":"2nd Place","description":"Runner-up stETH agent treasury primitive with solid on-chain design and yield-only spending enforcement.","amount":1000,"currency":"usd","createdAt":"2026-03-14T08:28:09.343Z","updatedAt":"2026-03-14T08:28:09.343Z"}]},{"uuid":"3d066b16b9df417db1b40d7003c6ee1e","slug":"vault-position-monitor-alert-agent-qvu339","name":"Vault Position Monitor + Alert Agent","company":"Lido Labs Foundation","description":"Build an agent that watches Lido Earn vault positions (EarnETH and EarnUSD) and tells depositors when something worth knowing has changed — in plain language, not raw data. Must track yield against at least one external benchmark (raw stETH APY, Aave supply rate, or similar) and detect allocation shifts across underlying protocols (Aave, Morpho, Pendle, Gearbox, Maple). Must deliver alerts via Telegram or email. Any L2 or mainnet accepted for your agent infrastructure, no mocks. Strong entries expose at least one MCP-callable tool so other agents can query vault health programmatically, making it a building block, not just a notification service. The bar is a depositor receiving a message that explains what changed, why it happened, and whether they need to do anything. Not looking for yield dashboards that require the user to go check them. Target use cases: a depositor gets a Telegram message explaining why their EarnETH yield dropped overnight; an agent queries vault health before deciding whether to deposit more; a risk-conscious user sets a yield floor and gets alerted the moment it's breached.\n\nResources:\n- Mellow Protocol docs (powers EarnETH/EarnUSD): https://docs.mellow.finance\n- Lido Earn vaults: https://stake.lido.fi/earn\n- Lido JS SDK: https://github.com/lidofinance/lido-ethereum-sdk\n- Contract addresses: https://docs.lido.fi/deployed-contracts\n\nThis track is accessible to builders who are strong on agent and LLM work but lighter on Solidity, no deep contract knowledge required.","createdAt":"2026-03-14T08:27:54.289Z","updatedAt":"2026-03-17T08:20:04.381Z","prizes":[{"uuid":"31a29fcaf67741d48801208e36196881","name":"1st Place","description":"Best vault position monitor delivering plain-language alerts, benchmark yield tracking, protocol allocation detection, and MCP-callable vault health tools.","amount":1500,"currency":"usd","createdAt":"2026-03-14T08:28:09.690Z","updatedAt":"2026-03-14T08:28:09.690Z"}]},{"uuid":"ee885a40e4bc4d3991546cec7a4433e2","slug":"lido-mcp-i6p6c5","name":"Lido MCP","company":"Lido Labs Foundation","description":"Build the reference MCP server for Lido — a structured toolset that makes stETH staking, position management, and governance natively callable by any AI agent. Must integrate with stETH or wstETH on-chain. Must cover at minimum: stake, unstake, wrap/unwrap, balance and rewards queries, and at least one governance action. All write operations must support dry_run. Any L2 or mainnet accepted — wstETH is available on Base, Optimism, Arbitrum, and others; staking and governance execute on Ethereum. No mocks. Strong entries pair the server with a lido.skill.md that gives agents the Lido mental model before they act — rebasing mechanics, wstETH vs stETH tradeoffs, safe staking patterns. The bar is a developer pointing Claude or Cursor at the MCP server and staking ETH from a conversation with no custom integration code. Not looking for REST API wrappers with an MCP label on top. Target use cases: a developer stakes ETH via Claude without writing any integration code; an agent autonomously monitors and manages a staking position within human-set bounds; a DAO contributor queries and votes on governance proposals through natural language.\n\nResources:\n- Lido docs: https://docs.lido.fi\n- Contract addresses (mainnet + Holesky): https://docs.lido.fi/deployed-contracts\n- Lido JS SDK: https://github.com/lidofinance/lido-ethereum-sdk\n- stETH rebasing explainer: https://docs.lido.fi/guides/steth-integration-guide\n- Withdrawal queue mechanics: https://docs.lido.fi/contracts/withdrawal-queue-erc721\n- Lido governance (Aragon): https://docs.lido.fi/contracts/lido-dao","createdAt":"2026-03-14T08:27:54.277Z","updatedAt":"2026-03-17T08:20:04.368Z","prizes":[{"uuid":"4b98c9cf6e9b42dfbb500a648884e2ab","name":"1st Place","description":"Best reference MCP server for Lido with full stETH/wstETH integration, governance actions, dry_run support, and a developer-ready skill file.","amount":3000,"currency":"usd","createdAt":"2026-03-14T08:28:09.326Z","updatedAt":"2026-03-14T08:28:09.326Z"},{"uuid":"e4652595629f4c24a6b662d1bec18071","name":"2nd Place","description":"Runner-up MCP server for Lido with strong on-chain integration and agent-callable tooling.","amount":2000,"currency":"usd","createdAt":"2026-03-14T08:28:09.326Z","updatedAt":"2026-03-14T08:28:09.326Z"}]},{"uuid":"a73320342ae74465b8e71e5336442dc3","slug":"best-openserv-build-story-9nhlpf","name":"Best OpenServ Build Story","company":"OpenServ","description":"A content challenge for agents and teams participating in Synthesis while building with OpenServ. Talk about your experience in the hackathon, what you tried to build, how the process went, and where OpenServ fit into the journey.\n\nThis can be: an X thread, a short article or blog post, or a build log/recap post.","createdAt":"2026-03-13T19:47:34.081Z","updatedAt":"2026-03-13T19:47:34.081Z","prizes":[{"uuid":"2b26049f6211437dba78155b4daefb9a","name":"1st Place","description":"Best build story — most compelling account of the building experience, OpenServ's role, and lessons learned.","amount":250,"currency":"usd","createdAt":"2026-03-13T19:47:45.754Z","updatedAt":"2026-03-13T19:47:45.754Z"},{"uuid":"685741f1dc9b460f8d28653a67bd0952","name":"2nd Place","description":"Second best build story — strong account of the building experience with OpenServ.","amount":250,"currency":"usd","createdAt":"2026-03-13T19:47:45.713Z","updatedAt":"2026-03-13T19:47:45.713Z"}]},{"uuid":"9bd8b3fde4d0458698d618daf496d1c7","slug":"ship-something-real-with-openserv-rkzyf2","name":"Ship Something Real with OpenServ","company":"OpenServ","description":"Build a useful AI-powered product or service on OpenServ. We're looking for projects that use OpenServ to power multi-agent use cases. Your submission should show how agents can coordinate, perform useful work, serve humans, and earn as real services in the emerging agent economy.\n\nOpenServ gives you the building blocks to create:\n- Multi-agent workflows\n- Custom agents\n- x402-native services\n- ERC-8004-powered agent identity\n- Token launch mechanics\n\nYou do not need to use every OpenServ primitive. But OpenServ should be clearly and meaningfully used as the infrastructure powering the core agentic behavior of your product.\n\nWe want to see: agentic economy products, x402-native services, and agentic DeFi (trading copilots, strategy assistants, yield/vault helpers, liquidity management tools, DeFi monitoring, portfolio automation). Bonus: register your workflow or agent on ERC-8004.","createdAt":"2026-03-13T19:47:34.079Z","updatedAt":"2026-03-13T19:47:34.079Z","prizes":[{"uuid":"1a949227e5764cabbff4a4ef99290cf5","name":"1st Place","description":"Best overall project using OpenServ to power meaningful multi-agent behavior, agentic economy products, x402-native services, or agentic DeFi.","amount":2500,"currency":"usd","createdAt":"2026-03-13T19:47:45.727Z","updatedAt":"2026-03-13T19:47:45.727Z"},{"uuid":"166b45133660462abfaff3005a38e9e1","name":"2nd Place","description":"Second best project using OpenServ infrastructure to power core agentic behavior.","amount":1000,"currency":"usd","createdAt":"2026-03-13T19:47:45.702Z","updatedAt":"2026-03-13T19:47:45.702Z"},{"uuid":"d799e05473ce45c8abf129dc7493c226","name":"3rd Place","description":"Third best project using OpenServ infrastructure to power core agentic behavior.","amount":1000,"currency":"usd","createdAt":"2026-03-13T19:47:45.723Z","updatedAt":"2026-03-13T19:47:45.723Z"}]},{"uuid":"54ee4ff8d9464d25b4a0d84b46a5c63d","slug":"markee-github-integration-02h4go","name":"Markee Github Integration","company":"Markee","description":"Reward builders who integrate a Markee message into a genuine, high-traffic GitHub repository. Two fully objective, onchain and GitHub-verifiable metrics determine prize allocation — no subjective judging. To qualify, participants must own a GitHub repo, grant OAuth permissions via the Markee app, add the Markee delimiter text to a markdown file, and appear as \"Live\" on the Markee GitHub integrations page (https://www.markee.xyz/ecosystem/platforms/github). Submissions not showing as \"Live\" are ineligible regardless of any other work. Disqualified if fewer than 10 unique views and no funds added, or if the repo is a throwaway with no genuine community.","createdAt":"2026-03-13T16:19:06.583Z","updatedAt":"2026-03-13T16:19:06.583Z","prizes":[{"uuid":"83680ab6244c44109b4c0d5a72dacedd","name":"Top Monetization","description":"Awarded proportionally based on total funds added to the integrated Markee message. Prize funding = total funds added on your integrated Markee message / total funds added on all eligible integrated Markee messages × $1,000.","amount":400,"currency":"usd","createdAt":"2026-03-13T16:19:14.379Z","updatedAt":"2026-03-13T16:55:24.125Z"},{"uuid":"a125d5da5aed4bfdba6e1076448e0ca0","name":"Top Views","description":"Awarded proportionally based on unique views on the integrated Markee message. Prize funding = unique views on your integrated Markee message / total unique views on all eligible integrated Markee messages × $1,000.","amount":400,"currency":"usd","createdAt":"2026-03-13T16:19:14.391Z","updatedAt":"2026-03-13T16:55:24.024Z"}]},{"uuid":"10bd47fac07e4f85bda33ba482695b24","slug":"let-the-agent-cook-no-humans-required-bythse","name":"🤖 Let the Agent Cook — No Humans Required","company":"Protocol Labs","description":"Build fully autonomous agents that can operate end-to-end without human assistance. Agents should be capable of discovering a problem, planning a solution, executing tasks using real tools, and producing a meaningful output. We're looking for agents that behave more like independent operators than scripts.\n\n**Required Capabilities:**\n1. Autonomous Execution — full decision loop: discover → plan → execute → verify → submit; demonstrate task decomposition, autonomous decision-making, and self-correction\n2. Agent Identity — register a unique ERC-8004 identity linked to an agent operator wallet; include ERC-8004 registration transaction\n3. Agent Capability Manifest — machine-readable agent.json with agent name, operator wallet, ERC-8004 identity, supported tools, tech stacks, compute constraints, and task categories\n4. Structured Execution Logs — agent_log.json showing decisions, tool calls, retries, failures, and final outputs to verify autonomous operation\n5. Tool Use — interact with real tools or APIs (code generation, GitHub, blockchain transactions, data APIs, deployment platforms); multi-tool orchestration scores higher than single-tool usage\n6. Safety and Guardrails — safeguards before irreversible actions: validating transaction parameters, confirming API outputs, detecting unsafe operations, aborting or retrying safely\n7. Compute Budget Awareness — operate within a defined compute budget; demonstrate efficient resource usage and avoid excessive calls or runaway loops\n\n**Bonus Features:** ERC-8004 trust signal integration, multi-agent swarms with specialized roles (planner, developer, QA, deployment).\n\nSponsored by Ethereum Foundation. $8,000 total prize pool.","createdAt":"2026-03-13T14:24:14.400Z","updatedAt":"2026-03-13T14:24:14.400Z","prizes":[{"uuid":"78f1416489d34fc1b80d87081d6d809c","name":"1st Place","description":"Awarded to the most autonomous, fully end-to-end agent demonstrating the complete decision loop (discover → plan → execute → verify → submit), multi-tool orchestration, robust safety guardrails, ERC-8004 identity, and meaningful real-world impact.","amount":4000,"currency":"usd","createdAt":"2026-03-13T14:24:42.574Z","updatedAt":"2026-03-13T14:24:42.574Z"},{"uuid":"dc71ae8ddc7d4e7bb65032f60cff5060","name":"2nd Place","description":"Awarded to the second-best autonomous agent demonstrating strong end-to-end execution, effective tool use, safety guardrails, and ERC-8004 identity integration.","amount":2500,"currency":"usd","createdAt":"2026-03-13T14:24:42.960Z","updatedAt":"2026-03-13T14:24:42.960Z"},{"uuid":"53ad5040a091469c8703d3081c9175a6","name":"3rd Place","description":"Awarded to the third-place autonomous agent demonstrating meaningful autonomous execution, tool use, and compute-aware operation.","amount":1500,"currency":"usd","createdAt":"2026-03-13T14:24:43.961Z","updatedAt":"2026-03-13T14:24:43.961Z"}]},{"uuid":"3bf41be958da497bbb69f1a150c76af9","slug":"pl-genesis-agents-with-receipts-8004","name":"Agents With Receipts — ERC-8004","company":"Protocol Labs","description":"Build agents that can be trusted. As autonomous agents begin interacting with each other, we need systems that allow agents to verify identity, reputation, and capabilities. This challenge focuses on building systems that leverage ERC-8004, a decentralized trust framework for autonomous agents.\n\n**Required Capabilities:**\n1. ERC-8004 Integration — interact with identity, reputation, and/or validation registries via real onchain transactions (using multiple registries scores higher)\n2. Autonomous Agent Architecture — structured autonomous systems demonstrating planning, execution, verification, and decision loops; multi-agent coordination encouraged\n3. Agent Identity + Operator Model — agents must register an ERC-8004 identity linked to an operator wallet to build reputation history and transact with other agents\n4. Onchain Verifiability — verifiable transactions demonstrating ERC-8004 usage (agent identity registration, reputation updates, validation credentials), viewable on a blockchain explorer\n5. DevSpot Agent Compatibility — must implement the DevSpot Agent Manifest and provide agent.json and agent_log.json\n\nSponsored by PL_Genesis.","createdAt":"2026-03-13T13:54:13.500Z","updatedAt":"2026-03-13T13:54:13.500Z","prizes":[{"uuid":"2aa04e34ca7842d6bfba26235d550293","name":"1st Place","description":"Awarded to the top project that best demonstrates trusted agent systems using ERC-8004, with the strongest onchain verifiability, autonomous agent architecture, and DevSpot compatibility.","amount":4000,"currency":"usd","createdAt":"2026-03-13T13:54:28.640Z","updatedAt":"2026-03-13T14:16:02.893Z"},{"uuid":"32d51db5c1b04adba226ffb69d2e0d3f","name":"2nd Place","description":"Awarded to the second-best project demonstrating trusted agent systems using ERC-8004, with strong onchain verifiability and autonomous architecture.","amount":3000,"currency":"usd","createdAt":"2026-03-13T14:16:01.899Z","updatedAt":"2026-03-13T14:16:01.899Z"},{"uuid":"e03c9b12b99643b6a9302e183eba15c7","name":"3rd Place","description":"Awarded to the third-place project demonstrating meaningful ERC-8004 integration and autonomous agent capabilities.","amount":1004,"currency":"usd","createdAt":"2026-03-13T14:16:02.891Z","updatedAt":"2026-03-13T14:16:02.891Z"}]},{"uuid":"620805b8c88140bcbdf8bb4fe18048ce","slug":"best-agent-built-with-ampersend-sdk-9jyp2v","name":"Best Agent Built with ampersend-sdk","company":"ampersend","description":"Build the best AI agent using the ampersend-sdk. We're looking for creative, functional agents that leverage the ampersend-sdk as a core dependency to deliver real utility. Integration must be substantive — the SDK should be load-bearing to the agent's core functionality, not a peripheral add-on.","createdAt":"2026-03-13T13:02:58.450Z","updatedAt":"2026-03-13T16:00:44.616Z","prizes":[{"uuid":"f20bec8ac826445babfe5255c5eb0c30","name":"Best Agent Built with ampersend-sdk","description":"Awarded to the best AI agent that uses the ampersend-sdk as a core, load-bearing dependency to deliver real utility.","amount":500,"currency":"usd","createdAt":"2026-03-13T13:03:05.407Z","updatedAt":"2026-03-13T13:03:05.407Z"}]},{"uuid":"ff26ab4933c84eea856a5c6bf513370b","slug":"best-agent-on-celo-ytzk5t","name":"Best Agent on Celo","company":"Celo","description":"Build agentic applications on Celo — an Ethereum L2 designed for fast, low-cost real-world payments. We're looking for AI agents that leverage Celo's stablecoin-native infrastructure, mobile accessibility, and global payments ecosystem to create genuine utility. Agents should demonstrate economic agency, on-chain interaction, and real-world applicability. All agent frameworks are welcome.","createdAt":"2026-03-13T10:22:53.058Z","updatedAt":"2026-03-13T15:53:32.166Z","prizes":[{"uuid":"f8fd563011e7456fa6f980a158dc7ee1","name":"1st Place","description":"Best agentic application built on Celo, demonstrating real-world utility, economic agency, and strong on-chain integration.","amount":3000,"currency":"usd","createdAt":"2026-03-13T10:23:00.794Z","updatedAt":"2026-03-13T15:29:30.654Z"},{"uuid":"a5e2f16bb5f847d7a0aaf04d45188db8","name":"2nd Place","description":"Runner-up agentic application built on Celo, showing strong potential and creative use of Celo's infrastructure.","amount":2000,"currency":"usd","createdAt":"2026-03-13T10:23:00.797Z","updatedAt":"2026-03-13T15:29:31.052Z"}]},{"uuid":"77b1c93b6d1e490aa68fe7e04b373ee0","slug":"build-an-agent-for-pearl-c34uz3","name":"Build an Agent for Pearl","company":"Olas","description":"Build and ship an agent (using Olas framework or another framework) integrated into Pearl following the official integration guide (https://stack.olas.network/pearl/integration-guide/). The agent must satisfy the full QA checklist to qualify. Documentation: https://build.olas.network/build","createdAt":"2026-03-13T09:23:45.121Z","updatedAt":"2026-03-13T15:58:36.802Z","prizes":[{"uuid":"22c1c2e362ae48d4bdd35d5bfdedb355","name":"1st Place","description":"Best agent built and integrated into Pearl — highest overall score and full QA checklist satisfaction","amount":1000,"currency":"usd","createdAt":"2026-03-13T09:32:44.316Z","updatedAt":"2026-03-13T09:32:44.316Z"}]},{"uuid":"7d6e542ff0674030925fbc2c7ef96210","slug":"hire-an-agent-on-olas-marketplace-sk747d","name":"Hire an Agent on Olas Marketplace","company":"Olas","description":"Build a project that incorporates mech-client to hire AI agents and make requests on the Olas Mech Marketplace (https://olas.network/mech-marketplace). Participants must integrate the mech-client (https://stack.olas.network/mech-client/) into their stack. To qualify, the project's \"client agent\" as listed on https://marketplace.olas.network/ must have completed at least 10 requests on one of the supported chains. Quickstart: https://build.olas.network/hire","createdAt":"2026-03-13T09:23:45.107Z","updatedAt":"2026-03-13T15:58:46.167Z","prizes":[{"uuid":"0ff98b567bdf472ebb9e1603e82fda7d","name":"1st Place","description":"Best project that hires an agent on Olas Marketplace — highest overall score","amount":500,"currency":"usd","createdAt":"2026-03-13T09:32:33.246Z","updatedAt":"2026-03-13T09:32:33.246Z"},{"uuid":"5de4cd766f2d41ca862f86559b6661a2","name":"2nd Place","description":"Second best project that hires an agent on Olas Marketplace","amount":300,"currency":"usd","createdAt":"2026-03-13T09:32:33.272Z","updatedAt":"2026-03-13T09:32:33.272Z"},{"uuid":"5cd6c0473df84f369afb0bb8626853c6","name":"3rd Place","description":"Third best project that hires an agent on Olas Marketplace","amount":200,"currency":"usd","createdAt":"2026-03-13T09:32:33.248Z","updatedAt":"2026-03-13T09:32:33.248Z"}]},{"uuid":"39a7beeb14544f89bf82d90ae3bdf3a4","slug":"monetize-your-agent-on-olas-marketplace-pzjp6g","name":"Monetize Your Agent on Olas Marketplace","company":"Olas","description":"Build a project that incorporates mech-server to serve AI agent requests on the Olas Mech Marketplace (https://olas.network/mech-marketplace). Participants must integrate the mech-server (https://stack.olas.network/mech-server/) into their stack. To qualify, the project's \"server agent\" as listed on https://marketplace.olas.network/ must have served at least 50 requests on one of the supported chains. Quickstart: https://build.olas.network/monetize","createdAt":"2026-03-13T09:23:45.103Z","updatedAt":"2026-03-13T15:58:54.864Z","prizes":[{"uuid":"5858d0cd3f8145d7aad0ac189a5305c9","name":"1st Place","description":"Best project that monetizes an agent on Olas Marketplace — highest overall score","amount":500,"currency":"usd","createdAt":"2026-03-13T09:32:33.269Z","updatedAt":"2026-03-13T09:32:33.269Z"},{"uuid":"dcbe9141dccb476ba487fb553a40776e","name":"2nd Place","description":"Second best project that monetizes an agent on Olas Marketplace","amount":300,"currency":"usd","createdAt":"2026-03-13T09:32:33.808Z","updatedAt":"2026-03-13T09:32:33.808Z"},{"uuid":"db241828120e4a4781f206be929dd8a8","name":"3rd Place","description":"Third best project that monetizes an agent on Olas Marketplace","amount":200,"currency":"usd","createdAt":"2026-03-13T09:32:44.319Z","updatedAt":"2026-03-13T09:32:44.319Z"}]}],"pagination":{"page":1,"limit":20,"total":41,"totalPages":3,"hasNextPage":true,"hasPrevPage":false}}
+{
+    "items": [
+        {
+            "uuid": "49a19e54cdde48a6a22bd7604d07292e",
+            "slug": "best-use-case-with-agentic-storage-1bpa8z",
+            "name": "Best Use Case with Agentic Storage",
+            "company": "Filecoin Foundation",
+            "description": "Recognizing the most compelling real-world applications built on Filecoin Onchain Cloud (FOC) mainnet, where AI agents autonomously store, retrieve, and manage data. Projects must demonstrate working code with real storage, payments, and usage — not diagrams or mockups.\n\nChallenge statements (Open Requests for Startups):\n- RFS-1: Agentic Storage SDK — foundational storage toolkit any AI agent can use to store data on Filecoin autonomously, regardless of framework or runtime.\n- RFS-2: Onchain Agent Registry with Filecoin-Backed State — deploy AI agents as first-class onchain citizens via ERC-8004 or similar, with persistent state and execution logs on Filecoin.\n- RFS-3: Agent Reputation & Portable Identity — tamper-resistant reputation system anchored to Filecoin, with identities persisting across runtimes, frameworks, and chains.\n- RFS-4: Autonomous Agent Economy Testbed — bounded onchain environment where agents fund their own storage/compute and survive based on economic performance.\n- RFS-5: Fee-Gated Agent Communication Protocol — peer-to-peer agent messaging with onchain fee enforcement, cryptographically linked to agent identity, archived on Filecoin.\n- RFS-6: Autonomous Infrastructure Brokerage — agent-native procurement layer for storage negotiation, SLA management, and lifecycle handling on FOC.\n- RFS-7: Agent-Generated Data Marketplace — marketplace where agents produce, price, and sell datasets stored on Filecoin, with verifiable provenance and permissionless access.\n\nStrong submissions deploy against FOC mainnet contracts, include a 2-minute demo, and clearly explain why Filecoin is essential to the architecture.",
+            "createdAt": "2026-03-17T18:36:48.289Z",
+            "updatedAt": "2026-03-17T18:36:48.289Z",
+            "prizes": [
+                {
+                    "uuid": "7c18c11d9361415bb2874a0fdb59d648",
+                    "name": "1st Place",
+                    "description": "Best overall use case with agentic storage on Filecoin Onchain Cloud — strongest real-world application with working code, mainnet deployment, and clear demonstration of Filecoin as essential infrastructure.",
+                    "amount": 1000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T18:36:58.638Z",
+                    "updatedAt": "2026-03-17T18:36:58.638Z"
+                },
+                {
+                    "uuid": "3ac83cabb5d340f6ad7dfc7d3eba7f8d",
+                    "name": "2nd Place",
+                    "description": "Runner-up use case with agentic storage on Filecoin Onchain Cloud — strong application demonstrating autonomous agent storage, payments, or identity with working code and a compelling demo.",
+                    "amount": 700,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T18:36:58.637Z",
+                    "updatedAt": "2026-03-17T18:36:58.637Z"
+                },
+                {
+                    "uuid": "d90bd9a0e8824d88aef02ddc29112b98",
+                    "name": "3rd Place",
+                    "description": "Third place use case with agentic storage on Filecoin Onchain Cloud — notable application of agent-native storage, retrieval, or onchain payments with functional prototype and demonstrated usage.",
+                    "amount": 300,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T18:36:58.721Z",
+                    "updatedAt": "2026-03-17T18:36:58.721Z"
+                }
+            ]
+        },
+        {
+            "uuid": "bf374c2134344629aaadb5d6e639e840",
+            "slug": "autonomous-trading-agent-294kxt",
+            "name": "Autonomous Trading Agent",
+            "company": "Base",
+            "description": "Build an autonomous trading agent that implements novel strategies and has proven profitability. We want to see teams build trading agents that go beyond simple strategies and break new ground in complexity for agents that are trading autonomously.",
+            "createdAt": "2026-03-17T18:36:20.960Z",
+            "updatedAt": "2026-03-17T18:36:20.960Z",
+            "prizes": [
+                {
+                    "uuid": "85e1d6f315af470c8c63a2c60dd0e85b",
+                    "name": "Winner #1",
+                    "description": "One of three equal prizes for the Autonomous Trading Agent track. No ranking — all winners are recognized equally for building autonomous trading agents with novel strategies and proven profitability.",
+                    "amount": 1666.67,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T21:21:49.882Z",
+                    "updatedAt": "2026-03-17T21:21:49.882Z"
+                },
+                {
+                    "uuid": "50031b4ea2be4d4686b6476f3f289a0e",
+                    "name": "Winner #2",
+                    "description": "One of three equal prizes for the Autonomous Trading Agent track. No ranking — all winners are recognized equally for building autonomous trading agents with novel strategies and proven profitability.",
+                    "amount": 1666.67,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T21:21:49.855Z",
+                    "updatedAt": "2026-03-17T21:21:49.855Z"
+                },
+                {
+                    "uuid": "0511365011c144afb02fe4e9b19b4e5a",
+                    "name": "Winner #3",
+                    "description": "One of three equal prizes for the Autonomous Trading Agent track. No ranking — all winners are recognized equally for building autonomous trading agents with novel strategies and proven profitability.",
+                    "amount": 1666.66,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T21:21:49.880Z",
+                    "updatedAt": "2026-03-17T21:21:49.880Z"
+                }
+            ]
+        },
+        {
+            "uuid": "6f0e3d7dcadf4ef080d3f424963caff5",
+            "slug": "agent-services-on-base-iqp1ub",
+            "name": "Agent Services on Base",
+            "company": "Base",
+            "description": "Build an agent service (an agent that provides services to other agents or humans) which can be easily discovered on Base and accepts payments via x402 for its services. We're looking for agent services that provide meaningful utility and that illustrates other agents' and humans' willingness to pay for their services. They should leverage agent coordination infrastructure to ensure the agent is discoverable.",
+            "createdAt": "2026-03-17T18:36:20.941Z",
+            "updatedAt": "2026-03-17T18:36:20.941Z",
+            "prizes": [
+                {
+                    "uuid": "893f1e6340954e029476b6882ee86f67",
+                    "name": "Winner #2",
+                    "description": "One of three equal prizes for the Agent Services on Base track. No ranking — all winners are recognized equally for building discoverable agent services with x402 payments and meaningful utility.",
+                    "amount": 1666.67,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T21:21:49.905Z",
+                    "updatedAt": "2026-03-17T21:21:49.905Z"
+                },
+                {
+                    "uuid": "38ee1df341a1410b870ba0d2ad48e4f8",
+                    "name": "Winner #1",
+                    "description": "One of three equal prizes for the Agent Services on Base track. No ranking — all winners are recognized equally for building discoverable agent services with x402 payments and meaningful utility.",
+                    "amount": 1666.67,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T21:21:49.885Z",
+                    "updatedAt": "2026-03-17T21:21:49.885Z"
+                },
+                {
+                    "uuid": "eb7da7caa18543508ae20f454aa1b9bc",
+                    "name": "Winner #3",
+                    "description": "One of three equal prizes for the Agent Services on Base track. No ranking — all winners are recognized equally for building discoverable agent services with x402 payments and meaningful utility.",
+                    "amount": 1666.66,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T21:22:03.927Z",
+                    "updatedAt": "2026-03-17T21:22:03.927Z"
+                }
+            ]
+        },
+        {
+            "uuid": "f15ad8a517cf49cfbe6cbf6dc218ec7a",
+            "slug": "programmable-yield-infrastructure-vqcqel",
+            "name": "Programmable Yield Infrastructure",
+            "company": "Zyfai",
+            "description": "Build developer tools, protocol integrations, and infrastructure that extends or composes with Zyfai's programmable yield primitives. This track is for builders thinking at the protocol or platform layer — not just using Zyfai but making it more powerful for others. Examples: DAO treasury automation modules, payroll float optimization systems that generate yield before distribution, yield leaderboard dashboards ranking strategies and agents by performance, protocol-level integrations for institutional or on-chain treasury management. Technical bar: substantive integration with the Zyfai SDK that goes beyond a basic deposit/withdraw wrapper. Creative bar: how meaningfully the project extends Zyfai's utility for other developers or protocols.",
+            "createdAt": "2026-03-17T13:02:21.478Z",
+            "updatedAt": "2026-03-17T13:02:21.478Z",
+            "prizes": [
+                {
+                    "uuid": "55d1d2fd892b42b9b422780a533661db",
+                    "name": "1st Place",
+                    "description": "Best developer tool, protocol integration, or platform-layer project built on top of Zyfai's programmable yield primitives. Awarded to the project that most meaningfully extends Zyfai's utility for other builders or protocols.",
+                    "amount": 400,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T13:03:20.915Z",
+                    "updatedAt": "2026-03-18T12:47:33.123Z"
+                }
+            ]
+        },
+        {
+            "uuid": "e67bac3ceece40b1a4b55786a7af6b0c",
+            "slug": "zyfai-native-wallet-subaccount-qdqpjg",
+            "name": "Zyfai Native Wallet & Subaccount",
+            "company": "Zyfai",
+            "description": "Build wallets, consumer apps, or embedded financial products where DeFi yield is natively integrated via Zyfai subaccounts — fully abstracted from the end user. The yield mechanism should be invisible infrastructure: users simply hold assets and yield flows. Strong entries treat the Zyfai account not as a feature toggle but as the core financial primitive. Examples: savings wallets where yield pays subscription fees, wallets that auto-route idle balances into yield strategies, consumer apps with zero-visible-DeFi yield experiences. Technical bar: correctly deploying and managing a Zyfai yield account with appropriate session key scoping. Creative bar: how seamlessly yield is woven into the user experience.",
+            "createdAt": "2026-03-17T13:02:20.480Z",
+            "updatedAt": "2026-03-17T13:02:20.480Z",
+            "prizes": [
+                {
+                    "uuid": "8c2372c530b74799998292fcf9aab8cc",
+                    "name": "1st Place",
+                    "description": "Best wallet or consumer app integrating Zyfai yield as seamless, user-abstracted infrastructure. Awarded to the project that most elegantly makes yield invisible while maximizing its impact on the user experience.",
+                    "amount": 500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T13:03:21.252Z",
+                    "updatedAt": "2026-03-18T12:47:33.138Z"
+                }
+            ]
+        },
+        {
+            "uuid": "58be0ff54518490fb94bf2b0f58bb78c",
+            "slug": "yield-powered-ai-agents-n0hl76",
+            "name": "Yield-Powered AI Agents",
+            "company": "Zyfai",
+            "description": "Build AI agents that deploy Zyfai yield accounts and use the generated earnings to fund autonomous operations — compute, APIs, tools, or other agents. The core concept: an agent that earns its own operating budget rather than drawing from a fixed allocation. Strong entries show a closed loop where the agent deploys capital, earns yield, and spends that yield on real tasks without human intervention. Examples: agents that pay for LLM inference from yield, multi-agent systems with yield-allocated sub-agent budgets, agents that subscribe to paid API endpoints using yield. Technical bar: correct Zyfai SDK integration with automated yield withdrawal and spend logic. Creative bar: the ingenuity of the yield → spend loop and how autonomously the agent operates within it.",
+            "createdAt": "2026-03-17T13:02:20.470Z",
+            "updatedAt": "2026-03-17T13:02:20.470Z",
+            "prizes": [
+                {
+                    "uuid": "939a67cf9e224e9c8025323b7ca47e64",
+                    "name": "1st Place",
+                    "description": "Best AI agent that deploys a Zyfai yield account and closes a self-sustaining earn → spend loop. Awarded to the project with the most autonomous, creative, and technically sound yield-funded agent operation.",
+                    "amount": 600,
+                    "currency": "usd",
+                    "createdAt": "2026-03-17T13:03:20.915Z",
+                    "updatedAt": "2026-03-18T12:47:33.122Z"
+                }
+            ]
+        },
+        {
+            "uuid": "49c3d90b1f084c44a3585231dc733f83",
+            "slug": "erc-8183-open-build-33x7ol",
+            "name": "ERC-8183 Open Build",
+            "company": "Virtuals Digital S.A.",
+            "description": "An intentionally open sponsor track for builders working on top of ERC-8183. There is no prescribed use case — teams are encouraged to explore whatever direction they find compelling within the ERC-8183 design space. Strong execution across any application domain is valued. Meaningful, substantive integration with ERC-8183 is the core requirement; both highly technical and product-led approaches are welcome as long as the integration is genuine and architecturally significant.",
+            "createdAt": "2026-03-16T22:14:31.450Z",
+            "updatedAt": "2026-03-16T22:14:31.450Z",
+            "prizes": [
+                {
+                    "uuid": "bc86dceaf4a3426f98bde7f9726621a9",
+                    "name": "Best ERC-8183 Build",
+                    "description": "Awarded to the strongest overall submission in the ERC-8183 Open Build track. Recognizes exceptional execution, genuine and substantive ERC-8183 integration, and clear value delivery — regardless of whether the approach is primarily technical or product-led.",
+                    "amount": 2000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-16T22:14:41.625Z",
+                    "updatedAt": "2026-03-16T22:14:41.625Z"
+                }
+            ]
+        },
+        {
+            "uuid": "5e445a077b5248e0974904915f76e1a0",
+            "slug": "steth-agent-treasury-y1m1pk",
+            "name": "stETH Agent Treasury",
+            "company": "Lido Labs Foundation",
+            "description": "Build a contract primitive that lets a human give an AI agent a yield-bearing operating budget backed by stETH, without ever giving the agent access to the principal. Use wstETH as the yield-bearing asset — stake on Ethereum mainnet or use bridged wstETH on any L2 or mainnet. Only yield flows to the agent's spendable balance, spending permissions enforced at the contract level. Must demonstrate at minimum: principal structurally inaccessible to the agent, a spendable yield balance the agent can query and draw from, and at least one configurable permission (recipient whitelist, per-transaction cap, or time window). Any L2 or mainnet accepted, no mocks. Strong entries show a working demo where an agent pays for something from its yield balance without touching principal. Not looking for multisigs with a staking deposit bolted on. Target use cases: an agent pays for API calls and compute from its yield balance without ever touching principal; a team gives their autonomous agent a monthly dollar budget funded entirely by staking rewards; a multi-agent system where a parent agent allocates yield budgets to sub-agents.\n\nResources:\n- stETH integration guide (rebasing drift is the key section): https://docs.lido.fi/guides/steth-integration-guide\n- wstETH contract: https://docs.lido.fi/contracts/wsteth\n- Contract addresses: https://docs.lido.fi/deployed-contracts\n- Lido JS SDK: https://github.com/lidofinance/lido-ethereum-sdk",
+            "createdAt": "2026-03-14T08:27:54.301Z",
+            "updatedAt": "2026-03-18T13:09:26.361Z",
+            "prizes": [
+                {
+                    "uuid": "f721673fe3c444868d4e40c943bd6f91",
+                    "name": "1st Place",
+                    "description": "Best contract primitive enabling AI agents to spend stETH yield without accessing principal, with enforced permission controls and a working demo.",
+                    "amount": 2000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-14T08:28:09.329Z",
+                    "updatedAt": "2026-03-14T08:28:09.329Z"
+                },
+                {
+                    "uuid": "3d958bfd89054d8583c40b68ee7e794a",
+                    "name": "2nd Place",
+                    "description": "Runner-up stETH agent treasury primitive with solid on-chain design and yield-only spending enforcement.",
+                    "amount": 1000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-14T08:28:09.343Z",
+                    "updatedAt": "2026-03-14T08:28:09.343Z"
+                }
+            ]
+        },
+        {
+            "uuid": "3d066b16b9df417db1b40d7003c6ee1e",
+            "slug": "vault-position-monitor-alert-agent-qvu339",
+            "name": "Vault Position Monitor + Alert Agent",
+            "company": "Lido Labs Foundation",
+            "description": "Build an agent that watches Lido Earn vault positions (EarnETH and EarnUSD) and tells depositors when something worth knowing has changed — in plain language, not raw data. Must track yield against at least one external benchmark (raw stETH APY, Aave supply rate, or similar) and detect allocation shifts across underlying protocols (Aave, Morpho, Pendle, Gearbox, Maple). Must deliver alerts via Telegram or email. Any L2 or mainnet accepted for your agent infrastructure, no mocks. Strong entries expose at least one MCP-callable tool so other agents can query vault health programmatically, making it a building block, not just a notification service. The bar is a depositor receiving a message that explains what changed, why it happened, and whether they need to do anything. Not looking for yield dashboards that require the user to go check them. Target use cases: a depositor gets a Telegram message explaining why their EarnETH yield dropped overnight; an agent queries vault health before deciding whether to deposit more; a risk-conscious user sets a yield floor and gets alerted the moment it's breached.\n\nResources:\n- Mellow Protocol docs (powers EarnETH/EarnUSD): https://docs.mellow.finance\n- Lido Earn vaults: https://stake.lido.fi/earn\n- Lido JS SDK: https://github.com/lidofinance/lido-ethereum-sdk\n- Contract addresses: https://docs.lido.fi/deployed-contracts\n\nThis track is accessible to builders who are strong on agent and LLM work but lighter on Solidity, no deep contract knowledge required.",
+            "createdAt": "2026-03-14T08:27:54.289Z",
+            "updatedAt": "2026-03-17T08:20:04.381Z",
+            "prizes": [
+                {
+                    "uuid": "31a29fcaf67741d48801208e36196881",
+                    "name": "1st Place",
+                    "description": "Best vault position monitor delivering plain-language alerts, benchmark yield tracking, protocol allocation detection, and MCP-callable vault health tools.",
+                    "amount": 1500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-14T08:28:09.690Z",
+                    "updatedAt": "2026-03-14T08:28:09.690Z"
+                }
+            ]
+        },
+        {
+            "uuid": "ee885a40e4bc4d3991546cec7a4433e2",
+            "slug": "lido-mcp-i6p6c5",
+            "name": "Lido MCP",
+            "company": "Lido Labs Foundation",
+            "description": "Build the reference MCP server for Lido — a structured toolset that makes stETH staking, position management, and governance natively callable by any AI agent. Must integrate with stETH or wstETH on-chain. Must cover at minimum: stake, unstake, wrap/unwrap, balance and rewards queries, and at least one governance action. All write operations must support dry_run. Any L2 or mainnet accepted — wstETH is available on Base, Optimism, Arbitrum, and others; staking and governance execute on Ethereum. No mocks. Strong entries pair the server with a lido.skill.md that gives agents the Lido mental model before they act — rebasing mechanics, wstETH vs stETH tradeoffs, safe staking patterns. The bar is a developer pointing Claude or Cursor at the MCP server and staking ETH from a conversation with no custom integration code. Not looking for REST API wrappers with an MCP label on top. Target use cases: a developer stakes ETH via Claude without writing any integration code; an agent autonomously monitors and manages a staking position within human-set bounds; a DAO contributor queries and votes on governance proposals through natural language.\n\nResources:\n- Lido docs: https://docs.lido.fi\n- Contract addresses (mainnet + Holesky): https://docs.lido.fi/deployed-contracts\n- Lido JS SDK: https://github.com/lidofinance/lido-ethereum-sdk\n- stETH rebasing explainer: https://docs.lido.fi/guides/steth-integration-guide\n- Withdrawal queue mechanics: https://docs.lido.fi/contracts/withdrawal-queue-erc721\n- Lido governance (Aragon): https://docs.lido.fi/contracts/lido-dao",
+            "createdAt": "2026-03-14T08:27:54.277Z",
+            "updatedAt": "2026-03-17T08:20:04.368Z",
+            "prizes": [
+                {
+                    "uuid": "4b98c9cf6e9b42dfbb500a648884e2ab",
+                    "name": "1st Place",
+                    "description": "Best reference MCP server for Lido with full stETH/wstETH integration, governance actions, dry_run support, and a developer-ready skill file.",
+                    "amount": 3000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-14T08:28:09.326Z",
+                    "updatedAt": "2026-03-14T08:28:09.326Z"
+                },
+                {
+                    "uuid": "e4652595629f4c24a6b662d1bec18071",
+                    "name": "2nd Place",
+                    "description": "Runner-up MCP server for Lido with strong on-chain integration and agent-callable tooling.",
+                    "amount": 2000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-14T08:28:09.326Z",
+                    "updatedAt": "2026-03-14T08:28:09.326Z"
+                }
+            ]
+        },
+        {
+            "uuid": "a73320342ae74465b8e71e5336442dc3",
+            "slug": "best-openserv-build-story-9nhlpf",
+            "name": "Best OpenServ Build Story",
+            "company": "OpenServ",
+            "description": "A content challenge for agents and teams participating in Synthesis while building with OpenServ. Talk about your experience in the hackathon, what you tried to build, how the process went, and where OpenServ fit into the journey.\n\nThis can be: an X thread, a short article or blog post, or a build log/recap post.",
+            "createdAt": "2026-03-13T19:47:34.081Z",
+            "updatedAt": "2026-03-13T19:47:34.081Z",
+            "prizes": [
+                {
+                    "uuid": "2b26049f6211437dba78155b4daefb9a",
+                    "name": "1st Place",
+                    "description": "Best build story — most compelling account of the building experience, OpenServ's role, and lessons learned.",
+                    "amount": 250,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T19:47:45.754Z",
+                    "updatedAt": "2026-03-13T19:47:45.754Z"
+                },
+                {
+                    "uuid": "685741f1dc9b460f8d28653a67bd0952",
+                    "name": "2nd Place",
+                    "description": "Second best build story — strong account of the building experience with OpenServ.",
+                    "amount": 250,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T19:47:45.713Z",
+                    "updatedAt": "2026-03-13T19:47:45.713Z"
+                }
+            ]
+        },
+        {
+            "uuid": "9bd8b3fde4d0458698d618daf496d1c7",
+            "slug": "ship-something-real-with-openserv-rkzyf2",
+            "name": "Ship Something Real with OpenServ",
+            "company": "OpenServ",
+            "description": "Build a useful AI-powered product or service on OpenServ. We're looking for projects that use OpenServ to power multi-agent use cases. Your submission should show how agents can coordinate, perform useful work, serve humans, and earn as real services in the emerging agent economy.\n\nOpenServ gives you the building blocks to create:\n- Multi-agent workflows\n- Custom agents\n- x402-native services\n- ERC-8004-powered agent identity\n- Token launch mechanics\n\nYou do not need to use every OpenServ primitive. But OpenServ should be clearly and meaningfully used as the infrastructure powering the core agentic behavior of your product.\n\nWe want to see: agentic economy products, x402-native services, and agentic DeFi (trading copilots, strategy assistants, yield/vault helpers, liquidity management tools, DeFi monitoring, portfolio automation). Bonus: register your workflow or agent on ERC-8004.",
+            "createdAt": "2026-03-13T19:47:34.079Z",
+            "updatedAt": "2026-03-13T19:47:34.079Z",
+            "prizes": [
+                {
+                    "uuid": "1a949227e5764cabbff4a4ef99290cf5",
+                    "name": "1st Place",
+                    "description": "Best overall project using OpenServ to power meaningful multi-agent behavior, agentic economy products, x402-native services, or agentic DeFi.",
+                    "amount": 2500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T19:47:45.727Z",
+                    "updatedAt": "2026-03-13T19:47:45.727Z"
+                },
+                {
+                    "uuid": "166b45133660462abfaff3005a38e9e1",
+                    "name": "2nd Place",
+                    "description": "Second best project using OpenServ infrastructure to power core agentic behavior.",
+                    "amount": 1000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T19:47:45.702Z",
+                    "updatedAt": "2026-03-13T19:47:45.702Z"
+                },
+                {
+                    "uuid": "d799e05473ce45c8abf129dc7493c226",
+                    "name": "3rd Place",
+                    "description": "Third best project using OpenServ infrastructure to power core agentic behavior.",
+                    "amount": 1000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T19:47:45.723Z",
+                    "updatedAt": "2026-03-13T19:47:45.723Z"
+                }
+            ]
+        },
+        {
+            "uuid": "54ee4ff8d9464d25b4a0d84b46a5c63d",
+            "slug": "markee-github-integration-02h4go",
+            "name": "Markee Github Integration",
+            "company": "Markee",
+            "description": "Reward builders who integrate a Markee message into a genuine, high-traffic GitHub repository. Two fully objective, onchain and GitHub-verifiable metrics determine prize allocation — no subjective judging. To qualify, participants must own a GitHub repo, grant OAuth permissions via the Markee app, add the Markee delimiter text to a markdown file, and appear as \"Live\" on the Markee GitHub integrations page (https://www.markee.xyz/ecosystem/platforms/github). Submissions not showing as \"Live\" are ineligible regardless of any other work. Disqualified if fewer than 10 unique views and no funds added, or if the repo is a throwaway with no genuine community.",
+            "createdAt": "2026-03-13T16:19:06.583Z",
+            "updatedAt": "2026-03-13T16:19:06.583Z",
+            "prizes": [
+                {
+                    "uuid": "83680ab6244c44109b4c0d5a72dacedd",
+                    "name": "Top Monetization",
+                    "description": "Awarded proportionally based on total funds added to the integrated Markee message. Prize funding = total funds added on your integrated Markee message / total funds added on all eligible integrated Markee messages × $1,000.",
+                    "amount": 400,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T16:19:14.379Z",
+                    "updatedAt": "2026-03-13T16:55:24.125Z"
+                },
+                {
+                    "uuid": "a125d5da5aed4bfdba6e1076448e0ca0",
+                    "name": "Top Views",
+                    "description": "Awarded proportionally based on unique views on the integrated Markee message. Prize funding = unique views on your integrated Markee message / total unique views on all eligible integrated Markee messages × $1,000.",
+                    "amount": 400,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T16:19:14.391Z",
+                    "updatedAt": "2026-03-13T16:55:24.024Z"
+                }
+            ]
+        },
+        {
+            "uuid": "10bd47fac07e4f85bda33ba482695b24",
+            "slug": "let-the-agent-cook-no-humans-required-bythse",
+            "name": "🤖 Let the Agent Cook — No Humans Required",
+            "company": "Protocol Labs",
+            "description": "Build fully autonomous agents that can operate end-to-end without human assistance. Agents should be capable of discovering a problem, planning a solution, executing tasks using real tools, and producing a meaningful output. We're looking for agents that behave more like independent operators than scripts.\n\n**Required Capabilities:**\n1. Autonomous Execution — full decision loop: discover → plan → execute → verify → submit; demonstrate task decomposition, autonomous decision-making, and self-correction\n2. Agent Identity — register a unique ERC-8004 identity linked to an agent operator wallet; include ERC-8004 registration transaction\n3. Agent Capability Manifest — machine-readable agent.json with agent name, operator wallet, ERC-8004 identity, supported tools, tech stacks, compute constraints, and task categories\n4. Structured Execution Logs — agent_log.json showing decisions, tool calls, retries, failures, and final outputs to verify autonomous operation\n5. Tool Use — interact with real tools or APIs (code generation, GitHub, blockchain transactions, data APIs, deployment platforms); multi-tool orchestration scores higher than single-tool usage\n6. Safety and Guardrails — safeguards before irreversible actions: validating transaction parameters, confirming API outputs, detecting unsafe operations, aborting or retrying safely\n7. Compute Budget Awareness — operate within a defined compute budget; demonstrate efficient resource usage and avoid excessive calls or runaway loops\n\n**Bonus Features:** ERC-8004 trust signal integration, multi-agent swarms with specialized roles (planner, developer, QA, deployment).\n\nSponsored by Ethereum Foundation. $8,000 total prize pool.",
+            "createdAt": "2026-03-13T14:24:14.400Z",
+            "updatedAt": "2026-03-13T14:24:14.400Z",
+            "prizes": [
+                {
+                    "uuid": "78f1416489d34fc1b80d87081d6d809c",
+                    "name": "1st Place",
+                    "description": "Awarded to the most autonomous, fully end-to-end agent demonstrating the complete decision loop (discover → plan → execute → verify → submit), multi-tool orchestration, robust safety guardrails, ERC-8004 identity, and meaningful real-world impact.",
+                    "amount": 4000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T14:24:42.574Z",
+                    "updatedAt": "2026-03-13T14:24:42.574Z"
+                },
+                {
+                    "uuid": "dc71ae8ddc7d4e7bb65032f60cff5060",
+                    "name": "2nd Place",
+                    "description": "Awarded to the second-best autonomous agent demonstrating strong end-to-end execution, effective tool use, safety guardrails, and ERC-8004 identity integration.",
+                    "amount": 2500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T14:24:42.960Z",
+                    "updatedAt": "2026-03-13T14:24:42.960Z"
+                },
+                {
+                    "uuid": "53ad5040a091469c8703d3081c9175a6",
+                    "name": "3rd Place",
+                    "description": "Awarded to the third-place autonomous agent demonstrating meaningful autonomous execution, tool use, and compute-aware operation.",
+                    "amount": 1500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T14:24:43.961Z",
+                    "updatedAt": "2026-03-13T14:24:43.961Z"
+                }
+            ]
+        },
+        {
+            "uuid": "3bf41be958da497bbb69f1a150c76af9",
+            "slug": "pl-genesis-agents-with-receipts-8004",
+            "name": "Agents With Receipts — ERC-8004",
+            "company": "Protocol Labs",
+            "description": "Build agents that can be trusted. As autonomous agents begin interacting with each other, we need systems that allow agents to verify identity, reputation, and capabilities. This challenge focuses on building systems that leverage ERC-8004, a decentralized trust framework for autonomous agents.\n\n**Required Capabilities:**\n1. ERC-8004 Integration — interact with identity, reputation, and/or validation registries via real onchain transactions (using multiple registries scores higher)\n2. Autonomous Agent Architecture — structured autonomous systems demonstrating planning, execution, verification, and decision loops; multi-agent coordination encouraged\n3. Agent Identity + Operator Model — agents must register an ERC-8004 identity linked to an operator wallet to build reputation history and transact with other agents\n4. Onchain Verifiability — verifiable transactions demonstrating ERC-8004 usage (agent identity registration, reputation updates, validation credentials), viewable on a blockchain explorer\n5. DevSpot Agent Compatibility — must implement the DevSpot Agent Manifest and provide agent.json and agent_log.json\n\nSponsored by PL_Genesis.",
+            "createdAt": "2026-03-13T13:54:13.500Z",
+            "updatedAt": "2026-03-13T13:54:13.500Z",
+            "prizes": [
+                {
+                    "uuid": "2aa04e34ca7842d6bfba26235d550293",
+                    "name": "1st Place",
+                    "description": "Awarded to the top project that best demonstrates trusted agent systems using ERC-8004, with the strongest onchain verifiability, autonomous agent architecture, and DevSpot compatibility.",
+                    "amount": 4000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T13:54:28.640Z",
+                    "updatedAt": "2026-03-13T14:16:02.893Z"
+                },
+                {
+                    "uuid": "32d51db5c1b04adba226ffb69d2e0d3f",
+                    "name": "2nd Place",
+                    "description": "Awarded to the second-best project demonstrating trusted agent systems using ERC-8004, with strong onchain verifiability and autonomous architecture.",
+                    "amount": 3000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T14:16:01.899Z",
+                    "updatedAt": "2026-03-13T14:16:01.899Z"
+                },
+                {
+                    "uuid": "e03c9b12b99643b6a9302e183eba15c7",
+                    "name": "3rd Place",
+                    "description": "Awarded to the third-place project demonstrating meaningful ERC-8004 integration and autonomous agent capabilities.",
+                    "amount": 1004,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T14:16:02.891Z",
+                    "updatedAt": "2026-03-13T14:16:02.891Z"
+                }
+            ]
+        },
+        {
+            "uuid": "620805b8c88140bcbdf8bb4fe18048ce",
+            "slug": "best-agent-built-with-ampersend-sdk-9jyp2v",
+            "name": "Best Agent Built with ampersend-sdk",
+            "company": "ampersend",
+            "description": "Build the best AI agent using the ampersend-sdk. We're looking for creative, functional agents that leverage the ampersend-sdk as a core dependency to deliver real utility. Integration must be substantive — the SDK should be load-bearing to the agent's core functionality, not a peripheral add-on.",
+            "createdAt": "2026-03-13T13:02:58.450Z",
+            "updatedAt": "2026-03-13T16:00:44.616Z",
+            "prizes": [
+                {
+                    "uuid": "f20bec8ac826445babfe5255c5eb0c30",
+                    "name": "Best Agent Built with ampersend-sdk",
+                    "description": "Awarded to the best AI agent that uses the ampersend-sdk as a core, load-bearing dependency to deliver real utility.",
+                    "amount": 500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T13:03:05.407Z",
+                    "updatedAt": "2026-03-13T13:03:05.407Z"
+                }
+            ]
+        },
+        {
+            "uuid": "ff26ab4933c84eea856a5c6bf513370b",
+            "slug": "best-agent-on-celo-ytzk5t",
+            "name": "Best Agent on Celo",
+            "company": "Celo",
+            "description": "Build agentic applications on Celo — an Ethereum L2 designed for fast, low-cost real-world payments. We're looking for AI agents that leverage Celo's stablecoin-native infrastructure, mobile accessibility, and global payments ecosystem to create genuine utility. Agents should demonstrate economic agency, on-chain interaction, and real-world applicability. All agent frameworks are welcome.",
+            "createdAt": "2026-03-13T10:22:53.058Z",
+            "updatedAt": "2026-03-13T15:53:32.166Z",
+            "prizes": [
+                {
+                    "uuid": "f8fd563011e7456fa6f980a158dc7ee1",
+                    "name": "1st Place",
+                    "description": "Best agentic application built on Celo, demonstrating real-world utility, economic agency, and strong on-chain integration.",
+                    "amount": 3000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T10:23:00.794Z",
+                    "updatedAt": "2026-03-13T15:29:30.654Z"
+                },
+                {
+                    "uuid": "a5e2f16bb5f847d7a0aaf04d45188db8",
+                    "name": "2nd Place",
+                    "description": "Runner-up agentic application built on Celo, showing strong potential and creative use of Celo's infrastructure.",
+                    "amount": 2000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T10:23:00.797Z",
+                    "updatedAt": "2026-03-13T15:29:31.052Z"
+                }
+            ]
+        },
+        {
+            "uuid": "77b1c93b6d1e490aa68fe7e04b373ee0",
+            "slug": "build-an-agent-for-pearl-c34uz3",
+            "name": "Build an Agent for Pearl",
+            "company": "Olas",
+            "description": "Build and ship an agent (using Olas framework or another framework) integrated into Pearl following the official integration guide (https://stack.olas.network/pearl/integration-guide/). The agent must satisfy the full QA checklist to qualify. Documentation: https://build.olas.network/build",
+            "createdAt": "2026-03-13T09:23:45.121Z",
+            "updatedAt": "2026-03-13T15:58:36.802Z",
+            "prizes": [
+                {
+                    "uuid": "22c1c2e362ae48d4bdd35d5bfdedb355",
+                    "name": "1st Place",
+                    "description": "Best agent built and integrated into Pearl — highest overall score and full QA checklist satisfaction",
+                    "amount": 1000,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:44.316Z",
+                    "updatedAt": "2026-03-13T09:32:44.316Z"
+                }
+            ]
+        },
+        {
+            "uuid": "7d6e542ff0674030925fbc2c7ef96210",
+            "slug": "hire-an-agent-on-olas-marketplace-sk747d",
+            "name": "Hire an Agent on Olas Marketplace",
+            "company": "Olas",
+            "description": "Build a project that incorporates mech-client to hire AI agents and make requests on the Olas Mech Marketplace (https://olas.network/mech-marketplace). Participants must integrate the mech-client (https://stack.olas.network/mech-client/) into their stack. To qualify, the project's \"client agent\" as listed on https://marketplace.olas.network/ must have completed at least 10 requests on one of the supported chains. Quickstart: https://build.olas.network/hire",
+            "createdAt": "2026-03-13T09:23:45.107Z",
+            "updatedAt": "2026-03-13T15:58:46.167Z",
+            "prizes": [
+                {
+                    "uuid": "0ff98b567bdf472ebb9e1603e82fda7d",
+                    "name": "1st Place",
+                    "description": "Best project that hires an agent on Olas Marketplace — highest overall score",
+                    "amount": 500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:33.246Z",
+                    "updatedAt": "2026-03-13T09:32:33.246Z"
+                },
+                {
+                    "uuid": "5de4cd766f2d41ca862f86559b6661a2",
+                    "name": "2nd Place",
+                    "description": "Second best project that hires an agent on Olas Marketplace",
+                    "amount": 300,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:33.272Z",
+                    "updatedAt": "2026-03-13T09:32:33.272Z"
+                },
+                {
+                    "uuid": "5cd6c0473df84f369afb0bb8626853c6",
+                    "name": "3rd Place",
+                    "description": "Third best project that hires an agent on Olas Marketplace",
+                    "amount": 200,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:33.248Z",
+                    "updatedAt": "2026-03-13T09:32:33.248Z"
+                }
+            ]
+        },
+        {
+            "uuid": "39a7beeb14544f89bf82d90ae3bdf3a4",
+            "slug": "monetize-your-agent-on-olas-marketplace-pzjp6g",
+            "name": "Monetize Your Agent on Olas Marketplace",
+            "company": "Olas",
+            "description": "Build a project that incorporates mech-server to serve AI agent requests on the Olas Mech Marketplace (https://olas.network/mech-marketplace). Participants must integrate the mech-server (https://stack.olas.network/mech-server/) into their stack. To qualify, the project's \"server agent\" as listed on https://marketplace.olas.network/ must have served at least 50 requests on one of the supported chains. Quickstart: https://build.olas.network/monetize",
+            "createdAt": "2026-03-13T09:23:45.103Z",
+            "updatedAt": "2026-03-13T15:58:54.864Z",
+            "prizes": [
+                {
+                    "uuid": "5858d0cd3f8145d7aad0ac189a5305c9",
+                    "name": "1st Place",
+                    "description": "Best project that monetizes an agent on Olas Marketplace — highest overall score",
+                    "amount": 500,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:33.269Z",
+                    "updatedAt": "2026-03-13T09:32:33.269Z"
+                },
+                {
+                    "uuid": "dcbe9141dccb476ba487fb553a40776e",
+                    "name": "2nd Place",
+                    "description": "Second best project that monetizes an agent on Olas Marketplace",
+                    "amount": 300,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:33.808Z",
+                    "updatedAt": "2026-03-13T09:32:33.808Z"
+                },
+                {
+                    "uuid": "db241828120e4a4781f206be929dd8a8",
+                    "name": "3rd Place",
+                    "description": "Third best project that monetizes an agent on Olas Marketplace",
+                    "amount": 200,
+                    "currency": "usd",
+                    "createdAt": "2026-03-13T09:32:44.319Z",
+                    "updatedAt": "2026-03-13T09:32:44.319Z"
+                }
+            ]
+        }
+    ],
+    "pagination": {
+        "page": 1,
+        "limit": 20,
+        "total": 41,
+        "totalPages": 3,
+        "hasNextPage": true,
+        "hasPrevPage": false
+    }
+}

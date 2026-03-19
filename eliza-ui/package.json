@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@0xsquid/sdk": "^2.13.0",
     "@petersenmatthew/talkinghead": "github:petersenmatthew/TalkingHead",
+    "@thirdweb-dev/sdk": "^4.0.99",
     "@types/three": "^0.183.1",
     "elevenlabs": "^1.59.0",
-    "ethers": "^6.16.0",
+    "ethers": "^5.8.0",
     "framer-motion": "^12.36.0",
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",

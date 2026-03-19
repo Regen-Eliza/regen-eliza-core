@@ -156,7 +156,7 @@ export async function parseIntentAndExecuteTransfer(voiceCommand: string): Promi
     // Fall back to fuzzy matching
     if (!contact) {
       console.log(`[IntentParser] No exact match for "${spokenContact}", trying fuzzy match...`);
-      contact = fuzzyMatchContact(spokenContact);
+      contact = fuzzyMatchContact(spokenContact) || undefined;
     }
 
     if (!contact) {

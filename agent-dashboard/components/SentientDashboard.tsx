@@ -11,9 +11,8 @@ import { swapService } from "../services/swapService";
 import { parseIntentAndExecuteTransfer } from "../utils/intentParser";
 import contacts from "../data/contacts.json";
 import { executeDonation } from "../app/actions/transaction";
-import dynamic from 'next/dynamic';
-
-const Avatar = dynamic(() => import('./Avatar'), { ssr: false });
+import Avatar from './Avatar';
+import type { AvatarState } from './Avatar';
 
 const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 const privateKey = process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY || defaultKey;
@@ -44,6 +43,7 @@ export default function SentientDashboard() {
   const [activeChain, setActiveChain] = useState('CELO');
   const [volume, setVolume] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [reportText, setReportText] = useState("");
   const [hasInitialized, setHasInitialized] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
@@ -72,18 +72,24 @@ export default function SentientDashboard() {
         setReportText("");
         setTimeout(() => setReportText(report), 50);
         pushLog(`SUCCESS — funded ${projects.length} project(s)`);
+        setIsSpeaking(true);
         await voiceService.speak(report);
+        setIsSpeaking(false);
       } else {
         const errorMsg = "I encountered an issue trying to route funds.";
         setReportText("");
         setTimeout(() => setReportText(errorMsg), 50);
         pushLog("ERROR — could not route funds");
+        setIsSpeaking(true);
         await voiceService.speak(errorMsg);
+        setIsSpeaking(false);
       }
     } catch (e) {
       console.error(e);
       pushLog("ERROR — communication failure");
+      setIsSpeaking(true);
       await voiceService.speak("An error occurred during communication.");
+      setIsSpeaking(false);
     } finally {
       setIsProcessing(false);
     }
@@ -105,18 +111,24 @@ export default function SentientDashboard() {
         const report = `On-chain donation confirmed on ${result.network}.\nTarget: ${result.target}\nAmount: ${result.amount} ETH\nTX: ${result.txHash}`;
         setReportText("");
         setTimeout(() => setReportText(report), 50);
+        setIsSpeaking(true);
         await voiceService.speak(`Micro-donation to ${target} confirmed on Base. Transaction hash: ${result.txHash.slice(0, 18)}`);
+        setIsSpeaking(false);
       } else {
         pushLog(`TX FAILED — ${result.error}`);
         const errorMsg = `On-chain donation failed: ${result.error}`;
         setReportText("");
         setTimeout(() => setReportText(errorMsg), 50);
+        setIsSpeaking(true);
         await voiceService.speak(`The on-chain donation to ${target} could not be completed. ${result.error}`);
+        setIsSpeaking(false);
       }
     } catch (e: any) {
       console.error(e);
       pushLog(`ERROR — ${e.message || "on-chain donation failed"}`);
+      setIsSpeaking(true);
       await voiceService.speak("An error occurred during the on-chain transaction.");
+      setIsSpeaking(false);
     } finally {
       setIsProcessing(false);
     }
@@ -144,14 +156,18 @@ export default function SentientDashboard() {
       setReportText("");
       setTimeout(() => setReportText(report), 50);
       pushLog(`SWAP OK — tx: ${receipt.transactionHash?.slice(0, 18)}...`);
+      setIsSpeaking(true);
       await voiceService.speak("Swap complete. The trade was successfully executed via the Uniswap protocol on Celo.");
+      setIsSpeaking(false);
     } catch (e: any) {
       console.error(e);
       const errorMsg = e.message || "Swap execution failed.";
       pushLog(`ERROR — ${errorMsg.slice(0, 60)}`);
       setReportText("");
       setTimeout(() => setReportText(`Swap failed: ${errorMsg}`), 50);
+      setIsSpeaking(true);
       await voiceService.speak("The swap could not be completed. " + errorMsg.split('.')[0]);
+      setIsSpeaking(false);
     } finally {
       setIsProcessing(false);
     }
@@ -172,7 +188,9 @@ export default function SentientDashboard() {
         setReportText("");
         setTimeout(() => setReportText(report), 50);
         pushLog(`TRANSFER OK — ${result.amount} ${result.symbol} → ${result.contact}`);
+        setIsSpeaking(true);
         await voiceService.speak(report);
+        setIsSpeaking(false);
       }
     } catch (e: any) {
       console.error(e);
@@ -180,7 +198,9 @@ export default function SentientDashboard() {
       const errorMsg = e.message || "An error occurred during the transfer.";
       setReportText("");
       setTimeout(() => setReportText(errorMsg), 50);
+      setIsSpeaking(true);
       await voiceService.speak(errorMsg);
+      setIsSpeaking(false);
     } finally {
       setIsProcessing(false);
     }
@@ -247,7 +267,9 @@ export default function SentientDashboard() {
         const newLog = `${userLog}> System: ${report}`;
         setTimeout(() => setReportText(newLog), 1500);
         pushLog(`RESULT: ${report.slice(0, 60)}...`);
+        setIsSpeaking(true);
         await voiceService.speak(report);
+        setIsSpeaking(false);
       }
     } catch (e: any) {
       console.error(e);
@@ -256,7 +278,9 @@ export default function SentientDashboard() {
       const userLog = `> User: ${command}\n\n`;
       const newLog = `${userLog}> System: ${errorMsg}`;
       setTimeout(() => setReportText(newLog), 1500);
+      setIsSpeaking(true);
       await voiceService.speak(errorMsg);
+      setIsSpeaking(false);
     } finally {
       setIsProcessing(false);
     }
@@ -282,7 +306,8 @@ export default function SentientDashboard() {
       pushLog("ElevenLabs API: Connected");
       pushLog("Listening for Intents...");
       setTimeout(() => {
-        voiceService.speak("Hi, I am Regen Eliza. I am an autonomous ERC-8004 agent on Celo. I provide three core services: First, I can route donations to verified public goods projects. Second, I can swap stablecoins on Celo using the Uniswap protocol. And third, I can execute x402 direct payments to your saved ENS contacts. How can I help you today?");
+        setIsSpeaking(true);
+        voiceService.speak("Hi, I am Regen Eliza. I am an autonomous ERC-8004 agent on Celo. I provide three core services: First, I can route donations to verified public goods projects. Second, I can swap stablecoins on Celo using the Uniswap protocol. And third, I can execute x402 direct payments to your saved ENS contacts. How can I help you today?").finally(() => setIsSpeaking(false));
       }, 500);
     }
   };
@@ -546,8 +571,13 @@ export default function SentientDashboard() {
         </div>
 
         {/* ─── COLUMN 2: Avatar (Center) ─── */}
-        <div className="w-full h-[65vh] filter grayscale sepia hue-rotate-[80deg] contrast-150 brightness-75 opacity-90 rounded-lg overflow-hidden border border-[#2a2a2a] ">
-          <Avatar />
+        <div className="w-full h-[65vh] rounded-lg overflow-hidden border border-[#2a2a2a]">
+          <Avatar state={(
+            isSpeaking ? 'speaking' :
+            isProcessing ? 'thinking' :
+            isListeningSpeech ? 'listening' :
+            'idle'
+          ) as AvatarState} />
         </div>
 
         {/* ─── COLUMN 3: Transaction Log Panel ─── */}

@@ -37,7 +37,7 @@ export function useAudioAnalyzer() {
 
   const getFrequency = () => {
     if (!analyserRef.current || !dataArray) return 0;
-    analyserRef.current.getByteFrequencyData(dataArray);
+    analyserRef.current.getByteFrequencyData(dataArray as any);
     // Calculate average volume/frequency
     return dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
   };
