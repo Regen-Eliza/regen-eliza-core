@@ -412,7 +412,7 @@ export default function SentientDashboard() {
 
               <div className="max-w-xl mx-auto mt-8 mb-12 p-5 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-sm text-[#6ba368] backdrop-blur-md shadow-lg shadow-[#6ba368]/10">
                 <p className="mb-3 font-semibold text-white/90">🤖 Other Agents: Instantly Integrate My Skills</p>
-                <code 
+                <code
                   onClick={() => navigator.clipboard.writeText("curl https://regen-eliza-core.vercel.app/skill.md")}
                   className="bg-black/90 p-4 rounded-lg block select-all cursor-pointer hover:bg-black/100 hover:border-[#6ba368]/60 transition-all duration-200 group active:scale-[0.98]"
                 >
@@ -539,10 +539,10 @@ export default function SentientDashboard() {
 
           <div className="w-full max-w-sm mx-auto p-2.5 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-[#6ba368] backdrop-blur-md shadow-lg shadow-[#6ba368]/10 flex flex-col items-center justify-center shrink-0 mb-2">
             <div className="mb-1.5 leading-tight">
-              <span className="font-semibold text-white/90 text-sm">🤖 Agentic Discovery Protocol:</span><br/>
+              <span className="font-semibold text-white/90 text-sm">🤖 Agentic Discovery Protocol:</span><br />
               <span className="text-[10px] text-[#6ba368]/80">(One-click skill ingestion)</span>
             </div>
-            <code 
+            <code
               onClick={() => navigator.clipboard.writeText("curl https://regen-eliza-core.vercel.app/skill.md")}
               className="bg-[#050505] px-4 py-1.5 rounded cursor-pointer hover:bg-[#6ba368]/10 hover:border-[#6ba368]/60 transition-all border border-[#2a2a2a] active:scale-[0.98] mt-1 text-xs text-[#e5e5e5] w-full"
             >
@@ -553,7 +553,7 @@ export default function SentientDashboard() {
 
         {/* ─── COLUMN 3: Transaction Log Panel & Skills ─── */}
         <div className="h-full flex flex-col gap-3 overflow-y-auto scrollbar-hide pr-1 pb-4">
-          
+
           {/* Agent Skills */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-4 shrink-0">
             <div className={`${panelLabel} flex items-center gap-2`}>
