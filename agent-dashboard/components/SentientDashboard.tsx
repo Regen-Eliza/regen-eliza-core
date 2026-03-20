@@ -310,7 +310,7 @@ export default function SentientDashboard({ children }: { children?: React.React
   /* ─── Shared Styles ─── */
   const dockBtn = `px-6 py-3 text-lg tracking-wider bg-black/40 hover:bg-[${C.green}]/10 border border-[${C.green}]/30 hover:border-[${C.green}]/60 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-40 shrink-0 text-[${C.muted}] font-mono tracking-wide`;
 
-  const panelLabel = `text-lg xl:text-xl font-bold uppercase tracking-widest mb-1 text-[#6ba368] font-mono tracking-wide`;
+  const panelLabel = `text-lg xl:text-xl font-bold uppercase tracking-widest mb-1 text-[#FFFFFF] font-mono tracking-wide`;
 
   return (
     <div className="flex flex-col h-screen w-full bg-[#050505] text-[#e5e5e5] overflow-hidden scanlines">
@@ -392,14 +392,14 @@ export default function SentientDashboard({ children }: { children?: React.React
       {/* ═══════════════════════════════════
           3-COLUMN COMMAND CENTER
           ═══════════════════════════════════ */}
-      <div className="w-[98%] max-w-[1700px] mx-auto flex flex-col lg:grid lg:grid-cols-[1fr_1.8fr_1.2fr] gap-4 items-start mt-2 flex-1 min-h-0 z-10 overflow-y-auto lg:overflow-hidden pb-4">
+      <div className="w-[98%] max-w-[1600px] mx-auto flex flex-col lg:grid lg:grid-cols-12 lg:gap-8 items-start mt-2 flex-1 min-h-0 z-10 overflow-y-auto lg:overflow-hidden pb-4">
 
         {/* ─── COLUMN 1: Agent Details Panel ─── */}
-        <div className="h-full flex flex-col gap-3 overflow-y-auto scrollbar-hide w-full pr-1 pb-4">
+        <div className="h-full flex flex-col gap-3 overflow-y-auto scrollbar-hide w-full pr-1 pb-4 lg:col-span-3">
           {/* Identity Card */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
             <div className={panelLabel}>Agent Identity</div>
-            <div className="text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#FFFFFF]">REGEN ELIZA</div>
+            <div className="text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">REGEN ELIZA</div>
             <a href="https://www.8004scan.io/agents/celo/1851" target="_blank" rel="noopener noreferrer" className="text-[#6ba368] hover:text-[#88d184] hover:underline transition-colors font-mono tracking-wide text-sm mb-3 inline-block font-bold">
               View on 8004scan.io ↗
             </a>
@@ -455,7 +455,7 @@ export default function SentientDashboard({ children }: { children?: React.React
 
 
           {/* ASCII Art Block 1 (8004-ERC) */}
-          <pre className="text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
+          <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
             {`   ___   ___   ___  _  _         _____ ____   ____ 
   ( _ ) / _ \\ / _ \\| || |       | ____|  _ \\ / ___|
   / _ \\| | | | | | | || |_ _____|  _| | |_) | |    
@@ -464,7 +464,7 @@ export default function SentientDashboard({ children }: { children?: React.React
           </pre>
 
           {/* ASCII Art Block 2 (x402) */}
-          <pre className="text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
+          <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
             {`     _  _    ___ ____  
  __  _| || |  / _ \\___ \\ 
  \\ \\/ / || |_| | | |__) |
@@ -472,33 +472,17 @@ export default function SentientDashboard({ children }: { children?: React.React
  /_/\\_\\  |_|  \\___/_____|`}
           </pre>
 
-          {/* Live Transaction Log bg */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 min-h-[160px] flex flex-col mt-auto shadow-[inset_0_0_15px_rgba(107,163,104,0.05)]">
-            <div className={`${panelLabel} flex items-center gap-2 mb-2`}>
-              <div className="w-2 h-2 rounded bg-[#6ba368] animate-pulse" />
-              TRANSACTION LOG
-            </div>
-            <div className="flex-1 min-h-[100px] overflow-y-auto scrollbar-hide font-mono tracking-wide text-xs xl:text-sm space-y-1.5 opacity-80 text-[#e5e5e5]">
-              <AnimatePresence>
-                {logs.map((log, i) => (
-                  <motion.div key={`${log}-${i}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight">{log}</motion.div>
-                ))}
-              </AnimatePresence>
-              {logs.length === 0 && <div className="text-[#888]/50 italic text-xs">...</div>}
-            </div>
-          </div>
         </div>
 
         {/* ─── COLUMN 2: The Soul (Center) ─── */}
-        <div className="h-[450px] lg:h-full flex flex-col relative w-full z-20 order-first lg:order-none mb-4 lg:mb-0">
+        <div className="h-[450px] lg:h-full flex flex-col relative w-full z-20 order-first lg:order-none mb-4 lg:mb-0 lg:col-span-6">
           
           {/* Agent Ingest Box */}
-          <div className="w-full mb-3 px-3 py-2 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-xl text-center font-mono backdrop-blur-md flex items-center justify-between group cursor-pointer transition-all shadow-[0_0_15px_rgba(107,163,104,0.1)] hover:shadow-[0_0_25px_rgba(107,163,104,0.2)] shrink-0" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
-            <div className="flex flex-col items-start w-full pr-2">
-              <span className="text-[10px] text-[#888] font-bold uppercase tracking-widest mb-0.5">🤖 AGENTS: Ingest My Skills Here</span>
-              <span className="text-xs xl:text-[13px] font-bold text-[#6ba368] truncate tracking-wide">curl https://api.regeneliza.com/skill.md</span>
+          <div className="w-full flex shrink-0 mb-4 justify-center">
+            <div className="w-full max-w-[800px] px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center font-mono backdrop-blur-md flex flex-col items-center justify-center group cursor-pointer transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
+              <span className="text-sm text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80">🤖 AGENTS: Ingest My Skills Here</span>
+              <span className="text-[24px] font-bold text-[#6ba368] tracking-wide mt-1">curl https://api.regeneliza.com/skill.md</span>
             </div>
-            <Copy size={16} className="text-[#888] group-hover:text-[#6ba368] shrink-0 drop-shadow-[0_0_2px_rgba(107,163,104,0.5)] group-hover:drop-shadow-[0_0_8px_rgba(107,163,104,0.9)]" />
           </div>
 
           <div className="w-full flex-1 min-h-0 rounded-xl overflow-hidden border border-[#2a2a2a] bg-black/30 flex items-center justify-center shadow-[0_0_30px_rgba(107,163,104,0.1)] mb-3 relative group">
@@ -511,7 +495,7 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className="absolute inset-0 border border-[#6ba368]/10 rounded-xl pointer-events-none transition-colors group-hover:border-[#6ba368]/30 mix-blend-screen" />
           </div>
 
-          <div className="w-full max-w-sm mx-auto flex shrink-0">
+          <div className="w-full flex shrink-0">
             {/* Voice / Mic Toggle */}
             <button
               onClick={toggleMic}
@@ -526,7 +510,23 @@ export default function SentientDashboard({ children }: { children?: React.React
         </div>
 
         {/* ─── COLUMN 3: Transaction Log Panel & Skills ─── */}
-        <div className="h-full flex flex-col gap-2 overflow-y-auto scrollbar-hide pr-1 pb-4">
+        <div className="h-full flex flex-col gap-2 overflow-y-auto scrollbar-hide pr-1 pb-4 lg:col-span-3">
+
+          {/* Live Transaction Log bg */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 min-h-[160px] flex flex-col shadow-[inset_0_0_15px_rgba(107,163,104,0.05)] mb-2">
+            <div className={`${panelLabel} flex items-center gap-2 mb-2`}>
+              <div className="w-2 h-2 rounded bg-[#6ba368] animate-pulse" />
+              TRANSACTION LOG
+            </div>
+            <div className="flex-1 min-h-[100px] overflow-y-auto scrollbar-hide font-mono tracking-wide text-xs xl:text-sm space-y-1.5 opacity-80 text-[#e5e5e5]">
+              <AnimatePresence>
+                {logs.map((log, i) => (
+                  <motion.div key={`${log}-${i}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight">{log}</motion.div>
+                ))}
+              </AnimatePresence>
+              {logs.length === 0 && <div className="text-[#888]/50 italic text-xs">...</div>}
+            </div>
+          </div>
 
           {/* Agent Skills */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 shrink-0">
@@ -565,7 +565,7 @@ export default function SentientDashboard({ children }: { children?: React.React
                 exit={{ opacity: 0, height: 0 }}
                 className="shrink-0 border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-2.5 shadow-[0_0_15px_rgba(107,163,104,0.05)]"
               >
-                <div className={`${panelLabel} flex items-center gap-2 mb-1`}>
+                <div className={`${panelLabel} flex items-center gap-2 mb-1 text-[#FFFFFF]`}>
                   <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
                   Active Output
                 </div>
@@ -577,7 +577,7 @@ export default function SentientDashboard({ children }: { children?: React.React
           </AnimatePresence>
 
           {/* PROTOCOL MANIFEST (SKILL.MD) */}
-          <div className="flex-1 min-h-[150px] border border-[#2a2a2a] bg-black/40 backdrop-blur-md rounded-lg p-3 flex flex-col shadow-[0_0_20px_rgba(107,163,104,0.05)] border-t-[#6ba368]/30 mt-2">
+          <div className="flex-1 min-h-[250px] border border-[#2a2a2a] bg-black/20 backdrop-blur-md rounded-lg p-3 flex flex-col shadow-[0_0_20px_rgba(107,163,104,0.05)] border-t-[#6ba368]/30 mt-2">
             <div className="flex items-center justify-between mb-2 pb-2 border-b border-[#2a2a2a]">
               <div className={`${panelLabel} !mb-0 flex items-center gap-2`}>
                 <div className="w-2 h-2 rounded-sm bg-[#6ba368] animate-pulse" />
@@ -586,7 +586,7 @@ export default function SentientDashboard({ children }: { children?: React.React
               <span className="text-[#888] text-[9px] tracking-widest uppercase opacity-70">RAW DATA</span>
             </div>
             <div className="flex-1 overflow-y-auto scrollbar-hide pr-1">
-              <pre className="font-mono text-[10px] xl:text-[11px] leading-relaxed text-[#6ba368]/90 whitespace-pre-wrap break-words drop-shadow-[0_0_2px_rgba(107,163,104,0.2)]">
+              <pre className="font-mono text-xs lg:text-sm leading-relaxed text-[#6ba368]/90 whitespace-pre-wrap break-words drop-shadow-[0_0_2px_rgba(107,163,104,0.2)]">
                 {children}
               </pre>
             </div>
@@ -598,54 +598,39 @@ export default function SentientDashboard({ children }: { children?: React.React
       {/* ═══════════════════════════════════
           BOTTOM DOCK CONTROL BAR
           ═══════════════════════════════════ */}
-      <div className="w-[98%] mx-auto grid grid-cols-[1fr_2fr_1fr] gap-2 items-center py-2 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 shrink-0">
+      <div className="w-[98%] mx-auto grid grid-cols-[1.2fr_1.6fr_1.2fr] gap-4 items-center py-2 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 shrink-0 px-2 lg:px-4">
 
         {/* Left Section (Tracks) */}
-        <div className="flex items-center space-x-4 text-[#e5e5e5] justify-start font-mono tracking-wide">
-          <span className="text-[#6ba368] font-bold tracking-widest text-lg">TRACKS:</span>
-          <span className="font-bold text-sm">CELO | OCTANT | ENS | UNISWAP</span>
+        <div className="flex items-center space-x-3 text-[#e5e5e5] justify-start font-mono tracking-wide">
+          <span className="text-[#6ba368] font-bold tracking-widest text-sm lg:text-base">TRACKS:</span>
+          <span className="font-bold text-[10px] lg:text-xs opacity-80">CELO | OCTANT | ENS | UNISWAP</span>
         </div>
 
         {/* Center Section (Services) */}
-        <div className="flex flex-col items-center space-y-1.5 font-mono tracking-wide font-bold">
-          <div className="text-[#6ba368] font-bold text-2xl tracking-widest text-center w-full">SERVICES</div>
+        <div className="flex flex-col items-center space-y-1 font-mono tracking-wide font-bold">
+          <div className="text-[#6ba368] font-bold text-center w-full text-lg tracking-[0.2em]">SERVICES</div>
 
           {/* Row 1 */}
           <div className="flex items-center space-x-2 w-full justify-center">
-            <span className="text-[#6ba368] w-28 text-right text-xl font-bold">Donate:</span>
-            <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">DeSci</button>
-            <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Ecology</button>
-            <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Builders</button>
-            <button disabled={isProcessing} onClick={() => handleFund("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Agents</button>
+            <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">DeSci</button>
+            <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Ecology</button>
+            <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Builders</button>
+            <button disabled={isProcessing} onClick={() => handleFund("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Agents</button>
           </div>
 
           {/* Row 2 */}
           <div className="flex items-center space-x-2 w-full justify-center">
-            <span className="text-[#6ba368] w-28 text-right text-xl font-bold">Transfer:</span>
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Contacts</button>
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">ENS</button>
-          </div>
-
-          {/* Row 3 */}
-          <div className="flex items-center space-x-2 w-full justify-center">
-            <span className="text-[#6ba368] w-28 text-right text-xl font-bold">Swap:</span>
-            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">USDT_BASE ⇄ USDm</button>
-            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">USDC ⇄ USDT(CELO)</button>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Contacts</button>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">ENS</button>
+            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Swap</button>
           </div>
         </div>
 
-        {/* Right Section (Contacts) */}
+        {/* Right Section (ENS) */}
         <div className="flex items-center space-x-3 justify-end font-mono tracking-wide">
-          <span className="text-[#6ba368] font-bold text-sm tracking-widest">ENS:</span>
+          <span className="text-[#6ba368] font-bold text-sm lg:text-base">ENS:</span>
           {contacts.slice(0, 3).map((c) => (
-            <button
-              key={c.name}
-              disabled={isProcessing}
-              onClick={handleDirectPayment}
-              className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors gap-1 flex items-center justify-center font-mono tracking-wide text-xs"
-            >
-              {c.spokenName}
-            </button>
+            <span key={c.name} className="text-[10px] lg:text-xs opacity-60">{c.spokenName}</span>
           ))}
         </div>
       </div>
