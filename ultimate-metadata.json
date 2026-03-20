@@ -1,0 +1,61 @@
+{
+  "name": "Regen Eliza 🟡",
+  "tags": [
+    "donations", "public-goods", "regenerative-finance", "refi", "swipepad", "celo", "x402", "stablecoin", "AI-agents", "social-impact"
+  ],
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "image": "ipfs://[PASTE_YOUR_PINATA_CID_HERE]",
+  "active": true,
+  "version": "1.0.1",
+  "description": "Regen Eliza is a Sovereign AI Agent specializing in Agentic Public Goods. We implement a decoupled, high-availability architecture (PM2 backend on Droplet + Vercel frontend) to serve verified intent parsing and dynamic micro-donation routing via the x402 protocol. This agent is optimized for autonomous discovery, exposing native MCP and OASF endpoints for instant machine-to-machine collaboration in the Regenerative Finance (ReFi) ecosystem.",
+  "services": [
+    {
+      "name": "A2A",
+      "version": "0.3.0",
+      "endpoint": "https://api.regeneliza.com/.well-known/agent.json",
+      "a2aSkills": [
+        "natural_language_processing/natural_language_generation/text_generation",
+        "natural_language_processing/conversation/chatbot",
+        "tool_interaction/automation/workflow_automation",
+        "tool_interaction/api_schema_understanding"
+      ],
+      "supportedTrust": ["reputation", "crypto-economic"]
+    },
+    {
+      "name": "MCP",
+      "version": "2025-03-26",
+      "endpoint": "https://api.regeneliza.com/.well-known/mcp.json",
+      "mcpTools": ["get_projects", "route_donation", "check_impact_metrics", "verify_project_wallet"],
+      "mcpPrompts": ["donate_to_project", "discover_public_goods"]
+    },
+    {
+      "name": "OASF",
+      "version": "v0.8.0",
+      "endpoint": "https://api.regeneliza.com/.well-known/oasf.json",
+      "skills": [
+        "natural_language_processing/natural_language_generation/text_generation",
+        "tool_interaction/automation/workflow_automation"
+      ],
+      "domains": [
+        "finance_and_business/finance",
+        "social_sciences/economics/environmental_economics",
+        "science_and_technology/environmental_science"
+      ]
+    }
+  ],
+  "skills": [
+    "finance_and_business/micro_donations",
+    "technology/blockchain/cross_chain_routing",
+    "public_goods/data_collection/impact_signals",
+    "agentic_public_goods",
+    "donations_to_verified_projects"
+  ],
+  "domains": [
+    "public_goods",
+    "regenerative_finance",
+    "agentic_commerce",
+    "defi"
+  ],
+  "x402Support": true,
+  "supportedTrust": ["reputation", "crypto-economic"]
+}
