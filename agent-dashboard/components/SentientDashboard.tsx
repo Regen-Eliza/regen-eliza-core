@@ -11,6 +11,7 @@ import { swapService } from "../services/swapService";
 import { parseIntentAndExecuteTransfer } from "../utils/intentParser";
 import contacts from "../data/contacts.json";
 import { executeDonation } from "../app/actions/transaction";
+import { getAgentScore } from "../app/actions/getRepScore";
 import Avatar from './Avatar';
 import type { AvatarState } from './Avatar';
 
@@ -35,17 +36,28 @@ const C = {
   dimGreen: "#064006",   // kept for reference in borders/dots
 };
 
-export default function SentientDashboard() {
+export default function SentientDashboard({ children }: { children?: React.ReactNode }) {
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
   const { isListeningSpeech, startListeningSpeech, stopListeningSpeech, transcript, setTranscript } = useSpeechRecognition();
-  const [reputation, setReputation] = useState(76.98);
+  const [reputation, setReputation] = useState<number | string>("SYNCING...");
   const [network, setNetwork] = useState("TESTNET");
-  const [activeChain, setActiveChain] = useState('CELO');
+  const [activeChain, setActiveChain] = useState<'CELO' | 'BASE'>('CELO');
+
+  useEffect(() => {
+    async function fetchScore() {
+      setReputation("SYNCING...");
+      const id = activeChain === 'CELO' ? "1851" : "30121";
+      const chainId = activeChain === 'CELO' ? 42220 : 8453;
+      const score = await getAgentScore(chainId, id);
+      setReputation(score !== null ? score : "SYNCING...");
+    }
+    fetchScore();
+  }, [activeChain]);
   const [volume, setVolume] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [reportText, setReportText] = useState("");
-  const [hasInitialized, setHasInitialized] = useState(false);
+
   const [logs, setLogs] = useState<string[]>([]);
   const requestRef = useRef<number | undefined>(undefined);
 
@@ -293,24 +305,7 @@ export default function SentientDashboard() {
     }
   }, [isListeningSpeech, transcript, setTranscript]);
 
-  const handleInitialize = async () => {
-    try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-    } catch (e) {
-      console.error("Microphone access denied or not available", e);
-    } finally {
-      setHasInitialized(true);
-      pushLog("SYSTEM INITIALIZED");
-      pushLog("Connecting to Celo Mainnet [RPC: forno.celo.org]");
-      pushLog("ERC-8004 Identity Verified: 0x7a30...8004");
-      pushLog("ElevenLabs API: Connected");
-      pushLog("Listening for Intents...");
-      setTimeout(() => {
-        setIsSpeaking(true);
-        voiceService.speak("Hi, I am Regen Eliza. I am an autonomous ERC-8004 agent on Celo. I provide three core services: First, I can route donations to verified public goods projects. Second, I can swap stablecoins on Celo using the Uniswap protocol. And third, I can execute x402 direct payments to your saved ENS contacts. How can I help you today?").finally(() => setIsSpeaking(false));
-      }, 500);
-    }
-  };
+
 
   /* ─── Shared Styles ─── */
   const dockBtn = `px-6 py-3 text-lg tracking-wider bg-black/40 hover:bg-[${C.green}]/10 border border-[${C.green}]/30 hover:border-[${C.green}]/60 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-40 shrink-0 text-[${C.muted}] font-mono tracking-wide`;
@@ -385,46 +380,6 @@ export default function SentientDashboard() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* ═══════════════════════════════════
-          INITIALIZATION OVERLAY
-          ═══════════════════════════════════ */}
-      <AnimatePresence>
-        {!hasInitialized && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md"
-          >
-            <div className="text-center">
-              <pre className="text-[#6ba368] font-bold text-sm sm:text-base md:text-lg leading-tight text-center mb-8 font-mono tracking-wide">
-                {ASCII_TITLE}
-              </pre>
-              <h2 className="text-2xl mb-6 text-[#e5e5e5] font-mono tracking-widest">
-                {'>'} SYSTEM INITIALIZATION REQUIRED_
-              </h2>
-              <button
-                onClick={handleInitialize}
-                className="px-8 py-4 bg-[#6ba368]/10 border-2 border-[#2a2a2a] hover:bg-[#6ba368]/20 text-[#6ba368] rounded-xl transition-all font-mono tracking-widest text-xl mb-12"
-              >
-                [ INITIALIZE ]
-              </button>
-
-              <div className="max-w-xl mx-auto mt-6 mb-10 p-5 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-sm text-[#e5e5e5] backdrop-blur-md shadow-lg shadow-[#6ba368]/10">
-                <div className="mb-2.5 font-bold text-xl text-[#e5e5e5]">🤖 Agents: Ingest my skills here</div>
-                <code
-                  onClick={() => navigator.clipboard.writeText("curl https://regen-eliza-core.vercel.app/skill.md")}
-                  className="group bg-[#050505] px-4 py-3 flex items-center justify-between rounded-lg cursor-pointer hover:bg-[#6ba368]/10 hover:border-[#6ba368]/60 transition-all border-2 border-[#2a2a2a] active:scale-[0.98] w-full"
-                >
-                  <span className="text-base xl:text-lg font-bold text-[#6ba368] truncate text-left w-full pl-2">curl https://regen-eliza-core.vercel.app/skill.md</span>
-                  <Copy size={20} className="text-[#888] group-hover:text-[#6ba368] transition-colors ml-3 shrink-0 drop-shadow-[0_0_2px_rgba(107,163,104,0.5)] group-hover:drop-shadow-[0_0_8px_rgba(107,163,104,0.9)]" />
-                </code>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* ═══════════════════════════════════
           ASCII TITLE BAR
           ═══════════════════════════════════ */}
@@ -435,16 +390,16 @@ export default function SentientDashboard() {
       </div>
 
       {/* ═══════════════════════════════════
-          3-COLUMN DASHBOARD GRID
+          3-COLUMN COMMAND CENTER
           ═══════════════════════════════════ */}
-      <div className="w-[98%] mx-auto grid grid-cols-[1.3fr_1.4fr_1.3fr] gap-2 items-start mt-1 flex-1 min-h-0 z-10 overflow-hidden pb-0">
+      <div className="w-[98%] max-w-[1700px] mx-auto flex flex-col lg:grid lg:grid-cols-[1fr_1.8fr_1.2fr] gap-4 items-start mt-2 flex-1 min-h-0 z-10 overflow-y-auto lg:overflow-hidden pb-4">
 
         {/* ─── COLUMN 1: Agent Details Panel ─── */}
-        <div className="h-full flex flex-col gap-3 overflow-hidden">
+        <div className="h-full flex flex-col gap-3 overflow-y-auto scrollbar-hide w-full pr-1 pb-4">
           {/* Identity Card */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
             <div className={panelLabel}>Agent Identity</div>
-            <div className="text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#6ba368]">REGEN ELIZA</div>
+            <div className="text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#FFFFFF]">REGEN ELIZA</div>
             <a href="https://www.8004scan.io/agents/celo/1851" target="_blank" rel="noopener noreferrer" className="text-[#6ba368] hover:text-[#88d184] hover:underline transition-colors font-mono tracking-wide text-sm mb-3 inline-block font-bold">
               View on 8004scan.io ↗
             </a>
@@ -517,38 +472,56 @@ export default function SentientDashboard() {
  /_/\\_\\  |_|  \\___/_____|`}
           </pre>
 
-          {/* Voice / Mic Toggle */}
-          <button
-            onClick={toggleMic}
-            className={`w-full flex items-center justify-center gap-3 px-4 py-3 text-sm tracking-wider rounded-lg border-2 transition-all font-mono tracking-wide mt-auto mb-2 ${isListeningSpeech
-              ? "border-red-500/60 bg-red-500/10 text-red-400 animate-pulse "
-              : "border-[#2a2a2a] bg-[#6ba368]/5 text-[#e5e5e5] hover:bg-[#6ba368]/10 hover:"
-              }`}
-          >
-            {isListening ? <><Mic size={16} className="text-red-500" /> LISTENING...</> : <><Power size={16} className="text-[#6ba368]" /> VOICE CORE</>}
-          </button>
+          {/* Live Transaction Log bg */}
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 min-h-[160px] flex flex-col mt-auto shadow-[inset_0_0_15px_rgba(107,163,104,0.05)]">
+            <div className={`${panelLabel} flex items-center gap-2 mb-2`}>
+              <div className="w-2 h-2 rounded bg-[#6ba368] animate-pulse" />
+              TRANSACTION LOG
+            </div>
+            <div className="flex-1 min-h-[100px] overflow-y-auto scrollbar-hide font-mono tracking-wide text-xs xl:text-sm space-y-1.5 opacity-80 text-[#e5e5e5]">
+              <AnimatePresence>
+                {logs.map((log, i) => (
+                  <motion.div key={`${log}-${i}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight">{log}</motion.div>
+                ))}
+              </AnimatePresence>
+              {logs.length === 0 && <div className="text-[#888]/50 italic text-xs">...</div>}
+            </div>
+          </div>
         </div>
 
-        {/* ─── COLUMN 2: Avatar (Center) ─── */}
-        <div className="h-full flex flex-col overflow-hidden relative">
-          <div className="w-full flex-1 min-h-0 rounded-lg overflow-hidden border border-[#2a2a2a] mb-1.5">
+        {/* ─── COLUMN 2: The Soul (Center) ─── */}
+        <div className="h-[450px] lg:h-full flex flex-col relative w-full z-20 order-first lg:order-none mb-4 lg:mb-0">
+          
+          {/* Agent Ingest Box */}
+          <div className="w-full mb-3 px-3 py-2 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-xl text-center font-mono backdrop-blur-md flex items-center justify-between group cursor-pointer transition-all shadow-[0_0_15px_rgba(107,163,104,0.1)] hover:shadow-[0_0_25px_rgba(107,163,104,0.2)] shrink-0" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
+            <div className="flex flex-col items-start w-full pr-2">
+              <span className="text-[10px] text-[#888] font-bold uppercase tracking-widest mb-0.5">🤖 AGENTS: Ingest My Skills Here</span>
+              <span className="text-xs xl:text-[13px] font-bold text-[#6ba368] truncate tracking-wide">curl https://api.regeneliza.com/skill.md</span>
+            </div>
+            <Copy size={16} className="text-[#888] group-hover:text-[#6ba368] shrink-0 drop-shadow-[0_0_2px_rgba(107,163,104,0.5)] group-hover:drop-shadow-[0_0_8px_rgba(107,163,104,0.9)]" />
+          </div>
+
+          <div className="w-full flex-1 min-h-0 rounded-xl overflow-hidden border border-[#2a2a2a] bg-black/30 flex items-center justify-center shadow-[0_0_30px_rgba(107,163,104,0.1)] mb-3 relative group">
             <Avatar state={(
               isSpeaking ? 'speaking' :
                 isProcessing ? 'thinking' :
                   isListeningSpeech ? 'listening' :
                     'idle'
             ) as AvatarState} />
+            <div className="absolute inset-0 border border-[#6ba368]/10 rounded-xl pointer-events-none transition-colors group-hover:border-[#6ba368]/30 mix-blend-screen" />
           </div>
 
-          <div className="w-full max-w-md mx-auto p-2 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-[#e5e5e5] backdrop-blur-md flex flex-col items-center justify-center shrink-0 mb-1">
-            <div className="mb-1.5 font-bold text-lg text-[#e5e5e5]">🤖 Agents: Ingest my skills here</div>
-            <code
-              onClick={() => navigator.clipboard.writeText("curl https://regen-eliza-core.vercel.app/skill.md")}
-              className="group bg-[#050505] px-3 py-2 flex items-center justify-between rounded-lg cursor-pointer hover:bg-[#6ba368]/10 hover:border-[#6ba368]/60 transition-all border-2 border-[#2a2a2a] active:scale-[0.98] w-full mt-0.5"
+          <div className="w-full max-w-sm mx-auto flex shrink-0">
+            {/* Voice / Mic Toggle */}
+            <button
+              onClick={toggleMic}
+              className={`w-full flex items-center justify-center gap-3 px-6 py-4 text-base xl:text-lg tracking-widest uppercase rounded-lg border-2 transition-all font-mono font-bold shadow-lg ${isListeningSpeech
+                ? "border-red-500/60 bg-red-500/10 text-red-500 animate-pulse drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                : "border-[#2a2a2a] bg-[#111] text-[#e5e5e5] hover:bg-[#6ba368]/10 hover:border-[#6ba368]/60 hover:text-[#6ba368]"
+                }`}
             >
-              <span className="text-[13px] xl:text-sm font-bold text-[#6ba368] truncate text-left w-full pl-1">curl https://regen-eliza-core.vercel.app/skill.md</span>
-              <Copy size={16} className="text-[#888] group-hover:text-[#6ba368] transition-colors ml-2 shrink-0 drop-shadow-[0_0_2px_rgba(107,163,104,0.5)] group-hover:drop-shadow-[0_0_8px_rgba(107,163,104,0.9)]" />
-            </code>
+              {isListening ? <><Mic size={20} className="text-red-500" /> LISTENING...</> : <><Power size={20} className="text-[#6ba368]" /> INITIALIZE CORE</>}
+            </button>
           </div>
         </div>
 
@@ -582,140 +555,40 @@ export default function SentientDashboard() {
             </div>
           </div>
 
-          {/* Live Transaction Log bg */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 h-[22%] shrink-0 flex flex-col">
-            <div className={`${panelLabel} flex items-center gap-2`}>
-              <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
-              Transaction Log
-            </div>
-            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide font-mono tracking-wide text-base space-y-2">
-              <AnimatePresence>
-                {logs.map((log, i) => (
-                  <motion.div
-                    key={`${log}-${i}`}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="text-[#e5e5e5]/90 leading-tight text-lg xl:text-xl font-bold"
-                  >
-                    {log}
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-              {logs.length === 0 && (
-                <div className="text-[#888]/50 text-base italic">Awaiting transactions...</div>
-              )}
-            </div>
-          </div>
-
           {/* Active Transaction Output */}
           <AnimatePresence mode="wait">
             {reportText && (
               <motion.div
                 key={reportText}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                className="border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-2 max-h-[22%] overflow-y-auto scrollbar-hide shrink-0"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="shrink-0 border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-2.5 shadow-[0_0_15px_rgba(107,163,104,0.05)]"
               >
-                <div className={`${panelLabel} flex items-center gap-2`}>
+                <div className={`${panelLabel} flex items-center gap-2 mb-1`}>
                   <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
                   Active Output
                 </div>
-                <p className="font-mono tracking-wide text-lg xl:text-xl font-bold text-[#e5e5e5] leading-tight">
-                  {reportText.split("").map((char, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.02 }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                  <motion.span
-                    className="inline-block w-2 h-4 bg-[#6ba368] ml-0.5 align-baseline"
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                  />
-                </p>
+                <div className="font-mono tracking-wide text-xs lg:text-sm font-bold text-[#e5e5e5] leading-relaxed break-words">
+                  {reportText}
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* ENS Contacts */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 shrink-0">
-            <div className={`${panelLabel} flex items-center gap-2`}>
-              <Wallet size={14} className="text-[#6ba368]" /> ENS Address Book
-            </div>
-            <div className="h-24 overflow-y-auto pr-2 space-y-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#6ba368]/30 [&::-webkit-scrollbar-thumb]:rounded-full">
-              {contacts.map((c) => (
-                <div key={c.name} className="flex items-center justify-between text-sm font-mono tracking-wide">
-                  <span className="text-[#e5e5e5]/80">{c.name}</span>
-                  <span className="text-[#888]/60">{c.walletAddress.slice(0, 6)}...{c.walletAddress.slice(-4)}</span>
-                </div>
-              ))}
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div key={`placeholder-${i}`} className="flex items-center justify-between text-sm font-mono tracking-wide">
-                  <span className="text-[#e5e5e5]/40">unknown{i + 1}.eth</span>
-                  <span className="text-[#888]/40">0x0000...000{i}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* A2A Commerce Panel */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2">
-            <div className={`${panelLabel} flex items-center gap-2`}>
-              <Zap size={14} className="text-[#6ba368]" /> A2A COMMERCE
-            </div>
-            <div className="hidden">Agent Hiring</div>
-
-            {/* Operating Budget */}
-            <div className="flex flex-col space-y-1 mb-2">
-              <div className="text-[#e5e5e5] font-mono font-bold text-sm tracking-widest mb-1">OPERATING BUDGET</div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                  <span className="text-[#e5e5e5] font-mono text-xs">Base (ETH/USDC)</span>
-                </div>
-                <span className="text-[#6ba368] font-mono text-xs">Active</span>
+          {/* PROTOCOL MANIFEST (SKILL.MD) */}
+          <div className="flex-1 min-h-[150px] border border-[#2a2a2a] bg-black/40 backdrop-blur-md rounded-lg p-3 flex flex-col shadow-[0_0_20px_rgba(107,163,104,0.05)] border-t-[#6ba368]/30 mt-2">
+            <div className="flex items-center justify-between mb-2 pb-2 border-b border-[#2a2a2a]">
+              <div className={`${panelLabel} !mb-0 flex items-center gap-2`}>
+                <div className="w-2 h-2 rounded-sm bg-[#6ba368] animate-pulse" />
+                PROTOCOL_MANIFEST
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
-                  <span className="text-[#e5e5e5] font-mono text-xs">Celo (cUSD)</span>
-                </div>
-                <span className="text-[#6ba368] font-mono text-xs">Active</span>
-              </div>
+              <span className="text-[#888] text-[9px] tracking-widest uppercase opacity-70">RAW DATA</span>
             </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col space-y-2">
-              <button
-                disabled={isProcessing}
-                onClick={async () => {
-                  if (isProcessing) return;
-                  setIsProcessing(true);
-                  pushLog('A2A HIRE — initiating micro-payment to data agent...');
-                  await new Promise(r => setTimeout(r, 800));
-                  pushLog('A2A HIRE — sent 0.5 USDC → 0xAgent...d4ta');
-                  pushLog('A2A HIRE — receipt confirmed. Task delegated.');
-                  setReportText('');
-                  setTimeout(() => setReportText('> A2A micro-payment of 0.5 USDC sent to Data Agent (0xAgent...d4ta) on Base.\n> Task: Fetch on-chain public goods metrics.\n> Status: CONFIRMED'), 50);
-                  setIsProcessing(false);
-                }}
-                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors font-mono font-bold text-lg xl:text-xl tracking-widest disabled:opacity-40"
-              >
-                [ HIRE DATA AGENT (0.5 USDC) ]
-              </button>
-              <button
-                disabled={isProcessing}
-                onClick={() => handleSwapRequest('1', 'USDC', 'USDT')}
-                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors font-mono font-bold text-lg xl:text-xl tracking-widest disabled:opacity-40"
-              >
-                [ SWAP &amp; BRIDGE YIELD ]
-              </button>
+            <div className="flex-1 overflow-y-auto scrollbar-hide pr-1">
+              <pre className="font-mono text-[10px] xl:text-[11px] leading-relaxed text-[#6ba368]/90 whitespace-pre-wrap break-words drop-shadow-[0_0_2px_rgba(107,163,104,0.2)]">
+                {children}
+              </pre>
             </div>
           </div>
 
@@ -770,7 +643,6 @@ export default function SentientDashboard() {
               disabled={isProcessing}
               onClick={handleDirectPayment}
               className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors gap-1 flex items-center justify-center font-mono tracking-wide text-xs"
-              title={c.walletAddress}
             >
               {c.spokenName}
             </button>

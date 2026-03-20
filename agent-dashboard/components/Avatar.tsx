@@ -154,16 +154,21 @@ export default function Avatar({ state = "idle" }: AvatarProps) {
         .avatar-image-wrapper {
           position: relative;
           z-index: 2;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           transition: transform 0.15s ease-out;
           will-change: transform;
         }
 
         .avatar-image {
-          width: 280px;
-          height: 280px;
-          object-fit: cover;
-          border-radius: 50%;
-          border: 2px solid rgba(107, 163, 104, 0.25);
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 12px;
+          border: 1px solid rgba(107, 163, 104, 0.15);
           box-shadow:
             0 0 30px rgba(107, 163, 104, 0.1),
             0 0 60px rgba(0, 0, 0, 0.4);
