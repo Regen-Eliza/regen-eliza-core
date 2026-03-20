@@ -315,7 +315,7 @@ export default function SentientDashboard() {
   /* ─── Shared Styles ─── */
   const dockBtn = `px-6 py-3 text-lg tracking-wider bg-black/40 hover:bg-[${C.green}]/10 border border-[${C.green}]/30 hover:border-[${C.green}]/60 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-40 shrink-0 text-[${C.muted}] font-mono tracking-wide`;
 
-  const panelLabel = `text-sm text-[${C.green}]/50 uppercase tracking-widest mb-3 font-mono tracking-wide`;
+  const panelLabel = `text-lg xl:text-xl font-bold uppercase tracking-widest mb-1 text-[#6ba368] font-mono tracking-wide`;
 
   return (
     <div className="flex flex-col h-screen w-full bg-[#050505] text-[#e5e5e5] overflow-hidden scanlines">
@@ -411,7 +411,7 @@ export default function SentientDashboard() {
               </button>
 
               <div className="max-w-xl mx-auto mt-8 mb-12 p-5 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-sm text-[#6ba368] backdrop-blur-md shadow-lg shadow-[#6ba368]/10">
-                <p className="mb-3 font-semibold text-white/90">🤖 Other Agents: Instantly Integrate My Skills</p>
+                <p className="mb-1.5 font-semibold text-white/90">🤖 Other Agents: Instantly Integrate My Skills</p>
                 <code
                   onClick={() => navigator.clipboard.writeText("curl https://regen-eliza-core.vercel.app/skill.md")}
                   className="bg-black/90 p-4 rounded-lg block select-all cursor-pointer hover:bg-black/100 hover:border-[#6ba368]/60 transition-all duration-200 group active:scale-[0.98]"
@@ -437,18 +437,21 @@ export default function SentientDashboard() {
       {/* ═══════════════════════════════════
           3-COLUMN DASHBOARD GRID
           ═══════════════════════════════════ */}
-      <div className="w-[95%] mx-auto grid grid-cols-[1fr_2fr_1fr] gap-4 items-start mt-2 flex-1 min-h-0 z-10 overflow-hidden pb-2">
+      <div className="w-[98%] mx-auto grid grid-cols-[1.3fr_1.4fr_1.3fr] gap-2 items-start mt-1 flex-1 min-h-0 z-10 overflow-hidden pb-0">
 
         {/* ─── COLUMN 1: Agent Details Panel ─── */}
         <div className="h-full flex flex-col gap-3 overflow-hidden">
           {/* Identity Card */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
             <div className={panelLabel}>Agent Identity</div>
-            <div className="text-2xl font-mono tracking-wide tracking-wider mb-2 text-[#6ba368]">REGEN ELIZA</div>
-            <div className="text-base font-mono tracking-wide text-[#e5e5e5]/80 flex items-center gap-2">
+            <div className="text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#6ba368]">REGEN ELIZA</div>
+            <a href="https://www.8004scan.io/agents/celo/1851" target="_blank" rel="noopener noreferrer" className="text-[#6ba368] hover:text-[#88d184] hover:underline transition-colors font-mono tracking-wide text-sm mb-3 inline-block font-bold">
+              View on 8004scan.io ↗
+            </a>
+            <div className="text-xl font-mono tracking-wide font-bold text-[#e5e5e5] flex items-center gap-2">
               <ShieldCheck size={16} className="text-[#6ba368]" /> ERC-8004 Autonomous Agent
             </div>
-            <div className="flex flex-col space-y-2 mt-4">
+            <div className="flex flex-col space-y-2 mt-2">
               <div className="flex items-center space-x-2">
                 <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                 <span className="text-[#888888] font-mono tracking-wide text-sm">BASE ID: 30121</span>
@@ -461,8 +464,8 @@ export default function SentientDashboard() {
           </div>
 
           {/* Network Status */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
-            <div className="flex justify-between items-center w-full mb-3">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
+            <div className="flex justify-between items-center w-full mb-1.5">
               <span className="text-[#888888] font-mono uppercase tracking-widest text-sm">NETWORK</span>
               <span className="text-[#6ba368] font-mono flex items-center">
                 <div className={`w-2 h-2 rounded-full mr-2 ${activeChain === 'CELO' ? 'bg-yellow-400' : 'bg-blue-500'}`}></div> {activeChain}
@@ -476,13 +479,13 @@ export default function SentientDashboard() {
           </div>
 
           {/* 8004 Scan */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-6">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
             <div className={panelLabel}>8004SCAN.IO</div>
             <div className="flex items-center gap-2 text-base font-mono tracking-wide text-[#e5e5e5]/80">
               <Globe size={16} className="text-[#6ba368]" />
               <span>LINKED</span>
             </div>
-            <div className="flex flex-col space-y-3 mt-3">
+            <div className="flex flex-col space-y-3 mt-1.5">
               <div className="flex flex-col">
                 <div className="flex items-center space-x-2"><span className="w-2 h-2 rounded-full bg-blue-500"></span><span className="text-[#e5e5e5] font-mono text-sm">Chain: Base (8453)</span></div>
                 <div className="text-[#888888] font-mono text-xs pl-4 mt-1">RPC: mainnet.base.org</div>
@@ -528,7 +531,7 @@ export default function SentientDashboard() {
 
         {/* ─── COLUMN 2: Avatar (Center) ─── */}
         <div className="h-full flex flex-col overflow-hidden relative">
-          <div className="w-full flex-1 min-h-0 rounded-lg overflow-hidden border border-[#2a2a2a] mb-3">
+          <div className="w-full flex-1 min-h-0 rounded-lg overflow-hidden border border-[#2a2a2a] mb-1.5">
             <Avatar state={(
               isSpeaking ? 'speaking' :
                 isProcessing ? 'thinking' :
@@ -537,52 +540,53 @@ export default function SentientDashboard() {
             ) as AvatarState} />
           </div>
 
-          <div className="w-full max-w-sm mx-auto p-2.5 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-[#6ba368] backdrop-blur-md shadow-lg shadow-[#6ba368]/10 flex flex-col items-center justify-center shrink-0 mb-2">
-            <div className="mb-1.5 leading-tight">
-              <span className="font-semibold text-white/90 text-sm">🤖 Agentic Discovery Protocol:</span><br />
-              <span className="text-[10px] text-[#6ba368]/80">(One-click skill ingestion)</span>
+          <div className="w-full max-w-md mx-auto p-1.5 bg-black/60 border border-[#6ba368]/40 rounded-xl text-center font-mono text-[#6ba368] backdrop-blur-md flex flex-col items-center justify-center shrink-0 mb-1">
+            <div className="mb-0 leading-tight">
+              <span className="font-semibold text-white/90 text-base">🤖 Agentic Discovery Protocol:</span><br />
+              <span className="text-sm font-bold text-[#6ba368]">(One-click skill ingestion)</span>
             </div>
             <code
               onClick={() => navigator.clipboard.writeText("curl https://regen-eliza-core.vercel.app/skill.md")}
-              className="bg-[#050505] px-4 py-1.5 rounded cursor-pointer hover:bg-[#6ba368]/10 hover:border-[#6ba368]/60 transition-all border border-[#2a2a2a] active:scale-[0.98] mt-1 text-xs text-[#e5e5e5] w-full"
+              className="bg-[#050505] px-2 py-1 rounded-lg cursor-pointer hover:bg-[#6ba368]/10 hover:border-[#6ba368] transition-all border-2 border-[#2a2a2a] active:scale-[0.98] mt-1 text-[#e5e5e5] w-full flex flex-col items-center"
             >
-              curl regen-eliza-core.vercel.app/skill.md
+              <span className="text-lg xl:text-xl font-bold text-[#6ba368]">curl regen-eliza-core.vercel.app/skill.md</span>
+              <span className="text-sm font-bold text-[#e5e5e5]/80 mt-0.5">(Click to Copy)</span>
             </code>
           </div>
         </div>
 
         {/* ─── COLUMN 3: Transaction Log Panel & Skills ─── */}
-        <div className="h-full flex flex-col gap-3 overflow-y-auto scrollbar-hide pr-1 pb-4">
+        <div className="h-full flex flex-col gap-2 overflow-y-auto scrollbar-hide pr-1 pb-4">
 
           {/* Agent Skills */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-4 shrink-0">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 shrink-0">
             <div className={`${panelLabel} flex items-center gap-2`}>
               <ShieldCheck size={14} className="text-[#6ba368]" /> Agent Skills
             </div>
-            <div className="grid grid-cols-2 gap-2 mt-3 max-h-[120px] overflow-y-auto scrollbar-hide">
-              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-2 py-1.5 rounded-md font-mono tracking-widest text-[10px] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
+            <div className="grid grid-cols-1 gap-2 mt-1 max-h-[140px] overflow-y-auto scrollbar-hide">
+              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-lg font-mono font-bold tracking-widest text-lg lg:text-xl border-2 hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
                 BUILDER.MD
               </a>
-              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-2 py-1.5 rounded-md font-mono tracking-widest text-[10px] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
+              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-lg font-mono font-bold tracking-widest text-lg lg:text-xl border-2 hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
                 PUBLIC_GOODS.MD
               </a>
-              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-2 py-1.5 rounded-md font-mono tracking-widest text-[10px] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
+              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-lg font-mono font-bold tracking-widest text-lg lg:text-xl border-2 hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
                 OCTANT.MD
               </a>
-              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-2 py-1.5 rounded-md font-mono tracking-widest text-[10px] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
+              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-lg font-mono font-bold tracking-widest text-lg lg:text-xl border-2 hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
                 LIDO.MD
               </a>
-              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-2 py-1.5 rounded-md font-mono tracking-widest text-[10px] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
+              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-lg font-mono font-bold tracking-widest text-lg lg:text-xl border-2 hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
                 UNISWAP.MD
               </a>
-              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-2 py-1.5 rounded-md font-mono tracking-widest text-[10px] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
+              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="block w-full text-center border border-[#2a2a2a] bg-transparent text-[#888] px-3 py-2 rounded-lg font-mono font-bold tracking-widest text-lg lg:text-xl border-2 hover:border-[#6ba368] hover:text-[#6ba368] transition-colors truncate">
                 CELO.MD
               </a>
             </div>
           </div>
 
           {/* Live Transaction Log bg */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-4 h-40 shrink-0 flex flex-col">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 h-[22%] shrink-0 flex flex-col">
             <div className={`${panelLabel} flex items-center gap-2`}>
               <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
               Transaction Log
@@ -595,7 +599,7 @@ export default function SentientDashboard() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-[#e5e5e5]/70 leading-relaxed"
+                    className="text-[#e5e5e5]/90 leading-tight text-lg xl:text-xl font-bold"
                   >
                     {log}
                   </motion.div>
@@ -615,13 +619,13 @@ export default function SentientDashboard() {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                className="border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-4 max-h-36 overflow-y-auto scrollbar-hide shrink-0"
+                className="border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-2 max-h-[22%] overflow-y-auto scrollbar-hide shrink-0"
               >
                 <div className={`${panelLabel} flex items-center gap-2`}>
                   <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
                   Active Output
                 </div>
-                <p className="font-mono tracking-wide text-sm text-[#e5e5e5] leading-relaxed">
+                <p className="font-mono tracking-wide text-lg xl:text-xl font-bold text-[#e5e5e5] leading-tight">
                   {reportText.split("").map((char, index) => (
                     <motion.span
                       key={index}
@@ -643,7 +647,7 @@ export default function SentientDashboard() {
           </AnimatePresence>
 
           {/* ENS Contacts */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-4 shrink-0">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 shrink-0">
             <div className={`${panelLabel} flex items-center gap-2`}>
               <Wallet size={14} className="text-[#6ba368]" /> ENS Address Book
             </div>
@@ -664,15 +668,15 @@ export default function SentientDashboard() {
           </div>
 
           {/* A2A Commerce Panel */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-5">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2">
             <div className={`${panelLabel} flex items-center gap-2`}>
               <Zap size={14} className="text-[#6ba368]" /> A2A COMMERCE
             </div>
-            <div className="text-[#888888] font-mono text-xs tracking-widest uppercase mb-3">Agent Hiring</div>
+            <div className="hidden">Agent Hiring</div>
 
             {/* Operating Budget */}
-            <div className="flex flex-col space-y-2 mb-4">
-              <div className="text-[#888888] font-mono text-xs tracking-widest mb-1">OPERATING BUDGET</div>
+            <div className="flex flex-col space-y-1 mb-2">
+              <div className="text-[#e5e5e5] font-mono font-bold text-sm tracking-widest mb-1">OPERATING BUDGET</div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <span className="w-2 h-2 rounded-full bg-blue-500"></span>
@@ -704,14 +708,14 @@ export default function SentientDashboard() {
                   setTimeout(() => setReportText('> A2A micro-payment of 0.5 USDC sent to Data Agent (0xAgent...d4ta) on Base.\n> Task: Fetch on-chain public goods metrics.\n> Status: CONFIRMED'), 50);
                   setIsProcessing(false);
                 }}
-                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors font-mono text-xs tracking-widest disabled:opacity-40"
+                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors font-mono font-bold text-lg xl:text-xl tracking-widest disabled:opacity-40"
               >
                 [ HIRE DATA AGENT (0.5 USDC) ]
               </button>
               <button
                 disabled={isProcessing}
                 onClick={() => handleSwapRequest('1', 'USDC', 'USDT')}
-                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors font-mono text-xs tracking-widest disabled:opacity-40"
+                className="w-full border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-2.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors font-mono font-bold text-lg xl:text-xl tracking-widest disabled:opacity-40"
               >
                 [ SWAP &amp; BRIDGE YIELD ]
               </button>
@@ -724,7 +728,7 @@ export default function SentientDashboard() {
       {/* ═══════════════════════════════════
           BOTTOM DOCK CONTROL BAR
           ═══════════════════════════════════ */}
-      <div className="w-[95%] mx-auto grid grid-cols-[1fr_2fr_1fr] gap-4 items-center py-4 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 shrink-0">
+      <div className="w-[98%] mx-auto grid grid-cols-[1fr_2fr_1fr] gap-2 items-center py-2 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 shrink-0">
 
         {/* Left Section (Tracks) */}
         <div className="flex items-center space-x-4 text-[#e5e5e5] justify-start font-mono tracking-wide">
@@ -733,30 +737,30 @@ export default function SentientDashboard() {
         </div>
 
         {/* Center Section (Services) */}
-        <div className="flex flex-col items-center space-y-3 font-mono tracking-wide font-bold">
-          <div className="text-[#6ba368] font-bold text-lg tracking-widest text-center w-full">SERVICES</div>
+        <div className="flex flex-col items-center space-y-1.5 font-mono tracking-wide font-bold">
+          <div className="text-[#6ba368] font-bold text-2xl tracking-widest text-center w-full">SERVICES</div>
 
           {/* Row 1 */}
           <div className="flex items-center space-x-2 w-full justify-center">
-            <span className="text-[#6ba368] w-32 text-right text-sm">Donate:</span>
-            <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">DeSci</button>
-            <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">Ecology</button>
-            <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">Builders</button>
-            <button disabled={isProcessing} onClick={() => handleFund("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">Agents</button>
+            <span className="text-[#6ba368] w-28 text-right text-xl font-bold">Donate:</span>
+            <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">DeSci</button>
+            <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Ecology</button>
+            <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Builders</button>
+            <button disabled={isProcessing} onClick={() => handleFund("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Agents</button>
           </div>
 
           {/* Row 2 */}
           <div className="flex items-center space-x-2 w-full justify-center">
-            <span className="text-[#6ba368] w-32 text-right text-sm">Transfer:</span>
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">Contacts</button>
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">ENS</button>
+            <span className="text-[#6ba368] w-28 text-right text-xl font-bold">Transfer:</span>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">Contacts</button>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">ENS</button>
           </div>
 
           {/* Row 3 */}
           <div className="flex items-center space-x-2 w-full justify-center">
-            <span className="text-[#6ba368] w-32 text-right text-sm">Swap:</span>
-            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">USDT_BASE ⇄ USDm</button>
-            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-1 rounded-md hover:border-[#6ba368] hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-xs">USDC ⇄ USDT(CELO)</button>
+            <span className="text-[#6ba368] w-28 text-right text-xl font-bold">Swap:</span>
+            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">USDT_BASE ⇄ USDm</button>
+            <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-3 py-1.5 rounded-lg border-2 hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-colors flex items-center justify-center font-mono tracking-wide text-base xl:text-lg font-bold">USDC ⇄ USDT(CELO)</button>
           </div>
         </div>
 
