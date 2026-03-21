@@ -1,10 +1,11 @@
-k{
+{
   "name": "Regen Eliza 🟡",
   "tags": ["donations", "public-goods", "refi", "celo", "x402", "stablecoin", "social-impact", "celo-social-connect", "fee-abstraction", "agentic-economy", "desci", "octant", "uniswap", "ens"],
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
-  "active": true,
-  "version": "1.1.8",
   "image": "https://peach-adequate-deer-355.mypinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
+  "agent_wallet": "0xC57f7ce71FDe55CEE70f509a9b441Db87Be07D60",
+  "active": true,
+  "version": "1.1.6",
   "registrations": [
     {
       "chain": "eip155:42220",
