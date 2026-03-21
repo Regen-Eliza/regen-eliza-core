@@ -4,3 +4,4 @@ Sat 21 Mar 2026 13:27:50 +08 - fix: strict type checking for ERC-8004 manifests
 Sat 21 Mar 2026 13:27:52 +08 - style: update terminal glow effects for dark mode
 Sat 21 Mar 2026 13:27:54 +08 - feat: add automated health-check endpoint
 Sat 21 Mar 2026 13:27:56 +08 - docs: update API documentation for commerce gateway
+Sat 21 Mar 2026 13:27:58 +08 - chore: optimize asset compression for IPFS
