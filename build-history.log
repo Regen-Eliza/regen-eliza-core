@@ -11,3 +11,4 @@ Sat 21 Mar 2026 13:28:04 +08 - refactor: consolidate service worker logic
 Sat 21 Mar 2026 13:28:06 +08 - style: normalize dashboard grid for mobile viewport
 Sat 21 Mar 2026 13:28:08 +08 - feat: integrate real-time Celo gas price oracle
 Sat 21 Mar 2026 13:28:10 +08 - fix: handle edge cases for Social Connect lookups
+Sat 21 Mar 2026 13:28:12 +08 - docs: finalize skill-tree markdown structure
