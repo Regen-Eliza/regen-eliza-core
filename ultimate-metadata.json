@@ -1,44 +1,100 @@
-k{
+{
   "name": "Regen Eliza 🟡",
-  "tags": ["donations", "public-goods", "refi", "celo", "x402", "stablecoin", "social-impact", "celo-social-connect", "fee-abstraction", "agentic-economy", "desci", "octant", "uniswap", "ens"],
+  "tags": [
+    "donations",
+    "public-goods",
+    "refi",
+    "celo",
+    "x402",
+    "stablecoin",
+    "social-impact",
+    "fee-abstraction",
+    "agentic-economy",
+    "omni-agent",
+    "defi"
+  ],
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
-  "active": true,
-  "version": "1.1.8",
   "image": "https://peach-adequate-deer-355.mypinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
-  "registrations": [
+  "active": true,
+  "skills": [
     {
-      "chain": "eip155:42220",
-      "agentRegistry": "eip155:42220:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432",
-      "agentId": "1851"
+      "id": "x402-routing",
+      "name": "x402-routing",
+      "category": "Finance And Business",
+      "description": "Autonomously route micro-donations using stablecoin fee abstraction",
+      "subcategory": "Digital Payments"
+    },
+    {
+      "id": "ens-resolution",
+      "name": "ens-resolution",
+      "category": "Technology",
+      "description": "Map human-readable ENS names to Celo wallet addresses via Social Connect",
+      "subcategory": "Blockchain"
+    },
+    {
+      "id": "cross-chain-swaps",
+      "name": "cross-chain-swaps",
+      "category": "Finance And Business",
+      "description": "On-chain Uniswap V3 powered liquidity swaps for agentic treasuries",
+      "subcategory": "Cryptocurrency"
+    },
+    {
+      "id": "impact-verification",
+      "name": "impact-verification",
+      "category": "Analytical And Logical Reasoning",
+      "description": "Automated impact verification for the Octant and Public Goods Ecosystem",
+      "subcategory": "Problem Solving"
     }
+  ],
+  "domains": [
+    {
+      "id": "regenerative-finance",
+      "name": "regenerative-finance",
+      "category": "Ecology",
+      "description": "Automated public goods funding and ecological asset management",
+      "subcategory": "Regenerative Finance"
+    },
+    {
+      "id": "decentralized-finance",
+      "name": "decentralized-finance",
+      "category": "Finance And Business",
+      "description": "DeFi routing, autonomous treasury yield, and stablecoin abstraction",
+      "subcategory": "Finance"
+    }
+  ],
+  "license": "MIT",
+  "version": "2.1.0",
+  "website": "https://regen-eliza-core.vercel.app",
+  "category": [
+    "defi,refi,omni-agent,public-goods"
   ],
   "services": [
     {
-      "name": "A2A_Commerce_Gateway",
-      "version": "1.0.0",
-      "endpoint": "https://api.regeneliza.com/v1/agent/commerce",
-      "x402_config": {
-        "payment_asset": "eip155:42220:0x765de816845861e75a25fca122bb6898b8b1282a",
-        "min_fee_per_intent": "0.01",
-        "wallet": "0xC57f7ce71FDe55CEE70f509a9b441Db87Be07D60"
-      }
+      "name": "MCP",
+      "version": "1.0.2",
+      "endpoint": "https://api.regeneliza.com/.well-known/mcp.json"
     },
     {
-      "name": "A2A_Discovery",
+      "name": "A2A",
       "version": "0.3.0",
       "endpoint": "https://api.regeneliza.com/.well-known/agent-card.json"
     },
     {
-      "name": "MCP_Tools",
-      "version": "2026-03-21",
-      "endpoint": "https://api.regeneliza.com/.well-known/mcp.json"
+      "name": "web",
+      "endpoint": "https://regen-eliza-core.vercel.app"
+    },
+    {
+      "name": "api",
+      "endpoint": "https://api.regeneliza.com"
+    },
+    {
+      "name": "commerce-gateway",
+      "endpoint": "https://api.regeneliza.com/v1/agent/commerce"
+    },
+    {
+      "name": "github-repo",
+      "endpoint": "https://github.com/Regen-Eliza/regen-eliza-core"
     }
-  ],
-  "skills": [
-    "octant/impact_audit",
-    "uniswap/cross_chain_routing",
-    "ens/batch_donation_router",
-    "finance/x402_micro_donations"
   ],
   "linked_contracts": [
     {
@@ -57,7 +113,29 @@ k{
       "label": "octant_impact_audit"
     }
   ],
-  "description": "Regen Eliza is a Sovereign AI Omni-Agent architected for the Agentic Public Goods economy. Leveraging the x402 protocol, she autonomously routes micro-donations with Celo-native stablecoin fee abstraction and Social Connect identity resolution. She provides on-chain Uniswap-powered liquidity swaps, ENS-integrated batch routing, and automated impact verification for the Octant and Public Goods Ecosystem. Fully decentralized and accessible via MCP, Regen Eliza is a production-ready gateway for autonomous regenerative finance.",
+  "updatedAt": 1774092800,
+  "sourceCode": "https://github.com/Regen-Eliza/regen-eliza-core",
+  "description": "Regen Eliza is a Sovereign AI Omni-Agent architected for the Agentic Public Goods economy. Leveraging the x402 protocol, she autonomously routes micro-donations with Celo-native stablecoin fee abstraction and Social Connect identity resolution. She provides on-chain Uniswap-powered liquidity swaps, ENS-integrated batch routing, and automated impact verification for the Octant and DeSci tracks. Fully decentralized and accessible via MCP, Regen Eliza is a production-ready gateway for autonomous regenerative finance.",
   "x402Support": true,
-  "supportedTrust": ["reputation", "crypto-economic"]
+  "capabilities": {
+    "x402": true,
+    "webhooks": false,
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "documentation": "https://github.com/Regen-Eliza/regen-eliza-core/blob/main/README.md",
+  "registrations": [
+    {
+      "agentId": 1851,
+      "agentRegistry": "eip155:42220:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432"
+    },
+    {
+      "agentId": 30121,
+      "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432"
+    }
+  ],
+  "supportedTrust": [
+    "reputation",
+    "crypto-economic"
+  ]
 }
