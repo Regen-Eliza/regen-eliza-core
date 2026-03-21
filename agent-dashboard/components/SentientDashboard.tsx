@@ -495,18 +495,6 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className="absolute inset-0 border border-[#6ba368]/10 rounded-xl pointer-events-none transition-colors group-hover:border-[#6ba368]/30 mix-blend-screen" />
           </div>
 
-          <div className="w-full flex shrink-0">
-            {/* Voice / Mic Toggle */}
-            <button
-              onClick={toggleMic}
-              className={`w-full flex items-center justify-center gap-3 px-6 py-4 text-base xl:text-lg tracking-widest uppercase rounded-lg border-2 transition-all font-mono font-bold shadow-lg ${isListeningSpeech
-                ? "border-red-500/60 bg-red-500/10 text-red-500 animate-pulse drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"
-                : "border-[#2a2a2a] bg-[#111] text-[#e5e5e5] hover:bg-[#6ba368]/10 hover:border-[#6ba368]/60 hover:text-[#6ba368]"
-                }`}
-            >
-              {isListening ? <><Mic size={20} className="text-red-500" /> LISTENING...</> : <><Power size={20} className="text-[#6ba368]" /> INITIALIZE CORE</>}
-            </button>
-          </div>
         </div>
 
         {/* ─── COLUMN 3: Transaction Log Panel & Skills ─── */}

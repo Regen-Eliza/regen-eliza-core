@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import SentientDashboard from "@/components/SentientDashboard";
 
-export default async function Home() {
+export default async function Dashboard() {
   const skillPath = path.join(process.cwd(), 'public', 'skill.md');
   let skillContent = '';
   try {

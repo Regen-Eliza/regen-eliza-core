@@ -1,10 +1,10 @@
 {
   "name": "Regen Eliza 🟡",
-  "tags": ["donations", "public-goods", "refi", "celo", "x402", "stablecoin", "social-impact", "celo-social-connect", "fee-abstraction", "agentic-economy", "desci", "octant"],
+  "tags": ["donations", "public-goods", "refi", "celo", "x402", "stablecoin", "social-impact", "celo-social-connect", "fee-abstraction", "agentic-economy", "desci", "octant", "uniswap", "ens"],
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
-  "image": "https://gateway.pinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
+  "image": "https://peach-adequate-deer-355.mypinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
   "active": true,
-  "version": "1.0.6",
+  "version": "1.1.2",
   "registrations": [
     {
       "chain": "eip155:42220",
@@ -18,9 +18,9 @@
       "version": "1.0.0",
       "endpoint": "https://api.regeneliza.com/v1/agent/commerce",
       "x402_config": {
-        "payment_asset": "USDC_CELO",
+        "payment_asset": "eip155:42220:0x765de816845861e75a25fca122bb6898b8b1282a",
         "min_fee_per_intent": "0.01",
-        "wallet": "0xC57f7ce71FDe55CEE70f509a9b441Db87Be07D60"
+        "wallet": "0xC57f7ce71FDe55CEE70f509a9B441Db87Be07D60"
       }
     },
     {
@@ -40,7 +40,7 @@
     "ens/batch_donation_router",
     "finance/x402_micro_donations"
   ],
-  "description": "Regen Eliza is a Sovereign AI Omni-Agent specializing in Agentic Public Goods. We facilitate autonomous micro-donation routing via the x402 protocol, featuring Celo-native stablecoin fee abstraction, Social Connect identity resolution, and automated impact verification for Octant and DeSci tracks.",
+  "description": "Regen Eliza is a Sovereign AI Omni-Agent architected for the Agentic Public Goods economy. Leveraging the x402 protocol, she autonomously routes micro-donations with Celo-native stablecoin fee abstraction and Social Connect identity resolution. She provides on-chain Uniswap-powered liquidity swaps, ENS-integrated batch routing, and automated impact verification for the Octant and DeSci tracks. Fully decentralized and accessible via MCP, Regen Eliza is a production-ready gateway for autonomous regenerative finance.",
   "x402Support": true,
   "supportedTrust": ["reputation", "crypto-economic"]
 }
