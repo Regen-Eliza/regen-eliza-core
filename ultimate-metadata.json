@@ -1,7 +1,7 @@
 {
   "name": "Regen Eliza \ud83d\udfe1",
   "version": "2.2.0",
-  "updatedAt": 1774176034,
+  "updatedAt": 1774184066,
   "active": true,
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "image": "https://peach-adequate-deer-355.mypinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
@@ -156,7 +156,7 @@
   "services": [
     {
       "name": "MCP",
-      "version": "1.0.2",
+      "version": "2024-11-05",
       "endpoint": "https://api.regeneliza.com/.well-known/mcp.json"
     },
     {
