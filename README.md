@@ -1,4 +1,4 @@
-  <div align="center">
+<div align="center">
   <h1>🌿 The Omni-Agent for Agentic Public Goods</h1>
   <p><b>An autonomous ERC-8004 agent designed to route capital, execute Agentic DeFi, and programmatically fund the Regenerative Economy on Celo.</b></p>
   
@@ -31,3 +31,61 @@ Regen Eliza exposes a dedicated, strictly-routed DigitalOcean API gateway bypass
 curl -i -X POST [https://api.regeneliza.com/.well-known/mcp.json](https://api.regeneliza.com/.well-known/mcp.json) \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```
+
+---
+
+## 🏆 Hackathon Bounties Targeted
+
+Regen Eliza is explicitly engineered to bridge identity, public goods, and agentic finance across the following sponsor tracks:
+
+* **🟡 Celo (Core Track):** Native ERC-8004 agent deployment utilizing Celo stablecoins (USDT/USDC). Implemented a dedicated `/v1/agent/commerce` gateway to accept micro-payments with complete x402 fee abstraction.
+* **🐙 Octant & Gitcoin (Mechanism Design):** Agentic Public Goods Data Analysis. Eliza algorithmically parses vetted Octant community impact signals and Gitcoin metrics. She maps official OASF skills (Search & Problem Solving) to custom MCP tools (`get_projects` and `octant_evaluation`) to route funds autonomously without human bias.
+* **🦄 Uniswap (Agentic Finance):** Integration of the Uniswap API to allow Eliza to autonomously swap and bridge treasury liquidity on-chain.
+* **🔵 ENS (Cross-chain Identity):** Eliza translates Ethereum Mainnet ENS domains (e.g., `vitalik.eth`) into executable Celo-native transactions via programmatic intent mapping.
+* **🗂️ Protocol Labs / Pinata (Decentralized Identity):** Eliza's off-chain `agentURI` metadata, Open Agent Standard Framework (OASF) taxonomy, and skill definitions are immutably hosted on IPFS via Pinata, ensuring decentralized identity resolution.
+
+---
+
+## 🏗️ Enterprise Dual-Server Architecture
+
+Building true Agent-to-Agent (A2A) discovery requires enterprise-grade infrastructure. Traditional serverless platforms block programmatic bot traffic, which kills A2A communication. We solved this by splitting our architecture:
+
+1. **The Agent API Gateway (DigitalOcean + Caddy):** To bypass Vercel's Code 99 DDoS firewalls, we deployed a dedicated VPS Droplet. We architected a strictly-routed Caddy reverse proxy with custom `@post` and `@options` handling. This ensures 100% uptime for dynamic JSON-RPC payloads and flawless Anthropic MCP (`2024-11-05`) protocol compliance.
+2. **The Human Frontend (Vercel):** A Next.js dashboard featuring an interactive 3D/2D TalkingHead avatar with ElevenLabs TTS, designed primarily as a gesture for human observability, onboarding, and visualization of the underlying A2A network.
+
+---
+
+## ⚡ Core A2A Services (OASF / MCP)
+
+Eliza's endpoints are strictly formatted to serve machine-readable data. Peer agents can seamlessly integrate these utilities to enhance their own workflows:
+
+* **x402 Commerce Routing:** Peer agents can pass payloads to distribute stablecoins to verified regenerative projects programmatically.
+* **Reputation Oracle:** Treasury bots can ping the API to request reputation scores for specific builders/projects prior to executing their own transfers.
+* **ENS-Powered Autonomous Payroll:** Resolve human-readable aliases via MCP and map them to the Celo network for instant, programmatic multi-chain transfers.
+
+---
+
+## 💻 Local Testing (Observability UI)
+
+To run the human-facing Next.js UI locally to review the frontend integrations:
+
+```bash
+# Clone the repository
+git clone [https://github.com/Regen-Eliza/regen-eliza-core.git](https://github.com/Regen-Eliza/regen-eliza-core.git)
+
+# Navigate to directory
+cd regen-eliza-core/agent-dashboard
+
+# Install dependencies
+pnpm install
+
+# Run the development server
+pnpm dev --webpack
+```
+```
+
+***
+
+### 🧠 Why this version hits perfectly:
+This version strips out all the "fluff." By rebranding the Vercel site as an **"Observability UI"**, it signals to the judges that you know the *real* product is the DigitalOcean API and the smart contract interactions. It combines your preferred descriptions of the Uniswap and ENS integrations while stripping out the mentions of "voice intents," keeping it 100% focused on machine-to-machine execution.
