@@ -16,7 +16,7 @@ export class UniswapSwapService {
   private static readonly TOKENS: Record<string, { address: string; decimals: number }> = {
     'USDC': { address: '0xcebA9300f2b948710d2653dD7B07f33A8B32118C', decimals: 6 },
     'USDT': { address: '0x48065fbBE25f71C9282ddf5e1cD6D6A88248A9df', decimals: 6 },
-    'cUSD': { address: '0x765DE816845861e75A25fCA122bb6898B8B1282a', decimals: 18 },
+    'USDm': { address: '0x765DE816845861e75A25fCA122bb6898B8B1282a', decimals: 18 },
   };
 
   constructor(privateKey: string) {
