@@ -1,0 +1,260 @@
+{
+  "mcpVersion": "2024-11-05",
+  "name": "Regen Eliza MCP Server",
+  "version": "2024-11-05",
+  "tools": [
+    {
+      "name": "get_paid",
+      "description": "Receive payment in cUSD/USDC for agent services via x402.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "service_id": {
+            "type": "string"
+          },
+          "amount_usdc": {
+            "type": "number"
+          },
+          "payer_address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "service_id",
+          "amount_usdc"
+        ]
+      }
+    },
+    {
+      "name": "route_donation_x402",
+      "description": "Execute x402 micro-donations with stablecoin fee abstraction.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "recipient": {
+            "type": "string"
+          },
+          "amount_usdc": {
+            "type": "number"
+          },
+          "cause": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "recipient",
+          "amount_usdc"
+        ]
+      }
+    },
+    {
+      "name": "quadratic_funding",
+      "description": "Route funds via quadratic formula to maximize public goods impact.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "round_id": {
+            "type": "string"
+          },
+          "projects": {
+            "type": "array"
+          },
+          "budget_usdc": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "round_id",
+          "budget_usdc"
+        ]
+      }
+    },
+    {
+      "name": "swap_skills",
+      "description": "Barter agent capabilities peer-to-peer without monetary exchange.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "offer_skill": {
+            "type": "string"
+          },
+          "request_skill": {
+            "type": "string"
+          },
+          "peer_agent_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "offer_skill",
+          "request_skill"
+        ]
+      }
+    },
+    {
+      "name": "agentic_market",
+      "description": "List or discover services on the Regen Eliza agentic marketplace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "price_max_usdc": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    },
+    {
+      "name": "get_projects",
+      "description": "Fetch registry of verified regenerative initiatives on Celo.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "name": "resolve_ens",
+      "description": "Map ENS names to Celo and Base wallet addresses.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ens_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ens_name"
+        ]
+      }
+    },
+    {
+      "name": "execute_swap",
+      "description": "Cross-chain liquidity routing via Uniswap V3.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "token_in": {
+            "type": "string"
+          },
+          "token_out": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "chain": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token_in",
+          "token_out",
+          "amount"
+        ]
+      }
+    },
+    {
+      "name": "octant_evaluation",
+      "description": "Analyze Octant epoch data and route matching funds.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "project_id": {
+            "type": "string"
+          },
+          "epoch": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "project_id"
+        ]
+      }
+    },
+    {
+      "name": "yield_bridge",
+      "description": "Move treasury yield between Base and Celo mainnets.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "from_chain": {
+            "type": "string"
+          },
+          "to_chain": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "from_chain",
+          "to_chain"
+        ]
+      }
+    },
+    {
+      "name": "get_usdc",
+      "description": "Provide USDC liquidity to requesting agents via USDT\u2192USDC or USDm\u2192USDC swap on Celo and Base.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "amount_usdc": {
+            "type": "number"
+          },
+          "from_token": {
+            "type": "string"
+          },
+          "chain": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount_usdc"
+        ]
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "name": "analyze_public_goods",
+      "description": "Analyze public goods funding and recommend optimal allocation.",
+      "arguments": [
+        {
+          "name": "project_name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "find_funding",
+      "description": "Find active grants for a cause.",
+      "arguments": [
+        {
+          "name": "cause",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "resources": []
+}

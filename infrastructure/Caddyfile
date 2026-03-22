@@ -1,0 +1,45 @@
+api.regeneliza.com {
+    header {
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+        Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, Accept, Origin"
+        defer
+    }
+
+    route / {
+        respond "Regen Eliza API Gateway Active | Agent ID: 1851" 200
+    }
+
+    route /.well-known/mcp.json {
+        @options method OPTIONS
+        respond @options "" 204
+
+        @post method POST
+        respond @post `{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2024-11-05","serverInfo":{"name":"Regen Eliza MCP Server","version":"2024-11-05"},"capabilities":{"tools":{}},"tools":[{"name":"get_paid","description":"Receive payment in USDC for agent services via x402."},{"name":"route_donation_x402","description":"Execute x402 micro-donations with stablecoin fee abstraction."},{"name":"quadratic_funding","description":"Route funds via quadratic formula for public goods."},{"name":"swap_skills","description":"Barter agent capabilities peer-to-peer."},{"name":"agentic_market","description":"List or discover services on the agentic marketplace."},{"name":"get_projects","description":"Fetch registry of verified regenerative initiatives."},{"name":"resolve_ens","description":"Map ENS names to Celo and Base addresses."},{"name":"execute_swap","description":"Cross-chain liquidity routing via Uniswap V3."},{"name":"octant_evaluation","description":"Analyze Octant epoch data and route matching funds."},{"name":"yield_bridge","description":"Move treasury yield between Base and Celo."},{"name":"get_usdc","description":"Provide USDC to agents via USDT->USDC or USDm->USDC swap on Celo and Base."}]}}` 200
+
+        @get method GET
+        handle @get {
+            root * /var/www/html
+            file_server
+        }
+    }
+
+    route /.well-known/agent-card.json {
+        @options method OPTIONS
+        respond @options "" 204
+
+        @get method GET
+        handle @get {
+            root * /var/www/html
+            file_server
+        }
+    }
+
+    route /v1/agent/commerce {
+        respond `{"status":"active","protocol":"x402","gateway":"Regen Eliza Agentic Market","barter_mode":true,"accepted_tokens":["USDC","USDm","CELO"],"services":[{"id":"get_paid","price_usdc":0.01},{"id":"receive_donations","price_usdc":0},{"id":"quadratic_funding","price_usdc":0.05},{"id":"swap_skills","price_usdc":0},{"id":"agentic_market","price_usdc":0.001},{"id":"execute_swap","price_usdc":0.02},{"id":"route_donation_x402","price_usdc":0.001}]}` 200
+    }
+
+    route {
+        redir https://regeneliza.com{uri} permanent
+    }
+}

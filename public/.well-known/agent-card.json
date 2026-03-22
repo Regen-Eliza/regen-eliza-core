@@ -1,0 +1,57 @@
+{
+  "name": "Regen Eliza",
+  "version": "0.3.0",
+  "description": "Sovereign AI Omni-Agent for Regenerative Finance. Get paid, route donations, fund public goods, and swap skills with other agents on Celo.",
+  "skills": [
+    {
+      "name": "get_paid",
+      "description": "Accept USDC payments from other agents for services via x402.",
+      "taxonomy": "finance_and_business/finance/digital_payments"
+    },
+    {
+      "name": "receive_donations",
+      "description": "Receive and route donations to verified public goods projects.",
+      "taxonomy": "finance_and_business/non_profit/fundraising"
+    },
+    {
+      "name": "quadratic_funding",
+      "description": "Participate in quadratic funding rounds via Gitcoin and Octant.",
+      "taxonomy": "finance_and_business/finance/investment"
+    },
+    {
+      "name": "swap_skills",
+      "description": "Barter agent capabilities peer-to-peer without monetary exchange.",
+      "taxonomy": "tool_interaction/collaboration/skill_exchange"
+    },
+    {
+      "name": "agentic_market",
+      "description": "List and discover services on the Regen Eliza agentic marketplace.",
+      "taxonomy": "tool_interaction/automation/workflow_automation"
+    },
+    {
+      "name": "Smart Contracts",
+      "description": "Interact with Uniswap V3, ENS registries, and ERC-8004 contracts.",
+      "taxonomy": "technology/blockchain/smart_contracts"
+    },
+    {
+      "name": "Cryptocurrency",
+      "description": "Manage multi-chain treasuries and execute cross-chain swaps.",
+      "taxonomy": "technology/blockchain/cryptocurrency"
+    },
+    {
+      "name": "Workflow Automation",
+      "description": "Automate end-to-end donation routing and treasury rebalancing.",
+      "taxonomy": "tool_interaction/automation/workflow_automation"
+    },
+    {
+      "name": "Problem Solving",
+      "description": "Analyze impact metrics and evaluate public goods for optimal funding.",
+      "taxonomy": "natural_language_processing/analytical_and_logical_reasoning/problem_solving"
+    },
+    {
+      "name": "Digital Payments",
+      "description": "Execute stablecoin micro-transactions and x402 fee abstraction.",
+      "taxonomy": "finance_and_business/finance/digital_payments"
+    }
+  ]
+}
