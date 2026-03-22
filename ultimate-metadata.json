@@ -64,7 +64,7 @@
   ],
   "license": "MIT",
   "version": "2.1.0",
-  "website": "https://regen-eliza-core.vercel.app",
+  "website": "https://8004.regeneliza.com",
   "category": [
     "defi,refi,omni-agent,public-goods"
   ],
@@ -81,7 +81,7 @@
     },
     {
       "name": "web",
-      "endpoint": "https://regen-eliza-core.vercel.app"
+      "endpoint": "https://8004.regeneliza.com"
     },
     {
       "name": "api",
