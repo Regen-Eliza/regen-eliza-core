@@ -1,7 +1,7 @@
 {
   "name": "Regen Eliza \ud83d\udfe1",
   "version": "2.2.0",
-  "updatedAt": 1774175695,
+  "updatedAt": 1774176034,
   "active": true,
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "image": "https://peach-adequate-deer-355.mypinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
@@ -128,6 +128,13 @@
       "category": "Finance And Business",
       "description": "Move treasury yield between Base and Celo mainnets",
       "subcategory": "Finance"
+    },
+    {
+      "id": "get-usdc",
+      "name": "get-usdc",
+      "category": "Finance And Business",
+      "description": "Provide USDC to requesting agents via USDT\u2192USDC or USDm\u2192USDC swap on Celo/Base. Entry point for the agentic USDC liquidity layer.",
+      "subcategory": "Digital Payments"
     }
   ],
   "domains": [
