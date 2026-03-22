@@ -10,7 +10,7 @@ const manifest = {
   agent_type: "ERC-8004",
   erc8004_ids: {
     celo: 1851,
-    base: "COMPROMISED_MIGRATED",
+    base: 1851,
   },
   chains: [
     {
@@ -33,6 +33,8 @@ const manifest = {
     "public_goods/data_collection/impact_signals",
     "natural_language_processing/public_goods/qualitative_analysis",
     "agentic_public_goods",
+    "get_usdc",
+    "get_usdc",
     "donations_to_verified_projects",
   ],
   capabilities: {
