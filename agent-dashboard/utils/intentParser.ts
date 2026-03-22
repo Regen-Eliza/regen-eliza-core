@@ -11,7 +11,7 @@ const donationService = new DonationService(privateKey);
 const TOKEN_ADDRESSES: Record<string, string> = {
   "USDC": "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",
   "USDT": "0x48065fbBE25f71C9282ddf5e1cD6D6A88248A9df",
-  "USDC": "0x765DE816845861e75A25fCA122bb6898B8B1282a",
+  "USDm": "0x765DE816845861e75A25fCA122bb6898B8B1282a",
 };
 
 /* ─── Levenshtein distance for fuzzy matching ─── */
