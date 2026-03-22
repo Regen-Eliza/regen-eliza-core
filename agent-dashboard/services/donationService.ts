@@ -71,12 +71,12 @@ export class DonationService {
         const share = amount / selected.length;
         return {
           to: address,
-          amount: ethers.utils.parseUnits(share.toString(), 18)
+          amount: ethers.utils.parseUnits(share.toFixed(6), 6)
         };
       });
 
       console.log("x402 Payment Payload Prepared:", distributionPayload);
-      console.log("Distributing stablecoins (USDT/USDm) on Celo network...");
+      console.log("Distributing stablecoins (USDC) on Celo network...");
 
       const fundedProjects: FundedProject[] = selected.map(r => ({
         name: r.name || r.Name || r["Project Name"] || "Unknown Project",
