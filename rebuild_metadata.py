@@ -1,0 +1,66 @@
+import json, time
+
+metadata = {
+  "name": "Regen Eliza 🟡",
+  "version": "2.2.0",
+  "updatedAt": int(time.time()),
+  "active": True,
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "image": "https://peach-adequate-deer-355.mypinata.cloud/ipfs/Qmd8y77KLCVU24fe49rXAcQfi4QTqvHDUXGA3wHJSZEXpf",
+  "description": "Regen Eliza is a Sovereign AI Omni-Agent architected for the Agentic Public Goods economy. Leveraging the x402 protocol, she autonomously routes micro-donations with Celo-native stablecoin fee abstraction and Social Connect identity resolution.",
+  "website": "https://8004.regeneliza.com",
+  "documentation": "https://github.com/Regen-Eliza/regen-eliza-core/blob/main/README.md",
+  "sourceCode": "https://github.com/Regen-Eliza/regen-eliza-core",
+  "license": "MIT",
+  "tags": ["donations","public-goods","refi","celo","base","x402","stablecoin","social-impact","fee-abstraction","agentic-economy","omni-agent","defi"],
+  "category": ["defi,refi,omni-agent,public-goods"],
+  "x402Support": True,
+  "capabilities": {"x402": True, "webhooks": False, "streaming": False, "pushNotifications": False},
+  "payment_tokens": [
+    {"chain": "eip155:42220", "symbol": "USDC", "address": "0xcebA9300f2b948710d2653dD7B07f33A8B32118C", "standard": "ERC-20", "primary": True},
+    {"chain": "eip155:8453",  "symbol": "USDC", "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", "standard": "ERC-20", "primary": True},
+    {"chain": "eip155:42220", "symbol": "USDm", "address": "0x765DE816845861e75A25fCA122bb6898B8B1282a", "standard": "ERC-20", "note": "swap output via Mento"},
+    {"chain": "eip155:42220", "symbol": "CELO",  "address": "0x471EcE3750Da237f93B8E339c536989b8978a438", "standard": "ERC-20"}
+  ],
+  "registrations": [
+    {"agentId": 1851, "agentRegistry": "eip155:42220:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432", "chain": "celo"},
+    {"agentId": 1851, "agentRegistry": "eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",  "chain": "base"}
+  ],
+  "supportedTrust": ["reputation","crypto-economic"],
+  "skills": [
+    {"id": "x402-routing",       "name": "x402-routing",       "category": "Finance And Business",               "description": "Autonomously route micro-donations using USDC fee abstraction", "subcategory": "Digital Payments"},
+    {"id": "ens-resolution",     "name": "ens-resolution",     "category": "Technology",                         "description": "Map ENS names to Celo/Base wallet addresses via Social Connect", "subcategory": "Blockchain"},
+    {"id": "cross-chain-swaps",  "name": "cross-chain-swaps",  "category": "Finance And Business",               "description": "Uniswap V3 liquidity swaps for agentic treasuries on Celo and Base", "subcategory": "Cryptocurrency"},
+    {"id": "impact-verification","name": "impact-verification","category": "Analytical And Logical Reasoning",    "description": "Automated impact verification for Octant and Public Goods Ecosystem", "subcategory": "Problem Solving"},
+    {"id": "stablecoin-swap",    "name": "stablecoin-swap",    "category": "Finance And Business",               "description": "USDT→USDC→USDm swap routing on Celo and Base via Mento and Uniswap V3", "subcategory": "Cryptocurrency"},
+    {"id": "get-paid",           "name": "get-paid",           "category": "Finance And Business",               "description": "Accept USDC payments from other agents via x402", "subcategory": "Digital Payments"},
+    {"id": "yield-bridge",       "name": "yield-bridge",       "category": "Finance And Business",               "description": "Move treasury yield between Base and Celo mainnets", "subcategory": "Finance"}
+  ],
+  "domains": [
+    {"id": "regenerative-finance",  "name": "regenerative-finance",  "category": "Ecology",             "description": "Automated public goods funding and ecological asset management", "subcategory": "Regenerative Finance"},
+    {"id": "decentralized-finance", "name": "decentralized-finance", "category": "Finance And Business", "description": "DeFi routing, autonomous treasury yield, and stablecoin abstraction", "subcategory": "Finance"}
+  ],
+  "services": [
+    {"name": "MCP",             "version": "1.0.2", "endpoint": "https://api.regeneliza.com/.well-known/mcp.json"},
+    {"name": "A2A",             "version": "0.3.0", "endpoint": "https://api.regeneliza.com/.well-known/agent-card.json"},
+    {"name": "web",                                 "endpoint": "https://8004.regeneliza.com"},
+    {"name": "api",                                 "endpoint": "https://api.regeneliza.com"},
+    {"name": "commerce-gateway",                    "endpoint": "https://api.regeneliza.com/v1/agent/commerce"},
+    {"name": "github-repo",                         "endpoint": "https://github.com/Regen-Eliza/regen-eliza-core"}
+  ],
+  "linked_contracts": [
+    {"chain": "eip155:42220", "label": "uniswap_v3_router_celo", "address": "eip155:42220:0x5615CDAb92b6B174276d4b392918A243e80Eac30"},
+    {"chain": "eip155:42220", "label": "ens_registry_celo",      "address": "eip155:42220:0xCCcA63d33B652E2A89F467c9d96E875fA2aC2d7C"},
+    {"chain": "eip155:42220", "label": "octant_impact_audit",    "address": "eip155:42220:0xA68B84B19aF34D15377fBc159b39e3BCE743f550"},
+    {"chain": "eip155:42220", "label": "usdc_celo",              "address": "eip155:42220:0xcebA9300f2b948710d2653dD7B07f33A8B32118C"},
+    {"chain": "eip155:8453",  "label": "usdc_base",              "address": "eip155:8453:0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"}
+  ]
+}
+
+with open("ultimate-metadata.json", "w") as f:
+    json.dump(metadata, f, indent=2)
+
+print("✅ ultimate-metadata.json rebuilt")
+print(f"  registrations: agent {set(r['agentId'] for r in metadata['registrations'])} on chains {[r['chain'] for r in metadata['registrations']]}")
+print(f"  payment_tokens: {[t['symbol'] for t in metadata['payment_tokens']]}")
+print(f"  skills: {[s['id'] for s in metadata['skills']]}")
