@@ -462,21 +462,21 @@ export default function SentientDashboard({ children }: { children?: React.React
 
 
           {/* ASCII Art Block 1 (8004-ERC) */}
-          <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
-            {`   ___   ___   ___  _  _         _____ ____   ____
-  (_) / _ \\ / _ \\| || |       | ____|  _ \\ / ___ |
+          <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5] select-none">
+            {`   ___   ___   ___  _  _         _____ ____   ____ 
+  ( _ ) / _ \\ / _ \\| || |       | ____|  _ \\ / ___|
   / _ \\| | | | | | | || |_ _____|  _| | |_) | |    
- | (_) | | _ | | | _ | | __   _ | _____ | | ___ | _ <| | ___
-\\___ / \\___ / \\___ /   | _ |       | _____ | _ | \\_\\\\____ | `}
+ | (_) | |_| | |_| |__   _|_____| |___|  _ <| |___ 
+  \\___/ \\___/ \\___/   |_|       |_____|_| \\_\\\\____|`}
           </pre>
 
           {/* ASCII Art Block 2 (x402) */}
-          <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
+          <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5] select-none">
             {`     _  _    ___ ____  
- __  _ | || |  / _ \\___ \\
-\\ \\/ / || | _ | | | | __) |
-  >  <| __   _ | | _ | / __/
-  / _ /\\_\\  | _ |  \\___ / _____ | `}
+ __  _| || |  / _ \\___ \\ 
+ \\ \\/ / || |_| | | |__) |
+  >  <|__   _| |_| / __/ 
+ /_/\\_\\  |_|  \\___/_____|`}
           </pre>
 
         </div>
