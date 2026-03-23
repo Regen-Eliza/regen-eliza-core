@@ -16,7 +16,12 @@ body {
   color: var(--foreground);
   font-family: 'Courier New', monospace;
   margin: 0;
-  overflow: hidden;
+}
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
 }
 
 /* CRT scanlines overlay for retro aesthetic */

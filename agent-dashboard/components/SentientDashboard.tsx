@@ -58,6 +58,19 @@ export default function SentientDashboard({ children }: { children?: React.React
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [reportText, setReportText] = useState("");
 
+  const [manifestContent, setManifestContent] = useState<string>("Loading manifest...");
+  useEffect(() => {
+    fetch("https://api.regeneliza.com/skill.md", { mode: "cors" })
+      .then(res => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.text();
+      })
+      .then(text => setManifestContent(text))
+      .catch(err => {
+        console.error("Fetch manifest failed", err);
+        setManifestContent("Error: skill.md unavailable. Operating in baseline mode.");
+      });
+  }, []);
   const [logs, setLogs] = useState<string[]>([]);
   const requestRef = useRef<number | undefined>(undefined);
 
@@ -313,7 +326,7 @@ export default function SentientDashboard({ children }: { children?: React.React
   const panelLabel = `text-lg xl:text-xl font-bold uppercase tracking-widest mb-1 text-[#FFFFFF] font-mono tracking-wide`;
 
   return (
-    <div className="flex flex-col h-screen w-full bg-[#050505] text-[#e5e5e5] overflow-hidden scanlines">
+    <div className="flex flex-col min-h-screen w-full bg-[#050505] text-[#e5e5e5] overflow-y-auto overflow-x-hidden scanlines">
 
       {/* ═══════════════════════════════════
           SWAP CONFIRMATION MODAL
@@ -392,14 +405,14 @@ export default function SentientDashboard({ children }: { children?: React.React
       {/* ═══════════════════════════════════
           3-COLUMN COMMAND CENTER
           ═══════════════════════════════════ */}
-      <div className="w-full max-w-screen-xl mx-auto flex flex-col lg:grid lg:grid-cols-12 lg:gap-8 items-start mt-2 flex-1 min-h-[100dvh] lg:min-h-0 z-10 overflow-y-auto lg:overflow-hidden pb-4 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1600px] mx-auto flex flex-col lg:grid lg:grid-cols-[1.2fr_1.4fr_1.4fr] lg:gap-8 items-start mt-2 flex-1 z-10 pb-4 px-4 sm:px-6 lg:px-8 h-full">
 
         {/* ─── COLUMN 1: Agent Details Panel ─── */}
-        <div className="h-full flex flex-col gap-4 overflow-y-auto scrollbar-hide w-full pr-1 pb-4 lg:col-span-3 order-2 lg:order-none mt-8 lg:mt-0">
+        <div className="h-auto lg:h-full flex flex-col gap-4 overflow-visible lg:overflow-y-auto scrollbar-hide w-full pr-1 pb-4 order-2 lg:order-none mt-8 lg:mt-0">
           {/* Identity Card */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 overflow-hidden">
             <div className={panelLabel}>Agent Identity</div>
-            <div className="hidden lg:block text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">REGEN ELIZA</div>
+            <div className="hidden lg:block text-xl whitespace-nowrap font-mono tracking-wide tracking-wider mb-2 font-bold text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">REGEN ELIZA</div>
             <a href="https://www.8004scan.io/agents/celo/1851" target="_blank" rel="noopener noreferrer" className="text-[#6ba368] hover:text-[#88d184] hover:underline transition-colors font-mono tracking-wide text-sm mb-3 inline-block font-bold">
               View on 8004scan.io ↗
             </a>
@@ -409,17 +422,17 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-4 space-y-2 sm:space-y-0 mt-2">
               <div className="flex items-center space-x-2">
                 <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                <span className="text-[#888888] font-mono tracking-wide text-sm whitespace-nowrap">BASE ID: 30121</span>
+                <span className="text-[#888888] font-mono tracking-wide text-sm break-all">BASE ID: 30121</span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
-                <span className="text-[#888888] font-mono tracking-wide text-sm whitespace-nowrap">CELO ID: 1851</span>
+                <span className="text-[#888888] font-mono tracking-wide text-sm break-all">CELO ID: 1851</span>
               </div>
             </div>
           </div>
 
           {/* Network Status */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 overflow-hidden">
             <div className="flex justify-between items-center w-full mb-1.5">
               <span className="text-[#888888] font-mono uppercase tracking-widest text-sm">NETWORK</span>
               <span className="text-[#6ba368] font-mono flex items-center">
@@ -434,7 +447,7 @@ export default function SentientDashboard({ children }: { children?: React.React
           </div>
 
           {/* 8004 Scan */}
-          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
+          <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 overflow-hidden">
             <div className={panelLabel}>8004SCAN.IO</div>
             <div className="flex items-center gap-2 text-base font-mono tracking-wide text-[#e5e5e5]/80">
               <Globe size={16} className="text-[#6ba368]" />
@@ -475,19 +488,19 @@ export default function SentientDashboard({ children }: { children?: React.React
         </div>
 
         {/* ─── COLUMN 2: The Soul (Center) ─── */}
-        <div className="min-h-[70vh] sm:min-h-[450px] lg:h-full flex flex-col relative w-full z-20 order-1 lg:order-none mb-4 lg:mb-0 lg:col-span-6">
+        <div className="h-auto lg:h-full flex flex-col relative w-full z-20 order-1 lg:order-none mb-4 lg:mb-0">
           
           {/* Agent Ingest Box */}
           <div className="w-full flex shrink-0 mb-4 justify-center">
             <div className="w-full max-w-[800px] px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center font-mono backdrop-blur-md flex flex-col items-center justify-center group cursor-pointer transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
-              <span className="text-sm text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80">🤖 AGENTS: Ingest My Skills Here</span>
-              <span className="font-bold text-[#6ba368] tracking-wide mt-1 truncate overflow-hidden max-w-[90vw] lg:max-w-full text-[clamp(1rem,3.5vw,1.5rem)] sm:text-[24px]">curl https://api.regeneliza.com/skill.md</span>
+              <span className="text-sm text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80 flex items-center justify-center gap-2"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] animate-pulse" /> AGENTS: Ingest My Skills Here</span>
+              <span className="font-bold text-[#6ba368] tracking-wide mt-1 break-all max-w-[90vw] lg:max-w-full text-[clamp(1rem,3.5vw,1.5rem)] sm:text-[24px]">curl https://api.regeneliza.com/skill.md</span>
             </div>
           </div>
 
           {/* Mobile Hero Tagline & CTA */}
           <div className="flex flex-col items-center mb-4 lg:hidden w-full space-y-2 px-2">
-             <h1 className="font-mono font-bold text-[#00FF41] text-[clamp(2rem,8vw,3rem)] tracking-wider drop-shadow-[0_0_10px_rgba(0,255,65,0.4)] text-center leading-none">REGEN ELIZA</h1>
+             <h1 className="font-mono font-bold text-[#00FF41] text-[clamp(1.5rem,8vw,4rem)] tracking-normal sm:tracking-widest whitespace-nowrap overflow-hidden drop-shadow-[0_0_10px_rgba(0,255,65,0.4)] text-center leading-none" style={{ fontFamily: "'VT323', monospace" }}>REGEN ELIZA</h1>
              <p className="text-[#888] font-mono text-center text-sm px-4 whitespace-normal break-words">ERC-8004 Autonomous Agent</p>
           </div>
 
@@ -509,7 +522,7 @@ export default function SentientDashboard({ children }: { children?: React.React
         </div>
 
         {/* ─── COLUMN 3: Transaction Log Panel & Skills ─── */}
-        <div className="h-full flex flex-col gap-4 overflow-y-auto scrollbar-hide pr-1 pb-8 lg:col-span-3 order-3 lg:order-none w-full">
+        <div className="h-auto lg:h-full flex flex-col gap-4 overflow-visible lg:overflow-y-auto scrollbar-hide pr-1 pb-8 order-3 lg:order-none w-full">
 
           {/* Live Transaction Log bg */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 min-h-[160px] flex flex-col shadow-[inset_0_0_15px_rgba(107,163,104,0.05)] mb-2">
@@ -520,7 +533,7 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className="flex-1 min-h-[100px] overflow-y-auto scrollbar-hide font-mono tracking-wide text-xs xl:text-sm space-y-1.5 opacity-80 text-[#e5e5e5]">
               <AnimatePresence>
                 {logs.map((log, i) => (
-                  <motion.div key={`${log}-${i}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight">{log}</motion.div>
+                  <motion.div key={`${log}-${i}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight truncate whitespace-nowrap">{log}</motion.div>
                 ))}
               </AnimatePresence>
               {logs.length === 0 && <div className="text-[#888]/50 italic text-xs">...</div>}
@@ -532,13 +545,31 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className={`${panelLabel} flex items-center gap-2`}>
               <ShieldCheck size={14} className="text-[#6ba368]" /> Agent Skills
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
-              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">BUILDER.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
-              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">PUBLIC_GOODS.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
-              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">OCTANT.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
-              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">LIDO.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
-              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">UNISWAP.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
-              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">CELO.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
+            <div className="flex flex-col gap-1 mt-2">
+              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> BUILDER.MD</span>
+                <span className="text-xs text-[#888888] truncate max-w-[60%]">Builder Funding Evaluation</span>
+              </a>
+              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> PUBLIC_GOODS.MD</span>
+                <span className="text-xs text-[#888888] truncate max-w-[60%]">Regen Network Integrations</span>
+              </a>
+              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> OCTANT.MD</span>
+                <span className="text-xs text-[#888888] truncate max-w-[60%]">GLM Ecosystem Fund</span>
+              </a>
+              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> LIDO.MD</span>
+                <span className="text-xs text-[#888888] truncate max-w-[60%]">wstETH Yield Generation</span>
+              </a>
+              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> UNISWAP.MD</span>
+                <span className="text-xs text-[#888888] truncate max-w-[60%]">On-chain Swap Intents</span>
+              </a>
+              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> CELO.MD</span>
+                <span className="text-xs text-[#888888] truncate max-w-[60%]">Real World Assets & Impact</span>
+              </a>
             </div>
           </div>
 
@@ -564,7 +595,7 @@ export default function SentientDashboard({ children }: { children?: React.React
           </AnimatePresence>
 
           {/* PROTOCOL MANIFEST (SKILL.MD) */}
-          <div className="flex-1 min-h-[250px] border border-[#2a2a2a] bg-black/20 backdrop-blur-md rounded-lg p-3 flex flex-col shadow-[0_0_20px_rgba(107,163,104,0.05)] border-t-[#6ba368]/30 mt-2">
+          <div className="flex-1 min-h-[250px] border border-[#2a2a2a] bg-black/20 backdrop-blur-md rounded-lg p-3 flex flex-col shadow-[0_0_20px_rgba(107,163,104,0.05)] border-t-[#6ba368]/30 mt-2 h-full">
             <div className="flex items-center justify-between mb-2 pb-2 border-b border-[#2a2a2a]">
               <div className={`${panelLabel} !mb-0 flex items-center gap-2`}>
                 <div className="w-2 h-2 rounded-sm bg-[#6ba368] animate-pulse" />
@@ -573,8 +604,8 @@ export default function SentientDashboard({ children }: { children?: React.React
               <span className="text-[#888] text-[9px] tracking-widest uppercase opacity-70">RAW DATA</span>
             </div>
             <div className="flex-1 overflow-y-auto scrollbar-hide pr-1">
-              <pre className="font-mono text-xs lg:text-sm leading-relaxed text-[#6ba368]/90 whitespace-pre-wrap break-words drop-shadow-[0_0_2px_rgba(107,163,104,0.2)]">
-                {children}
+              <pre className="font-mono text-xs lg:text-sm leading-relaxed text-[#6ba368]/90 whitespace-pre-wrap break-words overflow-x-auto drop-shadow-[0_0_2px_rgba(107,163,104,0.2)]">
+                {manifestContent || children}
               </pre>
             </div>
           </div>
