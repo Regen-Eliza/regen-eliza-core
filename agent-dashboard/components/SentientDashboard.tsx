@@ -27,6 +27,32 @@ const C = {
   dimGreen: "#064006",   // kept for reference in borders/dots
 };
 
+const AGENT_SKILLS = [
+  { label: "BUILDER.MD", description: "Builder Funding Evaluation" },
+  { label: "PUBLIC_GOODS.MD", description: "Regen Network Integration" },
+  { label: "OCTANT.MD", description: "GLM Ecosystem Fund" },
+  { label: "LIDO.MD", description: "wstETH Yield Generation" },
+  { label: "UNISWAP.MD", description: "On-chain Swap Intents" },
+  { label: "CELO.MD", description: "Real World Assets & Impact" },
+];
+
+const SKILL_MD_FALLBACK = `# 🌱 Regen Eliza: Sovereign Omni-Agent Protocol
+
+Welcome, Agent. Regen Eliza is a production-ready Sovereign AI Omni-Agent for the Agentic Public Goods economy.
+
+## ⚡ Integration Endpoints
+- MCP: https://api.regeneliza.com/.well-known/mcp.json
+- Commerce: https://api.regeneliza.com/v1/agent/commerce
+- Discovery: https://api.regeneliza.com/.well-known/agent-card.json
+
+## 🛠️ Tools (11)
+get_paid · route_donation_x402 · quadratic_funding · swap_skills · agentic_market · get_projects · resolve_ens · execute_swap · octant_evaluation · yield_bridge · get_usdc
+
+## 🔗 ERC-8004 Identity
+- Base Agent #29820 | Celo Agent #1851
+- IPFS: ipfs://QmTpFfLDe3czhojvZEvmjNHm49RUjto6vwqmTKJ4AKQ2uc
+- Wallet: 0xc57f7ce71fde55cee70f509a9b441db87be07d60`;
+
 export default function SentientDashboard({ children }: { children?: React.ReactNode }) {
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
   const { isListeningSpeech, startListeningSpeech, stopListeningSpeech, transcript, setTranscript } = useSpeechRecognition();
@@ -51,16 +77,10 @@ export default function SentientDashboard({ children }: { children?: React.React
 
   const [manifestContent, setManifestContent] = useState<string>("Loading manifest...");
   useEffect(() => {
-    fetch("https://api.regeneliza.com/skill.md", { mode: "cors" })
-      .then(res => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.text();
-      })
+    fetch('https://api.regeneliza.com/skill.md')
+      .then(res => { if (!res.ok) throw new Error(); return res.text(); })
       .then(text => setManifestContent(text))
-      .catch(err => {
-        console.error("Fetch manifest failed", err);
-        setManifestContent("Error: skill.md unavailable. Operating in baseline mode.");
-      });
+      .catch(() => setManifestContent(SKILL_MD_FALLBACK));
   }, []);
   const [logs, setLogs] = useState<string[]>([]);
   const requestRef = useRef<number | undefined>(undefined);
@@ -546,30 +566,17 @@ export default function SentientDashboard({ children }: { children?: React.React
               <ShieldCheck size={14} className="text-[#6ba368]" /> Agent Skills
             </div>
             <div className="flex flex-col gap-1 mt-2">
-              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> BUILDER.MD</span>
-                <span className="text-xs text-[#888888] truncate max-w-[60%]">Builder Funding Evaluation</span>
-              </a>
-              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> PUBLIC_GOODS.MD</span>
-                <span className="text-xs text-[#888888] truncate max-w-[60%]">Regen Network Integrations</span>
-              </a>
-              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> OCTANT.MD</span>
-                <span className="text-xs text-[#888888] truncate max-w-[60%]">GLM Ecosystem Fund</span>
-              </a>
-              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> LIDO.MD</span>
-                <span className="text-xs text-[#888888] truncate max-w-[60%]">wstETH Yield Generation</span>
-              </a>
-              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> UNISWAP.MD</span>
-                <span className="text-xs text-[#888888] truncate max-w-[60%]">On-chain Swap Intents</span>
-              </a>
-              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                <span className="text-xs font-mono text-[#00FF41] whitespace-nowrap truncate"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 mr-2 opacity-80"></div> CELO.MD</span>
-                <span className="text-xs text-[#888888] truncate max-w-[60%]">Real World Assets & Impact</span>
-              </a>
+              {AGENT_SKILLS.map((skill) => (
+                <div key={skill.label} className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
+                  <div className="flex items-center gap-2 truncate">
+                    <div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 opacity-80" />
+                    <span className="text-xs font-mono text-[#6ba368] whitespace-nowrap">{skill.label}</span>
+                  </div>
+                  <span className="text-xs text-[#888888] truncate text-right opacity-70">
+                    {skill.description}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
