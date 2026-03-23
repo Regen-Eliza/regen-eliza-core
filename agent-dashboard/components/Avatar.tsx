@@ -59,7 +59,7 @@ export default function Avatar({ state = "idle" }: AvatarProps) {
           width={600}
           height={600}
           priority
-          className="avatar-image"
+          className="avatar-image w-full h-auto object-cover aspect-square"
           draggable={false}
         />
       </div>
@@ -166,7 +166,7 @@ export default function Avatar({ state = "idle" }: AvatarProps) {
         .avatar-image {
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          /* object-fit managed by utilities */
           border-radius: 12px;
           border: 1px solid rgba(107, 163, 104, 0.15);
           box-shadow:

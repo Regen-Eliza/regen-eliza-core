@@ -383,8 +383,8 @@ export default function SentientDashboard({ children }: { children?: React.React
       {/* ═══════════════════════════════════
           ASCII TITLE BAR
           ═══════════════════════════════════ */}
-      <div className="w-full flex justify-center items-center pt-4 pb-2 shrink-0 z-10">
-        <pre className="text-[#6ba368] font-bold text-sm sm:text-base md:text-lg leading-tight text-center select-none font-mono tracking-wide">
+      <div className="w-full flex flex-col justify-center items-center pt-4 sm:pt-6 pb-2 shrink-0 z-10 px-4 sm:px-6 lg:px-8">
+        <pre className="text-[#6ba368] font-bold text-[6px] sm:text-xs md:text-sm lg:text-base leading-tight text-center select-none font-mono tracking-wide overflow-x-hidden w-full">
           {ASCII_TITLE}
         </pre>
       </div>
@@ -392,28 +392,28 @@ export default function SentientDashboard({ children }: { children?: React.React
       {/* ═══════════════════════════════════
           3-COLUMN COMMAND CENTER
           ═══════════════════════════════════ */}
-      <div className="w-[98%] max-w-[1600px] mx-auto flex flex-col lg:grid lg:grid-cols-12 lg:gap-8 items-start mt-2 flex-1 min-h-0 z-10 overflow-y-auto lg:overflow-hidden pb-4">
+      <div className="w-full max-w-screen-xl mx-auto flex flex-col lg:grid lg:grid-cols-12 lg:gap-8 items-start mt-2 flex-1 min-h-[100dvh] lg:min-h-0 z-10 overflow-y-auto lg:overflow-hidden pb-4 px-4 sm:px-6 lg:px-8">
 
         {/* ─── COLUMN 1: Agent Details Panel ─── */}
-        <div className="h-full flex flex-col gap-3 overflow-y-auto scrollbar-hide w-full pr-1 pb-4 lg:col-span-3">
+        <div className="h-full flex flex-col gap-4 overflow-y-auto scrollbar-hide w-full pr-1 pb-4 lg:col-span-3 order-2 lg:order-none mt-8 lg:mt-0">
           {/* Identity Card */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3">
             <div className={panelLabel}>Agent Identity</div>
-            <div className="text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">REGEN ELIZA</div>
+            <div className="hidden lg:block text-4xl font-mono tracking-wide tracking-wider mb-2 font-bold text-[#00FF41] drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">REGEN ELIZA</div>
             <a href="https://www.8004scan.io/agents/celo/1851" target="_blank" rel="noopener noreferrer" className="text-[#6ba368] hover:text-[#88d184] hover:underline transition-colors font-mono tracking-wide text-sm mb-3 inline-block font-bold">
               View on 8004scan.io ↗
             </a>
             <div className="text-xl font-mono tracking-wide font-bold text-[#e5e5e5] flex items-center gap-2">
               <ShieldCheck size={16} className="text-[#6ba368]" /> ERC-8004 Autonomous Agent
             </div>
-            <div className="flex flex-col space-y-2 mt-2">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-4 space-y-2 sm:space-y-0 mt-2">
               <div className="flex items-center space-x-2">
                 <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                <span className="text-[#888888] font-mono tracking-wide text-sm">BASE ID: 30121</span>
+                <span className="text-[#888888] font-mono tracking-wide text-sm whitespace-nowrap">BASE ID: 30121</span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
-                <span className="text-[#888888] font-mono tracking-wide text-sm">CELO ID: 1851</span>
+                <span className="text-[#888888] font-mono tracking-wide text-sm whitespace-nowrap">CELO ID: 1851</span>
               </div>
             </div>
           </div>
@@ -440,7 +440,7 @@ export default function SentientDashboard({ children }: { children?: React.React
               <Globe size={16} className="text-[#6ba368]" />
               <span>LINKED</span>
             </div>
-            <div className="flex flex-col space-y-3 mt-1.5">
+            <div className="flex flex-col gap-3 mt-1.5">
               <div className="flex flex-col">
                 <div className="flex items-center space-x-2"><span className="w-2 h-2 rounded-full bg-blue-500"></span><span className="text-[#e5e5e5] font-mono text-sm">Chain: Base (8453)</span></div>
                 <div className="text-[#888888] font-mono text-xs pl-4 mt-1">RPC: mainnet.base.org</div>
@@ -475,18 +475,24 @@ export default function SentientDashboard({ children }: { children?: React.React
         </div>
 
         {/* ─── COLUMN 2: The Soul (Center) ─── */}
-        <div className="h-[450px] lg:h-full flex flex-col relative w-full z-20 order-first lg:order-none mb-4 lg:mb-0 lg:col-span-6">
+        <div className="min-h-[70vh] sm:min-h-[450px] lg:h-full flex flex-col relative w-full z-20 order-1 lg:order-none mb-4 lg:mb-0 lg:col-span-6">
           
           {/* Agent Ingest Box */}
           <div className="w-full flex shrink-0 mb-4 justify-center">
             <div className="w-full max-w-[800px] px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center font-mono backdrop-blur-md flex flex-col items-center justify-center group cursor-pointer transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
               <span className="text-sm text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80">🤖 AGENTS: Ingest My Skills Here</span>
-              <span className="text-[24px] font-bold text-[#6ba368] tracking-wide mt-1">curl https://api.regeneliza.com/skill.md</span>
+              <span className="font-bold text-[#6ba368] tracking-wide mt-1 truncate overflow-hidden max-w-[90vw] lg:max-w-full text-[clamp(1rem,3.5vw,1.5rem)] sm:text-[24px]">curl https://api.regeneliza.com/skill.md</span>
             </div>
           </div>
 
-          <div className="w-full flex-1 min-h-0 rounded-xl overflow-hidden border border-[#2a2a2a] bg-black/30 flex items-center justify-center shadow-[0_0_30px_rgba(107,163,104,0.1)] mb-3 relative group">
-            <Avatar state={(
+          {/* Mobile Hero Tagline & CTA */}
+          <div className="flex flex-col items-center mb-4 lg:hidden w-full space-y-2 px-2">
+             <h1 className="font-mono font-bold text-[#00FF41] text-[clamp(2rem,8vw,3rem)] tracking-wider drop-shadow-[0_0_10px_rgba(0,255,65,0.4)] text-center leading-none">REGEN ELIZA</h1>
+             <p className="text-[#888] font-mono text-center text-sm px-4 whitespace-normal break-words">ERC-8004 Autonomous Agent</p>
+          </div>
+
+          <div className="w-full flex-1 min-h-[300px] rounded-xl overflow-hidden border border-[#2a2a2a] bg-black/30 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(107,163,104,0.1)] mb-3 relative group">
+          <Avatar state={(
               isSpeaking ? 'speaking' :
                 isProcessing ? 'thinking' :
                   isListeningSpeech ? 'listening' :
@@ -494,11 +500,16 @@ export default function SentientDashboard({ children }: { children?: React.React
             ) as AvatarState} />
             <div className="absolute inset-0 border border-[#6ba368]/10 rounded-xl pointer-events-none transition-colors group-hover:border-[#6ba368]/30 mix-blend-screen" />
           </div>
+          <div className="mt-2 mb-4 lg:hidden w-full px-2">
+             <button className="w-full bg-[#10b981]/10 text-[#10b981] border border-[#10b981]/30 hover:bg-[#10b981]/20 font-bold py-4 rounded-lg min-h-[44px] shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all uppercase tracking-widest text-[clamp(0.8rem,3vw,1rem)] whitespace-normal break-words" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
+                INGEST SKILLS (COPY CURL)
+             </button>
+          </div>
 
         </div>
 
         {/* ─── COLUMN 3: Transaction Log Panel & Skills ─── */}
-        <div className="h-full flex flex-col gap-2 overflow-y-auto scrollbar-hide pr-1 pb-4 lg:col-span-3">
+        <div className="h-full flex flex-col gap-4 overflow-y-auto scrollbar-hide pr-1 pb-8 lg:col-span-3 order-3 lg:order-none w-full">
 
           {/* Live Transaction Log bg */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 min-h-[160px] flex flex-col shadow-[inset_0_0_15px_rgba(107,163,104,0.05)] mb-2">
@@ -521,25 +532,13 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className={`${panelLabel} flex items-center gap-2`}>
               <ShieldCheck size={14} className="text-[#6ba368]" /> Agent Skills
             </div>
-            <div className="grid grid-cols-2 gap-2 mt-1">
-              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="block w-full flex items-center justify-center border-2 border-[#2a2a2a] bg-transparent text-[#e5e5e5]/80 px-1 py-2 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-colors truncate">
-                BUILDER.MD
-              </a>
-              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="block w-full flex items-center justify-center border-2 border-[#2a2a2a] bg-transparent text-[#e5e5e5]/80 px-1 py-2 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-colors truncate">
-                PUBLIC_GOODS.MD
-              </a>
-              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="block w-full flex items-center justify-center border-2 border-[#2a2a2a] bg-transparent text-[#e5e5e5]/80 px-1 py-2 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-colors truncate">
-                OCTANT.MD
-              </a>
-              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="block w-full flex items-center justify-center border-2 border-[#2a2a2a] bg-transparent text-[#e5e5e5]/80 px-1 py-2 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-colors truncate">
-                LIDO.MD
-              </a>
-              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="block w-full flex items-center justify-center border-2 border-[#2a2a2a] bg-transparent text-[#e5e5e5]/80 px-1 py-2 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-colors truncate">
-                UNISWAP.MD
-              </a>
-              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="block w-full flex items-center justify-center border-2 border-[#2a2a2a] bg-transparent text-[#e5e5e5]/80 px-1 py-2 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-colors truncate">
-                CELO.MD
-              </a>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+              <a href="/skills/builder-funding.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">BUILDER.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
+              <a href="/skills/public-goods.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">PUBLIC_GOODS.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
+              <a href="/skills/octant-evaluation.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">OCTANT.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
+              <a href="/skills/lido-yield-treasury.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">LIDO.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
+              <a href="/skills/uniswap-intent-router.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">UNISWAP.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
+              <a href="/skills/celo-real-world-impact.md" target="_blank" rel="noopener noreferrer" className="flex flex-row w-full items-center justify-between border border-[#2a2a2a] bg-[#111111] text-[#e5e5e5]/90 px-3 py-3 rounded-lg font-mono font-bold tracking-widest text-xs xl:text-sm hover:border-[#6ba368] hover:text-[#6ba368] hover:bg-[#6ba368]/10 transition-all min-h-[44px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"><div className="flex items-center gap-2 min-w-0"><span className="text-[#6ba368] shrink-0">⚡</span> <span className="truncate">CELO.MD</span></div><span className="text-[#888] opacity-50 shrink-0">→</span></a>
             </div>
           </div>
 
@@ -586,10 +585,10 @@ export default function SentientDashboard({ children }: { children?: React.React
       {/* ═══════════════════════════════════
           BOTTOM DOCK CONTROL BAR
           ═══════════════════════════════════ */}
-      <div className="w-[98%] mx-auto grid grid-cols-[1.2fr_1.6fr_1.2fr] gap-4 items-center py-2 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 shrink-0 px-2 lg:px-4">
+      <div className="w-full max-w-screen-xl mx-auto flex flex-col lg:grid lg:grid-cols-[1.2fr_1.6fr_1.2fr] gap-4 lg:gap-8 items-center py-4 sm:py-2 bg-black/60 backdrop-blur-md border-t border-[#2a2a2a] z-20 shrink-0 px-4 sm:px-6 lg:px-8">
 
         {/* Left Section (Tracks) */}
-        <div className="flex items-center space-x-3 text-[#e5e5e5] justify-start font-mono tracking-wide">
+        <div className="flex items-center space-x-3 text-[#e5e5e5] justify-center lg:justify-start font-mono tracking-wide w-full flex-wrap gap-y-2">
           <span className="text-[#6ba368] font-bold tracking-widest text-sm lg:text-base">TRACKS:</span>
           <span className="font-bold text-[10px] lg:text-xs opacity-80">CELO | OCTANT | ENS | UNISWAP</span>
         </div>
@@ -599,7 +598,7 @@ export default function SentientDashboard({ children }: { children?: React.React
           <div className="text-[#6ba368] font-bold text-center w-full text-lg tracking-[0.2em]">SERVICES</div>
 
           {/* Row 1 */}
-          <div className="flex items-center space-x-2 w-full justify-center">
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full justify-center">
             <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">DeSci</button>
             <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Ecology</button>
             <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Builders</button>
@@ -607,15 +606,15 @@ export default function SentientDashboard({ children }: { children?: React.React
           </div>
 
           {/* Row 2 */}
-          <div className="flex items-center space-x-2 w-full justify-center">
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Contacts</button>
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">ENS</button>
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full justify-center">
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="w-full sm:w-auto min-h-[44px] sm:min-h-0 border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Contacts</button>
+            <button disabled={isProcessing} onClick={handleDirectPayment} className="w-full sm:w-auto min-h-[44px] sm:min-h-0 border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">ENS</button>
             <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Swap</button>
           </div>
         </div>
 
         {/* Right Section (ENS) */}
-        <div className="flex items-center space-x-3 justify-end font-mono tracking-wide">
+        <div className="flex items-center space-x-3 justify-center lg:justify-end font-mono tracking-wide w-full flex-wrap gap-y-2">
           <span className="text-[#6ba368] font-bold text-sm lg:text-base">ENS:</span>
           {contacts.slice(0, 3).map((c) => (
             <span key={c.name} className="text-[10px] lg:text-xs opacity-60">{c.spokenName}</span>
