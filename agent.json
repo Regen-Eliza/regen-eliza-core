@@ -1,0 +1,29 @@
+{
+  "name": "Regen Eliza",
+  "version": "0.3.0",
+  "operator_wallet": "0xc57f7ce71fde55cee70f509a9b441db87be07d60",
+  "erc8004_identity": {
+    "base": {
+      "agentId": 29820,
+      "registry": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
+      "txn": "0xbc28ef91110a6dcdfc57fea63f7f37bf9cd52255300616f0c2ed0302364cc45a",
+      "status": "compromised_wallet_do_not_fund"
+    },
+    "celo": {
+      "agentId": 1851,
+      "status": "active"
+    }
+  },
+  "mcp_endpoint": "https://api.regeneliza.com/mcp",
+  "agent_card": "https://api.regeneliza.com/.well-known/agent-card.json",
+  "ipfs_metadata": "ipfs://QmTpFfLDe3czhojvZEvmjNHm49RUjto6vwqmTKJ4AKQ2uc",
+  "supported_tools": [
+    "get_paid", "route_donation_x402", "quadratic_funding",
+    "swap_skills", "agentic_market", "get_projects",
+    "resolve_ens", "execute_swap", "octant_evaluation",
+    "yield_bridge", "get_usdc"
+  ],
+  "tech_stack": ["Claude Code CLI", "Gemini 2.5 Pro", "MCP 2024-11-05", "x402", "ERC-8004", "Celo", "Base", "IPFS", "Pinata", "Qdrant"],
+  "compute_constraints": { "max_tokens_per_call": 8192, "max_concurrent_tasks": 5 },
+  "task_categories": ["public_goods_funding", "agent_payments", "defi_routing", "impact_evaluation", "quadratic_funding", "skill_barter"]
+}
