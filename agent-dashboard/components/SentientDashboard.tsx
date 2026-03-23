@@ -96,10 +96,10 @@ export default function SentientDashboard({ children }: { children?: React.React
   /* ─── Logging helper ─── */
   const pushLog = (msg: string) => setLogs(prev => [`> ${ msg } `, ...prev].slice(0, 50));
 const SERVICE_LOGS: Record<string, string[]> = {
-  desci:    ['INIT: Triggering DeSci funding protocol...', 'FUND DESCI — routing 100 USDT to verified scientific research...', 'SUCCESS — funded 1 project(s)'],
-  ecology:  ['INIT: Triggering Ecology funding protocol...', 'BASE TX — routing 50 USDC to verified reforestation nodes...', 'SUCCESS — impact verified on-chain.'],
-  builders: ['INIT: Evaluating Builder public goods...', 'CELO TX — sending 10 USDm to open-source developers...', 'SUCCESS — funded 3 project(s)'],
-  agents:   ['INIT: Scanning peer agents via x402 protocol...', 'FUND AGENTS — routing 25 USDC to Agent #1851...', 'SUCCESS — A2A micro-transaction complete.'],
+  desci:    ['INIT: Triggering DeSci funding protocol...', 'FUND DESCI — x402 routing 0.01 USDC to verified scientific research...', 'SUCCESS — funded 1 project(s)'],
+  ecology:  ['INIT: Triggering Ecology funding protocol...', 'x402 TX — routing 0.0069 USDC to verified reforestation nodes...', 'SUCCESS — impact verified on-chain.'],
+  builders: ['INIT: Evaluating Builder public goods...', 'x402 TX — sending 0.0050 USDm to open-source developers on Celo...', 'SUCCESS — funded 3 project(s)'],
+  agents:   ['INIT: Scanning peer agents via x402 protocol...', 'x402 A2A — routing 0.0100 USDC to peer Agent #1851...', 'SUCCESS — A2A micro-transaction complete.'],
   contacts: ['INIT: Fetching agent address book...', 'CONTACTS LOADED: ottox.eth, ozkite.eth, vitalik.eth, gigahierz.eth, luukdao.eth', 'STATUS: Ready for x402 PAY commands.'],
   ens:      ['INIT: Resolving ENS domain identities...', 'RESOLVE: ozkite.eth → 0xc57f7ce71fde55cee70f509a9b441db87be07d60', 'SUCCESS — On-chain identity registry synchronized.'],
   swap:     ['SWAP — executing 1 USDC → USDT on-chain...', 'SWAP — Uniswap V3 Router intent confirmed.', 'SUCCESS — Cross-chain treasury liquidity routed.'],
