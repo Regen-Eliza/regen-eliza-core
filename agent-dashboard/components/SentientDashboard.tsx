@@ -394,12 +394,12 @@ export default function SentientDashboard({ children }: { children?: React.React
         )}
       </AnimatePresence>
       {/* ═══════════════════════════════════
-          ASCII TITLE BAR
+          MAIN TITLE BAR
           ═══════════════════════════════════ */}
-      <div className="w-full flex flex-col justify-center items-center pt-4 sm:pt-6 pb-2 shrink-0 z-10 px-4 sm:px-6 lg:px-8">
-        <pre className="text-[#6ba368] font-bold text-[6px] sm:text-xs md:text-sm lg:text-base leading-tight text-center select-none font-mono tracking-wide overflow-x-hidden w-full">
-          {ASCII_TITLE}
-        </pre>
+      <div className="w-full text-center overflow-hidden pt-4 sm:pt-6 pb-2 shrink-0 z-10 px-4 sm:px-6 lg:px-8">
+        <h1 className="whitespace-nowrap font-mono font-bold text-[#6ba368] text-[clamp(0.9rem,6.5vw,5rem)] tracking-normal sm:tracking-widest leading-none drop-shadow-[0_0_10px_rgba(107,163,104,0.4)]" style={{ fontFamily: "'VT323', monospace" }}>
+          REGEN ELIZA
+        </h1>
       </div>
 
       {/* ═══════════════════════════════════
@@ -500,7 +500,6 @@ export default function SentientDashboard({ children }: { children?: React.React
 
           {/* Mobile Hero Tagline & CTA */}
           <div className="flex flex-col items-center mb-4 lg:hidden w-full space-y-2 px-2">
-             <h1 className="font-mono font-bold text-[#00FF41] text-[clamp(1.5rem,8vw,4rem)] tracking-normal sm:tracking-widest whitespace-nowrap overflow-hidden drop-shadow-[0_0_10px_rgba(0,255,65,0.4)] text-center leading-none" style={{ fontFamily: "'VT323', monospace" }}>REGEN ELIZA</h1>
              <p className="text-[#888] font-mono text-center text-sm px-4 whitespace-normal break-words">ERC-8004 Autonomous Agent</p>
           </div>
 
