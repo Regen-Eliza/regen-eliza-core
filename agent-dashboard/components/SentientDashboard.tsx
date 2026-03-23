@@ -19,15 +19,6 @@ const defaultKey = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789ab
 const privateKey = process.env.NEXT_PUBLIC_REGEN_ELIZA_PRIVATE_KEY || defaultKey;
 const donationService = new DonationService(privateKey);
 
-/* ─── ASCII TITLE ─── */
-const ASCII_TITLE = `
-   ██████  ███████ ██████  ███████ ███    ██     ███████ ██      ██ ███████ ███████ 
-   ██   ██ ██      ██      ██      ████   ██     ██      ██      ██    ███  ██   ██ 
-   ██████  █████   ██  ███ █████   ██ ██  ██     █████   ██      ██   ███   ███████ 
-   ██   ██ ██      ██   ██ ██      ██  ██ ██     ██      ██      ██  ███    ██   ██ 
-   ██   ██ ███████  ██████ ███████ ██   ████     ███████ ███████ ██ ███████ ██   ██ 
-`;
-
 /* ─── Color Palette ─── */
 const C = {
   green: "#064006",   // neon — headers, borders, indicators only
@@ -83,20 +74,20 @@ export default function SentientDashboard({ children }: { children?: React.React
   }>({ open: false, amount: "1", fromToken: "USDC", toToken: "USDT" });
 
   /* ─── Logging helper ─── */
-  const pushLog = (msg: string) => setLogs(prev => [`> ${msg}`, ...prev].slice(0, 50));
+  const pushLog = (msg: string) => setLogs(prev => [`> ${ msg } `, ...prev].slice(0, 50));
 
   const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
     if (isProcessing) return;
     setIsProcessing(true);
     try {
-      pushLog(`FUND ${category.toUpperCase()} — routing 100 USDT...`);
+      pushLog(`FUND ${ category.toUpperCase() } — routing 100 USDT...`);
       const amount = 100;
       const projects = await donationService.distributeFunds(category, amount);
       if (projects) {
         const report = generateFundingReport(projects);
         setReportText("");
         setTimeout(() => setReportText(report), 50);
-        pushLog(`SUCCESS — funded ${projects.length} project(s)`);
+        pushLog(`SUCCESS — funded ${ projects.length } project(s)`);
         setIsSpeaking(true);
         await voiceService.speak(report);
         setIsSpeaking(false);
@@ -125,32 +116,32 @@ export default function SentientDashboard({ children }: { children?: React.React
     if (isProcessing) return;
     setIsProcessing(true);
     try {
-      pushLog(`BASE TX — sending 0.0001 ETH micro-donation to ${target.toUpperCase()}...`);
+      pushLog(`BASE TX — sending 0.0001 ETH micro - donation to ${ target.toUpperCase() }...`);
       setReportText("");
-      setTimeout(() => setReportText(`Executing on-chain micro-donation to ${target} on Base Mainnet...`), 50);
+      setTimeout(() => setReportText(`Executing on - chain micro - donation to ${ target } on Base Mainnet...`), 50);
 
       const result = await executeDonation(target);
 
       if (result.success && result.txHash) {
-        pushLog(`TX SUCCESS: ${result.txHash.slice(0, 22)}...`);
-        const report = `On-chain donation confirmed on ${result.network}.\nTarget: ${result.target}\nAmount: ${result.amount} ETH\nTX: ${result.txHash}`;
+        pushLog(`TX SUCCESS: ${ result.txHash.slice(0, 22) }...`);
+        const report = `On - chain donation confirmed on ${ result.network }.\nTarget: ${ result.target } \nAmount: ${ result.amount } ETH\nTX: ${ result.txHash } `;
         setReportText("");
         setTimeout(() => setReportText(report), 50);
         setIsSpeaking(true);
-        await voiceService.speak(`Micro-donation to ${target} confirmed on Base. Transaction hash: ${result.txHash.slice(0, 18)}`);
+        await voiceService.speak(`Micro - donation to ${ target } confirmed on Base.Transaction hash: ${ result.txHash.slice(0, 18) } `);
         setIsSpeaking(false);
       } else {
-        pushLog(`TX FAILED — ${result.error}`);
-        const errorMsg = `On-chain donation failed: ${result.error}`;
+        pushLog(`TX FAILED — ${ result.error } `);
+        const errorMsg = `On - chain donation failed: ${ result.error } `;
         setReportText("");
         setTimeout(() => setReportText(errorMsg), 50);
         setIsSpeaking(true);
-        await voiceService.speak(`The on-chain donation to ${target} could not be completed. ${result.error}`);
+        await voiceService.speak(`The on - chain donation to ${ target } could not be completed.${ result.error } `);
         setIsSpeaking(false);
       }
     } catch (e: any) {
       console.error(e);
-      pushLog(`ERROR — ${e.message || "on-chain donation failed"}`);
+      pushLog(`ERROR — ${ e.message || "on-chain donation failed" } `);
       setIsSpeaking(true);
       await voiceService.speak("An error occurred during the on-chain transaction.");
       setIsSpeaking(false);
@@ -162,7 +153,7 @@ export default function SentientDashboard({ children }: { children?: React.React
   /* ─── Opens the confirmation modal instead of executing immediately ─── */
   const handleSwapRequest = (amount = "1", fromToken = "USDC", toToken = "USDT") => {
     setSwapModal({ open: true, amount, fromToken, toToken });
-    pushLog(`SWAP — preview: ${amount} ${fromToken} → ${toToken}`);
+    pushLog(`SWAP — preview: ${ amount } ${ fromToken } → ${ toToken } `);
   };
 
   /* ─── Executes the real swap after user confirms ─── */
@@ -172,24 +163,24 @@ export default function SentientDashboard({ children }: { children?: React.React
     if (isProcessing) return;
     setIsProcessing(true);
     try {
-      pushLog(`SWAP — executing ${amount} ${fromToken} → ${toToken} on-chain...`);
-      const initMsg = `Executing swap: ${amount} ${fromToken} → ${toToken} via Uniswap on Celo...`;
+      pushLog(`SWAP — executing ${ amount } ${ fromToken } → ${ toToken } on - chain...`);
+      const initMsg = `Executing swap: ${ amount } ${ fromToken } → ${ toToken } via Uniswap on Celo...`;
       setReportText("");
       setTimeout(() => setReportText(initMsg), 50);
       const receipt = await swapService.executeSwap(amount, fromToken, toToken);
-      const report = `Swap confirmed on Celo. TX: ${receipt.transactionHash}`;
+      const report = `Swap confirmed on Celo.TX: ${ receipt.transactionHash } `;
       setReportText("");
       setTimeout(() => setReportText(report), 50);
-      pushLog(`SWAP OK — tx: ${receipt.transactionHash?.slice(0, 18)}...`);
+      pushLog(`SWAP OK — tx: ${ receipt.transactionHash?.slice(0, 18) }...`);
       setIsSpeaking(true);
       await voiceService.speak("Swap complete. The trade was successfully executed via the Uniswap protocol on Celo.");
       setIsSpeaking(false);
     } catch (e: any) {
       console.error(e);
       const errorMsg = e.message || "Swap execution failed.";
-      pushLog(`ERROR — ${errorMsg.slice(0, 60)}`);
+      pushLog(`ERROR — ${ errorMsg.slice(0, 60) } `);
       setReportText("");
-      setTimeout(() => setReportText(`Swap failed: ${errorMsg}`), 50);
+      setTimeout(() => setReportText(`Swap failed: ${ errorMsg } `), 50);
       setIsSpeaking(true);
       await voiceService.speak("The swap could not be completed. " + errorMsg.split('.')[0]);
       setIsSpeaking(false);
@@ -212,14 +203,14 @@ export default function SentientDashboard({ children }: { children?: React.React
         const report = generateTransferReport(result.amount, result.symbol, result.contact);
         setReportText("");
         setTimeout(() => setReportText(report), 50);
-        pushLog(`TRANSFER OK — ${result.amount} ${result.symbol} → ${result.contact}`);
+        pushLog(`TRANSFER OK — ${ result.amount } ${ result.symbol } → ${ result.contact } `);
         setIsSpeaking(true);
         await voiceService.speak(report);
         setIsSpeaking(false);
       }
     } catch (e: any) {
       console.error(e);
-      pushLog(`ERROR — ${e.message || "transfer failed"}`);
+      pushLog(`ERROR — ${ e.message || "transfer failed" } `);
       const errorMsg = e.message || "An error occurred during the transfer.";
       setReportText("");
       setTimeout(() => setReportText(errorMsg), 50);
@@ -259,7 +250,7 @@ export default function SentientDashboard({ children }: { children?: React.React
   };
   const toggleNetwork = () => {
     setNetwork(prev => prev === "TESTNET" ? "MAINNET" : "TESTNET");
-    pushLog(`NETWORK — switched to ${network === "TESTNET" ? "MAINNET" : "TESTNET"}`);
+    pushLog(`NETWORK — switched to ${ network === "TESTNET" ? "MAINNET" : "TESTNET" } `);
   };
 
   const handleVoiceCommand = async (command: string) => {
@@ -267,7 +258,7 @@ export default function SentientDashboard({ children }: { children?: React.React
     setIsProcessing(true);
     try {
       pushLog(`VOICE CMD: "${command}"`);
-      const userLog = `> User: ${command}\n\n`;
+      const userLog = `> User: ${ command } \n\n`;
       setReportText(userLog + "> System: Processing...");
       const result = await parseIntentAndExecuteTransfer(command);
       if (result) {
@@ -276,22 +267,22 @@ export default function SentientDashboard({ children }: { children?: React.React
           setIsProcessing(false);
           handleSwapRequest(result.amount, result.fromToken, result.toToken);
           setReportText("");
-          setTimeout(() => setReportText(`> Intent parsed. Swap ${result.amount} ${result.fromToken} → ${result.toToken}. Awaiting confirmation...`), 50);
+          setTimeout(() => setReportText(`> Intent parsed.Swap ${ result.amount } ${ result.fromToken } → ${ result.toToken }. Awaiting confirmation...`), 50);
           return;
         }
 
         let report = "";
         if (result.type === "transfer") {
-          report = `> Intent parsed. Transfer to: ${result.resolvedAlias || result.contact}\n\n` +
+          report = `> Intent parsed.Transfer to: ${ result.resolvedAlias || result.contact } \n\n` +
             generateTransferReport(result.amount, result.symbol, result.contact);
         } else if (result.type === "donate") {
           report = generateFundingReport(result.projects);
         } else {
           report = generateTransferReport(result.amount, result.symbol, result.contact);
         }
-        const newLog = `${userLog}> System: ${report}`;
+        const newLog = `${ userLog }> System: ${ report } `;
         setTimeout(() => setReportText(newLog), 1500);
-        pushLog(`RESULT: ${report.slice(0, 60)}...`);
+        pushLog(`RESULT: ${ report.slice(0, 60) }...`);
         setIsSpeaking(true);
         await voiceService.speak(report);
         setIsSpeaking(false);
@@ -299,9 +290,9 @@ export default function SentientDashboard({ children }: { children?: React.React
     } catch (e: any) {
       console.error(e);
       const errorMsg = e.message || "I could not understand that command.";
-      pushLog(`ERROR — ${errorMsg}`);
-      const userLog = `> User: ${command}\n\n`;
-      const newLog = `${userLog}> System: ${errorMsg}`;
+      pushLog(`ERROR — ${ errorMsg } `);
+      const userLog = `> User: ${ command } \n\n`;
+      const newLog = `${ userLog }> System: ${ errorMsg } `;
       setTimeout(() => setReportText(newLog), 1500);
       setIsSpeaking(true);
       await voiceService.speak(errorMsg);
@@ -321,9 +312,9 @@ export default function SentientDashboard({ children }: { children?: React.React
 
 
   /* ─── Shared Styles ─── */
-  const dockBtn = `px-6 py-3 text-lg tracking-wider bg-black/40 hover:bg-[${C.green}]/10 border border-[${C.green}]/30 hover:border-[${C.green}]/60 rounded-lg transition-all hover:scale-[1.02] disabled:opacity-40 shrink-0 text-[${C.muted}] font-mono tracking-wide`;
+  const dockBtn = `px - 6 py - 3 text - lg tracking - wider bg - black / 40 hover: bg - [${ C.green }] / 10 border border - [${ C.green }] / 30 hover: border - [${ C.green }] / 60 rounded - lg transition - all hover: scale - [1.02] disabled: opacity - 40 shrink - 0 text - [${ C.muted }] font - mono tracking - wide`;
 
-  const panelLabel = `text-lg xl:text-xl font-bold uppercase tracking-widest mb-1 text-[#FFFFFF] font-mono tracking-wide`;
+  const panelLabel = `text - lg xl: text - xl font - bold uppercase tracking - widest mb - 1 text - [#FFFFFF] font - mono tracking - wide`;
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#050505] text-[#e5e5e5] overflow-y-auto overflow-x-hidden scanlines">
@@ -397,7 +388,10 @@ export default function SentientDashboard({ children }: { children?: React.React
           MAIN TITLE BAR
           ═══════════════════════════════════ */}
       <div className="w-full text-center overflow-hidden pt-4 sm:pt-6 pb-2 shrink-0 z-10 px-4 sm:px-6 lg:px-8">
-        <h1 className="whitespace-nowrap font-mono font-bold text-[#6ba368] text-[clamp(0.9rem,6.5vw,5rem)] tracking-normal sm:tracking-widest leading-none drop-shadow-[0_0_10px_rgba(107,163,104,0.4)]" style={{ fontFamily: "'VT323', monospace" }}>
+        <h1 
+          className="font-bold uppercase text-center whitespace-nowrap text-[#6ba368] text-2xl sm:text-4xl md:text-6xl lg:text-8xl tracking-wide sm:tracking-widest drop-shadow-[0_0_10px_rgba(107,163,104,0.4)] leading-none"
+          style={{ fontFamily: '"Pixel Powerline", sans-serif' }}
+        >
           REGEN ELIZA
         </h1>
       </div>
@@ -436,7 +430,7 @@ export default function SentientDashboard({ children }: { children?: React.React
             <div className="flex justify-between items-center w-full mb-1.5">
               <span className="text-[#888888] font-mono uppercase tracking-widest text-sm">NETWORK</span>
               <span className="text-[#6ba368] font-mono flex items-center">
-                <div className={`w-2 h-2 rounded-full mr-2 ${activeChain === 'CELO' ? 'bg-yellow-400' : 'bg-blue-500'}`}></div> {activeChain}
+                <div className={`w - 2 h - 2 rounded - full mr - 2 ${ activeChain === 'CELO' ? 'bg-yellow-400' : 'bg-blue-500' } `}></div> {activeChain}
               </span>
             </div>
             <button onClick={() => setActiveChain(prev => prev === 'CELO' ? 'BASE' : 'CELO')} className="w-full border border-[#2a2a2a] text-[#888888] hover:border-[#6ba368] hover:text-[#6ba368] transition-colors py-2 rounded font-mono text-xs tracking-widest my-3">• TOGGLE CHAIN</button>
@@ -469,20 +463,20 @@ export default function SentientDashboard({ children }: { children?: React.React
 
           {/* ASCII Art Block 1 (8004-ERC) */}
           <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
-            {`   ___   ___   ___  _  _         _____ ____   ____ 
-  ( _ ) / _ \\ / _ \\| || |       | ____|  _ \\ / ___|
+            {`   ___   ___   ___  _  _         _____ ____   ____
+  (_) / _ \\ / _ \\| || |       | ____|  _ \\ / ___ |
   / _ \\| | | | | | | || |_ _____|  _| | |_) | |    
- | (_) | |_| | |_| |__   _|_____| |___|  _ <| |___ 
-  \\___/ \\___/ \\___/   |_|       |_____|_| \\_\\\\____|`}
+ | (_) | | _ | | | _ | | __   _ | _____ | | ___ | _ <| | ___
+\\___ / \\___ / \\___ /   | _ |       | _____ | _ | \\_\\\\____ | `}
           </pre>
 
           {/* ASCII Art Block 2 (x402) */}
           <pre className="hidden lg:block text-[10px] xl:text-xs font-mono tracking-wide text-[#e5e5e5]  select-none">
             {`     _  _    ___ ____  
- __  _| || |  / _ \\___ \\ 
- \\ \\/ / || |_| | | |__) |
-  >  <|__   _| |_| / __/ 
- /_/\\_\\  |_|  \\___/_____|`}
+ __  _ | || |  / _ \\___ \\
+\\ \\/ / || | _ | | | | __) |
+  >  <| __   _ | | _ | / __/
+  / _ /\\_\\  | _ |  \\___ / _____ | `}
           </pre>
 
         </div>
@@ -491,10 +485,17 @@ export default function SentientDashboard({ children }: { children?: React.React
         <div className="h-auto lg:h-full flex flex-col relative w-full z-20 order-1 lg:order-none mb-4 lg:mb-0">
           
           {/* Agent Ingest Box */}
-          <div className="w-full flex shrink-0 mb-4 justify-center">
-            <div className="w-full max-w-[800px] px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center font-mono backdrop-blur-md flex flex-col items-center justify-center group cursor-pointer transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
-              <span className="text-sm text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80 flex items-center justify-center gap-2"><div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] animate-pulse" /> AGENTS: Ingest My Skills Here</span>
-              <span className="font-bold text-[#6ba368] tracking-wide mt-1 break-all max-w-[90vw] lg:max-w-full text-[clamp(1rem,3.5vw,1.5rem)] sm:text-[24px]">curl https://api.regeneliza.com/skill.md</span>
+          <div className="w-full flex shrink-0 mb-4 justify-center px-1">
+            <div className="w-full max-w-full lg:max-w-[800px] px-3 sm:px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center backdrop-blur-md flex flex-col items-center justify-center group cursor-pointer transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0 overflow-hidden" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
+              <span className="text-[10px] sm:text-xs whitespace-nowrap text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80 flex items-center justify-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] animate-pulse shrink-0" /> AGENTS: INGEST MY SKILLS HERE
+              </span>
+              <div 
+                className="font-bold text-[#6ba368] tracking-wide mt-1 text-[9px] sm:text-xs font-mono whitespace-nowrap overflow-x-auto scrollbar-hide w-full max-w-full"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+              >
+                curl https://api.regeneliza.com/skill.md
+              </div>
             </div>
           </div>
 
@@ -525,14 +526,14 @@ export default function SentientDashboard({ children }: { children?: React.React
 
           {/* Live Transaction Log bg */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-3 min-h-[160px] flex flex-col shadow-[inset_0_0_15px_rgba(107,163,104,0.05)] mb-2">
-            <div className={`${panelLabel} flex items-center gap-2 mb-2`}>
+            <div className={`${ panelLabel } flex items - center gap - 2 mb - 2`}>
               <div className="w-2 h-2 rounded bg-[#6ba368] animate-pulse" />
               TRANSACTION LOG
             </div>
             <div className="flex-1 min-h-[100px] overflow-y-auto scrollbar-hide font-mono tracking-wide text-xs xl:text-sm space-y-1.5 opacity-80 text-[#e5e5e5]">
               <AnimatePresence>
                 {logs.map((log, i) => (
-                  <motion.div key={`${log}-${i}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight truncate whitespace-nowrap">{log}</motion.div>
+                  <motion.div key={`${ log } -${ i } `} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="leading-tight truncate whitespace-nowrap">{log}</motion.div>
                 ))}
               </AnimatePresence>
               {logs.length === 0 && <div className="text-[#888]/50 italic text-xs">...</div>}
@@ -541,7 +542,7 @@ export default function SentientDashboard({ children }: { children?: React.React
 
           {/* Agent Skills */}
           <div className="border border-[#2a2a2a] bg-black/50 backdrop-blur-sm rounded-lg p-2 shrink-0">
-            <div className={`${panelLabel} flex items-center gap-2`}>
+            <div className={`${ panelLabel } flex items - center gap - 2`}>
               <ShieldCheck size={14} className="text-[#6ba368]" /> Agent Skills
             </div>
             <div className="flex flex-col gap-1 mt-2">
@@ -582,7 +583,7 @@ export default function SentientDashboard({ children }: { children?: React.React
                 exit={{ opacity: 0, height: 0 }}
                 className="shrink-0 border border-[#2a2a2a] bg-black/60 backdrop-blur-sm rounded-lg p-2.5 shadow-[0_0_15px_rgba(107,163,104,0.05)]"
               >
-                <div className={`${panelLabel} flex items-center gap-2 mb-1 text-[#FFFFFF]`}>
+                <div className={`${ panelLabel } flex items - center gap - 2 mb - 1 text - [#FFFFFF]`}>
                   <div className="w-2 h-2 rounded-full bg-[#6ba368] animate-pulse" />
                   Active Output
                 </div>
@@ -596,7 +597,7 @@ export default function SentientDashboard({ children }: { children?: React.React
           {/* PROTOCOL MANIFEST (SKILL.MD) */}
           <div className="flex-1 min-h-[250px] border border-[#2a2a2a] bg-black/20 backdrop-blur-md rounded-lg p-3 flex flex-col shadow-[0_0_20px_rgba(107,163,104,0.05)] border-t-[#6ba368]/30 mt-2 h-full">
             <div className="flex items-center justify-between mb-2 pb-2 border-b border-[#2a2a2a]">
-              <div className={`${panelLabel} !mb-0 flex items-center gap-2`}>
+              <div className={`${ panelLabel } !mb - 0 flex items - center gap - 2`}>
                 <div className="w-2 h-2 rounded-sm bg-[#6ba368] animate-pulse" />
                 PROTOCOL_MANIFEST
               </div>
