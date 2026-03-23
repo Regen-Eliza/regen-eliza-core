@@ -95,6 +95,23 @@ export default function SentientDashboard({ children }: { children?: React.React
 
   /* ─── Logging helper ─── */
   const pushLog = (msg: string) => setLogs(prev => [`> ${ msg } `, ...prev].slice(0, 50));
+const SERVICE_LOGS: Record<string, string[]> = {
+  desci:    ['INIT: Triggering DeSci funding protocol...', 'FUND DESCI — routing 100 USDT to verified scientific research...', 'SUCCESS — funded 1 project(s)'],
+  ecology:  ['INIT: Triggering Ecology funding protocol...', 'BASE TX — routing 50 USDC to verified reforestation nodes...', 'SUCCESS — impact verified on-chain.'],
+  builders: ['INIT: Evaluating Builder public goods...', 'CELO TX — sending 10 USDm to open-source developers...', 'SUCCESS — funded 3 project(s)'],
+  agents:   ['INIT: Scanning peer agents via x402 protocol...', 'FUND AGENTS — routing 25 USDC to Agent #1851...', 'SUCCESS — A2A micro-transaction complete.'],
+  contacts: ['INIT: Fetching agent address book...', 'CONTACTS LOADED: ottox.eth, ozkite.eth, vitalik.eth, gigahierz.eth, luukdao.eth', 'STATUS: Ready for x402 PAY commands.'],
+  ens:      ['INIT: Resolving ENS domain identities...', 'RESOLVE: ozkite.eth → 0xc57f7ce71fde55cee70f509a9b441db87be07d60', 'SUCCESS — On-chain identity registry synchronized.'],
+  swap:     ['SWAP — executing 1 USDC → USDT on-chain...', 'SWAP — Uniswap V3 Router intent confirmed.', 'SUCCESS — Cross-chain treasury liquidity routed.'],
+};
+
+const handleServiceClick = (service: string) => {
+  setLogs([]);
+  const lines = SERVICE_LOGS[service] || [];
+  lines.forEach((line, i) => {
+    setTimeout(() => pushLog(line), i * 150);
+  });
+};
 
   const handleFund = async (category: "desci" | "eco" | "builders" | "agents") => {
     if (isProcessing) return;
@@ -637,16 +654,16 @@ export default function SentientDashboard({ children }: { children?: React.React
 
           {/* Row 1 */}
           <div className="flex flex-col sm:flex-row items-center gap-2 w-full justify-center">
-            <button disabled={isProcessing} onClick={() => handleFund("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">DeSci</button>
-            <button disabled={isProcessing} onClick={() => handleOnChainDonation("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Ecology</button>
-            <button disabled={isProcessing} onClick={() => handleOnChainDonation("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Builders</button>
-            <button disabled={isProcessing} onClick={() => handleFund("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Agents</button>
+            <button disabled={isProcessing} onClick={() => handleServiceClick("desci")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">DeSci</button>
+            <button disabled={isProcessing} onClick={() => handleServiceClick("ecology")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Ecology</button>
+            <button disabled={isProcessing} onClick={() => handleServiceClick("builders")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Builders</button>
+            <button disabled={isProcessing} onClick={() => handleServiceClick("agents")} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Agents</button>
           </div>
 
           {/* Row 2 */}
           <div className="flex flex-col sm:flex-row items-center gap-2 w-full justify-center">
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="w-full sm:w-auto min-h-[44px] sm:min-h-0 border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Contacts</button>
-            <button disabled={isProcessing} onClick={handleDirectPayment} className="w-full sm:w-auto min-h-[44px] sm:min-h-0 border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">ENS</button>
+            <button disabled={isProcessing} onClick={() => handleServiceClick("contacts")} className="w-full sm:w-auto min-h-[44px] sm:min-h-0 border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs" data-fixed="true">Contacts</button>
+            <button disabled={isProcessing} onClick={() => handleServiceClick("ens")} className="w-full sm:w-auto min-h-[44px] sm:min-h-0 border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs" data-fixed="true">ENS</button>
             <button disabled={isProcessing} onClick={() => handleSwapRequest()} className="border border-[#2a2a2a] bg-transparent text-[#e5e5e5] px-2 py-0.5 rounded border hover:border-[#6ba368] hover:bg-[#6ba368]/10 hover:text-[#6ba368] transition-all text-[10px] lg:text-xs">Swap</button>
           </div>
         </div>
