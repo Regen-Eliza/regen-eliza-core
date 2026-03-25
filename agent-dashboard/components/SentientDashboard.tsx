@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mic, ShieldCheck, Globe, Power, Wallet, X, Zap, Copy } from "lucide-react";
+import { Mic, ShieldCheck, Globe, Power, Wallet, X, Zap, Copy, Check } from "lucide-react";
 import { useAudioAnalyzer } from "@/hooks/useAudioAnalyzer";
 import { useSpeechRecognition } from "../hooks/useSpeechRecognition";
 import { DonationService } from "../services/donationService";
@@ -28,12 +28,12 @@ const C = {
 };
 
 const AGENT_SKILLS = [
-  { label: "BUILDER.MD", description: "Builder Funding Evaluation" },
-  { label: "PUBLIC_GOODS.MD", description: "Regen Network Integration" },
-  { label: "OCTANT.MD", description: "GLM Ecosystem Fund" },
-  { label: "LIDO.MD", description: "wstETH Yield Generation" },
-  { label: "UNISWAP.MD", description: "On-chain Swap Intents" },
-  { label: "CELO.MD", description: "Real World Assets & Impact" },
+  { label: "BUILDER.MD",      description: "Builder Funding Evaluation",  url: "https://api.regeneliza.com/builder.json" },
+  { label: "PUBLIC_GOODS.MD", description: "Regen Network Integration",   url: "https://api.regeneliza.com/public_goods.json" },
+  { label: "OCTANT.MD",       description: "GLM Ecosystem Fund",           url: "https://api.regeneliza.com/octant.json" },
+  { label: "LIDO.MD",         description: "wstETH Yield Generation",      url: "https://api.regeneliza.com/lido.json" },
+  { label: "UNISWAP.MD",      description: "On-chain Swap Intents",        url: "https://api.regeneliza.com/uniswap.json" },
+  { label: "CELO.MD",         description: "Real World Assets & Impact",   url: "https://api.regeneliza.com/celo.json" },
 ];
 
 const SKILL_MD_FALLBACK = `# 🌱 Regen Eliza: Sovereign Omni-Agent Protocol
@@ -57,6 +57,8 @@ export default function SentientDashboard({ children }: { children?: React.React
   const { isListening, startListening, stopListening, getFrequency } = useAudioAnalyzer();
   const { isListeningSpeech, startListeningSpeech, stopListeningSpeech, transcript, setTranscript } = useSpeechRecognition();
   const [reputation, setReputation] = useState<number | string>("SYNCING...");
+  const [copiedCurl, setCopiedCurl] = useState(false);
+  const [copiedSkill, setCopiedSkill] = useState<string | null>(null);
   const [network, setNetwork] = useState("TESTNET");
   const [activeChain, setActiveChain] = useState<'CELO' | 'BASE'>('CELO');
 
@@ -523,16 +525,34 @@ const handleServiceClick = (service: string) => {
           
           {/* Agent Ingest Box */}
           <div className="w-full flex shrink-0 mb-4 justify-center px-1">
-            <div className="w-full max-w-full lg:max-w-[800px] px-3 sm:px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center backdrop-blur-md flex flex-col items-center justify-center group cursor-pointer transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0 overflow-hidden" onClick={() => navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md")}>
+            <div className="w-full max-w-full lg:max-w-[800px] px-3 sm:px-6 py-4 bg-black/40 border-2 border-[#6ba368]/30 hover:border-[#6ba368]/60 rounded-2xl text-center backdrop-blur-md flex flex-col items-center justify-center group transition-all shadow-[0_0_20px_rgba(107,163,104,0.15)] shrink-0 overflow-hidden">
               <span className="text-[10px] sm:text-xs whitespace-nowrap text-[#FFFFFF] font-bold uppercase tracking-widest mb-1 opacity-80 flex items-center justify-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] animate-pulse shrink-0" /> AGENTS: INGEST MY SKILLS HERE
               </span>
-              <div 
-                className="font-bold text-[#6ba368] tracking-wide mt-1 text-[9px] sm:text-xs font-mono whitespace-nowrap overflow-x-auto scrollbar-hide w-full max-w-full"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
-              >
-                curl https://api.regeneliza.com/skill.md
+              <div className="flex items-center gap-2 mt-1 w-full justify-center">
+                <div 
+                  className="font-bold text-[#6ba368] tracking-wide text-[9px] sm:text-xs font-mono whitespace-nowrap overflow-x-auto scrollbar-hide"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+                >
+                  curl https://api.regeneliza.com/skill.md
+                </div>
+                <button
+                  aria-label="Copy curl command"
+                  onClick={() => {
+                    navigator.clipboard.writeText("curl https://api.regeneliza.com/skill.md");
+                    setCopiedCurl(true);
+                    setTimeout(() => setCopiedCurl(false), 2000);
+                  }}
+                  className="shrink-0 p-1 rounded text-[#6ba368] hover:text-[#9dd99a] hover:drop-shadow-[0_0_6px_rgba(107,163,104,0.8)] transition-all"
+                >
+                  {copiedCurl
+                    ? <Check size={13} className="text-[#9dd99a]" />
+                    : <Copy size={13} />}
+                </button>
               </div>
+              {copiedCurl && (
+                <span className="text-[9px] font-mono text-[#9dd99a] mt-1 tracking-widest animate-pulse">COPIED!</span>
+              )}
             </div>
           </div>
 
@@ -584,10 +604,30 @@ const handleServiceClick = (service: string) => {
             </div>
             <div className="flex flex-col gap-1 mt-2">
               {AGENT_SKILLS.map((skill) => (
-                <div key={skill.label} className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors">
-                  <div className="flex items-center gap-2 truncate">
+                <div key={skill.label} className="flex justify-between items-center gap-2 py-1 border-b border-[#064006] hover:bg-[#6ba368]/10 transition-colors group/skill">
+                  <div className="flex items-center gap-1.5 truncate">
                     <div className="w-1.5 h-1.5 rounded-sm bg-[#6ba368] shrink-0 opacity-80" />
-                    <span className="text-xs font-mono text-[#6ba368] whitespace-nowrap">{skill.label}</span>
+                    <a
+                      href={skill.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-mono text-[#6ba368] whitespace-nowrap hover:text-[#9dd99a] hover:drop-shadow-[0_0_5px_rgba(107,163,104,0.9)] transition-all"
+                    >
+                      {skill.label}
+                    </a>
+                    <button
+                      aria-label={`Copy URL for ${skill.label}`}
+                      onClick={() => {
+                        navigator.clipboard.writeText(skill.url);
+                        setCopiedSkill(skill.label);
+                        setTimeout(() => setCopiedSkill(null), 2000);
+                      }}
+                      className="opacity-0 group-hover/skill:opacity-100 shrink-0 p-0.5 text-[#6ba368] hover:text-[#9dd99a] hover:drop-shadow-[0_0_4px_rgba(107,163,104,0.8)] transition-all"
+                    >
+                      {copiedSkill === skill.label
+                        ? <Check size={10} className="text-[#9dd99a]" />
+                        : <Copy size={10} />}
+                    </button>
                   </div>
                   <span className="text-xs text-[#888888] truncate text-right opacity-70">
                     {skill.description}

@@ -1,4 +1,9 @@
-.vercel
+node_modules/
+.next/
+temp-deploy/
+dist/
+build/
+*.log
 .env*.local
-.env
-.env*
+temp-deploy/node_modules/
+node_modules/
